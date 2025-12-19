@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Week 1 Monday: Orientation, Mindset & First Contact with Data</title>
+  <style>
+    :root{
+      --max: 980px;
+      --text: #111827;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+      --bg: #ffffff;
+      --bg-soft: #f9fafb;
+      --code-bg: #0b1020;
+      --code-fg: #e7e7e7;
+      --blue: #2563eb;
+      --green: #10b981;
+      --amber: #f59e0b;
+    }
+    body{ margin:0; font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; color:var(--text); background:var(--bg); line-height:1.6; }
+    header{ background: var(--bg-soft); border-bottom: 1px solid var(--border); padding: 34px 16px; }
+    header .wrap{ max-width: var(--max); margin: 0 auto; }
+    h1{ margin:0; font-size: 2.05rem; line-height: 1.2; }
+    .subtitle{ margin-top: 10px; color: var(--muted); }
+    main{ max-width: var(--max); margin: 0 auto; padding: 26px 16px 64px; }
+    h2{ margin-top: 2.1rem; font-size: 1.45rem; }
+    h3{ margin-top: 1.3rem; font-size: 1.1rem; }
+    p{ margin: 0.7rem 0; }
+    ul{ margin: 0.6rem 0 0.6rem 1.1rem; padding:0; }
+    li{ margin: 0.25rem 0; }
+    a{ color: var(--blue); text-decoration: none; }
+    a:hover{ text-decoration: underline; }
+    .box{
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px 16px;
+      margin: 14px 0;
+      background: #fff;
+    }
+    .task{ border-left: 6px solid var(--blue); background: #f7fbff; }
+    .tip{ border-left: 6px solid var(--green); background: #f6fffb; }
+    .warn{ border-left: 6px solid var(--amber); background: #fffaf3; }
+    .kicker{ font-weight: 600; }
+    pre{ background: var(--code-bg); color: var(--code-fg); padding: 12px 14px; border-radius: 14px; overflow:auto; }
+    code, pre{ font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    .callout{
+      border: 1px dashed var(--border);
+      border-radius: 14px;
+      padding: 12px 14px;
+      background: #fff;
+      margin: 12px 0;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    @media(min-width:860px){
+      .grid.two{ grid-template-columns: 1fr 1fr; }
+    }
+    footer{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 16px 28px;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+    .checklist li{ list-style: none; margin-left: -1.1rem; }
+    .checklist li::before{ content: "✓"; margin-right: 10px; color: var(--green); font-weight: 700; }
+    .mono{ font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="wrap">
+      <h1>Week 1 Monday: Orientation, Mindset & First Contact with Data</h1>
+      <div class="subtitle">
+        Goal: become comfortable in RStudio, set up good project structure, and interrogate a real dataset with genuine questions (not just code that we don't understand yet).
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <h2>Learning objectives</h2>
+      <ul>
+        <li>Understand what R is used for and why</li>
+        <li>Be comfortable in RStudio</li>
+        <li>Load and inspect a real dataset</li>
+        <li>Start thinking in terms of questions as well as code</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Session structure</h2>
+      <div class="grid two">
+        <div class="box">
+          <div class="kicker">1) Framing</div>
+          <ul>
+            <li>What analysts do in industry and research</li>
+            <li>The lifecycle: question → data → transformation → insight → communication</li>
+            <li>Preview a finished dashboard (let's see what we're working towards!)</li>
+          </ul>
+        </div>
+        <div class="box">
+          <div class="kicker">2) RStudio basics</div>
+          <ul>
+            <li>Project structure & What does what in RStudio</li>
+            <li>Script vs Console</li>
+            <li>Working directory (point-and-click)</li>
+            <li>Installing vs loading packages</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="box">
+        <div class="kicker">3) First dataset</div>
+        <ul>
+          <li>Load a CSV</li>
+          <li>Interrogate it: what does it claim to represent?</li>
+          <li>Summaries & checking for missingness</li>
+          <li>Write comments describing the data and your steps</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>Framing: what analysts actually do</h2>
+      <p>
+        Analysts in industry and research don’t get rewarded for “writing code”. The value their role creates also lies in
+        <strong>producing reliable insight and communicating it clearly</strong>. To do this we must show which steps we take and 
+        the assumptions we have undertaken, it is important that our logic is justified and can be followed by others.
+      </p>
+
+      <div class="callout">
+        <div class="kicker">The lifecycle</div>
+        <p><strong>Question → Data → Transformation → Insight → Communication</strong></p>
+        <p>Code is the tool that makes this process repeatable and shareable.</p>
+      </div>
+
+      <div class="box task">
+        <div class="kicker"> I think a demo from me would be good here</div>
+        <p>I will show a finished dashboard so that the students can get an idea of what they will be working towards
+          and answer:</p>
+        <ul>
+          <li>What question does the dashboard answer?</li>
+          <li>What data must exist behind it?</li>
+          <li>What transformations probably happened to get to this position?</li>
+          <li>What kind of things make a dashboard useful and accessible?</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>RStudio basics</h2>
+
+      <h3>What is R, and why use it?</h3>
+      <ul>
+        <li>R is a programming language for data analysis and statistics.</li>
+        <li>It’s used heavily in research and in industry (data science, health, finance, etc.). There is also a growing demand for it in the modelling space.</li>
+        <li>It is powerful and popular because it is free, open-source and has an active community for support and development.
+           There is also extensive documentation supporting all of the packages so that you can find out how to use them to their fullest extent.</li>
+        <li>After you write an analysis once, you can re-run it on new data quickly and consistently.</li>
+      </ul>
+
+      <h3>RStudio layout (what you’re looking at)</h3>
+      <div class="grid two">
+        <div class="box">
+          <div class="kicker">Script (top-left)</div>
+          <p>Where you write and save code. If it matters and you want to keep a hold of it to re-run in future, it goes here.</p>
+        </div>
+                <div class="box">
+          <div class="kicker">Environment (top-right)</div>
+          <p>Shows objects currently loaded (datasets, variables, functions).</p>
+        </div>
+        <div class="box">
+          <div class="kicker">Console (bottom-left)</div>
+          <p>Where code runs and you can see outputs. It is also good for one-off testing of lines/chunks of code, but don’t rely on it for your final work.</p>
+        </div>
+        <div class="box">
+          <div class="kicker">Files / Plots / Help (bottom-right)</div>
+          <p>Navigate folders, view plots and outputs, and read documentation.</p>
+        </div>
+      </div>
+
+      <h3>Projects</h3>
+      <p>
+        A project is one folder containing <strong>everything</strong> for one piece of work:
+        data, scripts, outputs, and notes. Having an organised project folder prevents broken paths and lost files 
+        - trust me... life is easier when everything is where it should be.
+      </p>
+    </section>
+
+    <section>
+      <h2>Project setup (point-and-click only)</h2>
+
+      <div class="box tip">
+        <div class="kicker">We will set the working directory using point-and-click today</div>
+        <p>We will not be using <span class="mono">setwd()</span> as I believe it is more convinient to navigate to the right place by point-and-click.</p>
+      </div>
+
+      <h3>Step A: Create and choose your working directory</h3>
+      <ol>
+        <li>In RStudio: <strong>Session → Set Working Directory → Choose Directory...</strong></li>
+        <li>Create a folder named: <span class="mono">week1_monday</span></li>
+        <li>Confirm</li>
+      </ol>
+
+      <p>You can verify where you are working (and that the directory was set successfully) by running:</p>
+      <pre><code>getwd()</code> in your console</pre>
+
+      <h3>Step B: Create a clean folder structure (point-and-click)</h3>
+      <p>In the <strong>Files</strong> pane (bottom-right), click <strong>New Folder</strong> and create:</p>
+      <pre><code>data_raw
+data_clean
+scripts
+outputs</code></pre>
+
+      <p>Your structure should look like:</p>
+      <pre><code>week1_monday/
+  ├─ data_raw/
+  ├─ data_clean/
+  ├─ scripts/
+  └─ outputs/</code></pre>
+
+      <div class="box task">
+        <div class="kicker">Task</div>
+        <p>I will have a quick look around so we can check it matches.</p>
+      </div>
+
+      <h3>Step C: Create your first script</h3>
+      <ol>
+        <li><strong>File → New File → R Script</strong></li>
+        <li><strong>Save As...</strong> <span class="mono">scripts/monday_exploration.R</span></li>
+      </ol>
+    </section>
+
+  <section>
+    <h2> Basic operations</h2>
+    <p> Let's get used to writing some basic commands directly into the console area (remember this is 
+      for one-off work that you do not want or need to rerun later on.)</p>
+          <div class="grid one">
+        <div class="box">
+          <div class="kicker">In your console try out different basic operations between numbers of your choice, for example:</div>
+          <pre><code> 5 + 9
+          7 * 2
+          63 - 4
+          5 / 10 </code></pre>
+        </div>
+
+  </section>
+    
+    <section>
+      <h2>Packages: install vs load</h2>
+      <p>Now that you are familiar with writing basic calculations in the console, lets try our hands at calling packages into R and using them to load up and inspect a dataset.</p>
+      <div class="grid two">
+        <div class="box">
+          <div class="kicker">Install (once per computer)</div>
+          <pre><code>install.packages("tidyverse")</code></pre>
+        </div>
+        <div class="box">
+          <div class="kicker">Load (every session)</div>
+          <pre><code>library(tidyverse)</code></pre>
+        </div>
+          </section>
+    <section>
+        <div class="box">
+          <div class="kicker">If you are working on the stats3 server then please do not install any packages, you can access them by linking into the packages installed by Dagan by running this code at the start of each session.</div>
+          <pre><code>.libs thing</code> you can then continue with library(packageName) at the start of each session.</pre>
+        </div>
+      </div>
+          </section>
+<section>
+      <div class="box warn">
+        <div class="kicker">If you get “there is no package called …”</div>
+        <p>You probably need to run <span class="mono">install.packages(" ")</span> first (then load again).</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>First dataset: load a CSV</h2>
+      <p>
+        Place the dataset file into <span class="mono">data_raw/</span> using point-and-click (Files pane) or using the file explorer built into the computer,
+        then load it from your script.
+      </p>
+
+      <div class="box tip">
+        <div class="kicker">Use relative paths</div>
+        <p>Because you are already working inside the <span class="mono">week1_monday</span> folder, the path starts from there.</p>
+        <p>the following code will load your csv into R and contain it in an entity which we have called "df" for dataframe. 
+          You can call it whatever you like as long as you are consistent with your naming conventions and remember to call it using the same name later.</p>
+      </div>
+
+      <pre><code>library(tidyverse)
+
+df &lt;- read.csv("data_raw/your_dataset.csv")</code></pre>
+
+      <div class="box task">
+        <div class="kicker">Task</div>
+        <p>In your script, add a comment describing where the dataset came from (Canvas / provided file / etc.). Comments can be added by writing a # followed by the comment.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Interrogate the dataset: what does it claim to represent?</h2>
+      <p>Run these in your script, and read the outputs carefully:</p>
+
+      <pre><code>head(df)
+glimpse(df)
+summary(df)
+
+# Missing values per column
+colSums(is.na(df))</code></pre>
+
+      <div class="box task">
+        <div class="kicker">Task: dataset story (write answers as comments in your script)</div>
+        <ul>
+          <li>What does <strong>one row</strong> represent?</li>
+          <li>What does each column represent (units / meaning)?</li>
+          <li>Which columns are numeric vs categorical?</li>
+          <li>Are there missing values? Where?</li>
+          <li>What questions could this dataset help answer?</li>
+        </ul>
+      </div>
+
+      <div class="box tip">
+        <div class="kicker">Comment style example</div>
+        <pre><code># one row seems to represent ... e.g. the PK data for a given patient at one specific timepoint
+# Main columns are ID, TIME, Conc and likely represent XYZ
+# Potential questions: (1) X (2) Y </code></pre>
+      </div>
+    </section>
+
+    <section>
+      <h2>Day 1 output</h2>
+      <div class="box">
+        <div class="kicker">By the end of today, you should have:</div>
+        <ul class="checklist">
+          <li>Be comfortable navigating the RStudio environment</li>
+          <li>A sensible project folder structure inside <span class="mono">week1_monday/</span></li>
+          <li>A script saved as <span class="mono">scripts/monday_exploration.R</span></li>
+          <li>Code that loads the dataset, prints summaries, and checks missing values</li>
+          <li>Comments in your script describing the dataset and your steps</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>End-of-session checklist (quick)</h2>
+      <div class="box task">
+        <div class="kicker">Before you leave</div>
+        <ul>
+          <li>Is your working directory set to <span class="mono">week1_monday</span>?</li>
+          <li>Is the dataset inside <span class="mono">data_raw/</span>?</li>
+          <li>Is your script saved inside <span class="mono">scripts/</span>?</li>
+          <li>Do you have comments explaining what the dataset represents?</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Week 1 • Monday • HTML notes & RStudio scripting</p>
+  </footer>
+</body>
+</html>
