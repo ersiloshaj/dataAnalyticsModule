@@ -6,43 +6,71 @@
   <title>Tabbed Page</title>
 
   <style>
+    :root {
+      --text: #111827;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+      --blue: #2563eb;
+      --bg-soft: #f9fafb;
+      --radius: 999px;
+    }
+
     body {
       margin: 0;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--text);
     }
 
-    /* Tabs bar */
-    .tabs {
+    /* Tabs container */
+    .tabs-wrap {
       display: flex;
-      border-bottom: 1px solid #ddd;
-      background: #f9f9f9;
+      justify-content: center;
+      padding: 20px 16px;
+      background: var(--bg-soft);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .tabs {
+      display: inline-flex;
+      gap: 8px;
+      padding: 6px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: #fff;
     }
 
     .tab {
-      padding: 14px 20px;
-      cursor: pointer;
+      padding: 8px 18px;
+      border-radius: var(--radius);
       border: none;
-      background: none;
-      font-size: 1rem;
+      background: transparent;
+      cursor: pointer;
+      font-size: 0.95rem;
+      color: var(--muted);
+      transition: background 0.15s ease, color 0.15s ease;
     }
 
     .tab:hover {
-      background: #eee;
+      background: #f3f4f6;
+      color: var(--text);
     }
 
     .tab.active {
-      border-bottom: 3px solid #2563eb;
+      background: var(--blue);
+      color: #fff;
       font-weight: 600;
-      background: #fff;
     }
 
     /* Content area */
     .content {
-      padding: 24px;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 32px 16px;
     }
 
     .panel {
       display: none;
+      font-size: 1.05rem;
     }
 
     .panel.active {
@@ -54,12 +82,14 @@
 <body>
 
   <!-- Tabs -->
-  <div class="tabs">
-    <button class="tab active" data-target="A">A</button>
-    <button class="tab" data-target="B">B</button>
-    <button class="tab" data-target="C">C</button>
-    <button class="tab" data-target="D">D</button>
-    <button class="tab" data-target="E">E</button>
+  <div class="tabs-wrap">
+    <div class="tabs">
+      <button class="tab active" data-target="A">A</button>
+      <button class="tab" data-target="B">B</button>
+      <button class="tab" data-target="C">C</button>
+      <button class="tab" data-target="D">D</button>
+      <button class="tab" data-target="E">E</button>
+    </div>
   </div>
 
   <!-- Content -->
@@ -77,11 +107,9 @@
 
     tabs.forEach(tab => {
       tab.addEventListener("click", () => {
-        // Remove active states
         tabs.forEach(t => t.classList.remove("active"));
         panels.forEach(p => p.classList.remove("active"));
 
-        // Activate selected tab and panel
         tab.classList.add("active");
         document.getElementById(tab.dataset.target).classList.add("active");
       });
