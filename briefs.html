@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tabbed Page</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+
+    /* Tabs bar */
+    .tabs {
+      display: flex;
+      border-bottom: 1px solid #ddd;
+      background: #f9f9f9;
+    }
+
+    .tab {
+      padding: 14px 20px;
+      cursor: pointer;
+      border: none;
+      background: none;
+      font-size: 1rem;
+    }
+
+    .tab:hover {
+      background: #eee;
+    }
+
+    .tab.active {
+      border-bottom: 3px solid #2563eb;
+      font-weight: 600;
+      background: #fff;
+    }
+
+    /* Content area */
+    .content {
+      padding: 24px;
+    }
+
+    .panel {
+      display: none;
+    }
+
+    .panel.active {
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Tabs -->
+  <div class="tabs">
+    <button class="tab active" data-target="A">A</button>
+    <button class="tab" data-target="B">B</button>
+    <button class="tab" data-target="C">C</button>
+    <button class="tab" data-target="D">D</button>
+    <button class="tab" data-target="E">E</button>
+  </div>
+
+  <!-- Content -->
+  <div class="content">
+    <div class="panel active" id="A">text goes here</div>
+    <div class="panel" id="B">text goes here</div>
+    <div class="panel" id="C">text goes here</div>
+    <div class="panel" id="D">text goes here</div>
+    <div class="panel" id="E">text goes here</div>
+  </div>
+
+  <script>
+    const tabs = document.querySelectorAll(".tab");
+    const panels = document.querySelectorAll(".panel");
+
+    tabs.forEach(tab => {
+      tab.addEventListener("click", () => {
+        // Remove active states
+        tabs.forEach(t => t.classList.remove("active"));
+        panels.forEach(p => p.classList.remove("active"));
+
+        // Activate selected tab and panel
+        tab.classList.add("active");
+        document.getElementById(tab.dataset.target).classList.add("active");
+      });
+    });
+  </script>
+
+</body>
+</html>
