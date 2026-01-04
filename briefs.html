@@ -115,41 +115,40 @@
     <div class="panel" id="D">text goes here</div>
     <div class="panel" id="E">text goes here</div>
   </div>
+  
+<script>
+  const tabs = document.querySelectorAll(".tab");
+  const panels = document.querySelectorAll(".panel");
+  const indicator = document.querySelector(".indicator");
+  const tabsContainer = document.querySelector(".tabs");
 
-  <script>
-    const tabs = document.querySelectorAll(".tab");
-    const panels = document.querySelectorAll(".panel");
-    const indicator = document.querySelector(".indicator");
-    const tabsContainer = document.querySelector(".tabs");
+  function moveIndicator(tab) {
+    const left = tab.offsetLeft;
+    const width = tab.offsetWidth;
 
-    function moveIndicator(tab) {
-      const tabRect = tab.getBoundingClientRect();
-      const containerRect = tabsContainer.getBoundingClientRect();
+    indicator.style.width = `${width}px`;
+    indicator.style.transform = `translateX(${left}px)`;
+  }
 
-      indicator.style.width = `${tabRect.width}px`;
-      indicator.style.transform = `translateX(${tabRect.left - containerRect.left}px)`;
-    }
+  const activeTab = document.querySelector(".tab.active");
+  if (activeTab) moveIndicator(activeTab);
 
-    // Initialise on page load
-    moveIndicator(document.querySelector(".tab.active"));
+  tabs.forEach(tab => {
+    tab.addEventListener("click", () => {
+      tabs.forEach(t => t.classList.remove("active"));
+      panels.forEach(p => p.classList.remove("active"));
 
-    tabs.forEach(tab => {
-      tab.addEventListener("click", () => {
-        tabs.forEach(t => t.classList.remove("active"));
-        panels.forEach(p => p.classList.remove("active"));
-
-        tab.classList.add("active");
-        document.getElementById(tab.dataset.target).classList.add("active");
-        moveIndicator(tab);
-      });
+      tab.classList.add("active");
+      document.getElementById(tab.dataset.target).classList.add("active");
+      moveIndicator(tab);
     });
+  });
 
-    // Keep indicator aligned on resize
-    window.addEventListener("resize", () => {
-      const activeTab = document.querySelector(".tab.active");
-      if (activeTab) moveIndicator(activeTab);
-    });
-  </script>
+  window.addEventListener("resize", () => {
+    const activeTab = document.querySelector(".tab.active");
+    if (activeTab) moveIndicator(activeTab);
+  });
+</script>
 
 </body>
 </html>
