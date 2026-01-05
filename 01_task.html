@@ -1,1 +1,367 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>OHID Project Brief: Regional Health Inequalities Dashboard</title>
+  <style>
+    :root{
+      --govuk-black:#0b0c0c;
+      --govuk-blue:#1d70b8;
+      --govuk-yellow:#ffdd00;
+      --ink:#0b1020;
+      --muted:#505a5f;
+      --paper:#ffffff;
+      --border:#e6e9f2;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background:#f4f6fb;
+      color:var(--ink);
+      font: 15px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      padding:24px;
+    }
+    .page{
+      width: 210mm;            /* A4 width */
+      max-width: 100%;
+      margin:0 auto;
+      background:var(--paper);
+      border:1px solid var(--border);
+      box-shadow: 0 10px 30px rgba(10,20,60,.08);
+    }
 
+    /* GOV.UK style masthead */
+    .masthead{
+      background:var(--govuk-black);
+      color:#fff;
+      padding:16px 40px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      flex-wrap:wrap;
+      border-bottom:4px solid var(--govuk-yellow);
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width: 360px;
+    }
+    .brand img{
+      display:block;
+    }
+    .govuk-logo{
+      height:32px;
+      width:auto;
+    }
+    .org{
+      line-height:1.2;
+    }
+    .org .name{
+      font-size:15px;
+      font-weight:780;
+      color:#fff;
+    }
+    .org .dept{
+      font-size:12.5px;
+      color: rgba(255,255,255,.82);
+      margin-top:2px;
+    }
+    .contact{
+      text-align:right;
+      font-size:12.5px;
+      color: rgba(255,255,255,.82);
+    }
+    .contact strong{
+      color:#fff;
+      font-weight:820;
+    }
+
+    .body{
+      padding:32px 40px 24px;
+      overflow-wrap:anywhere;
+    }
+    .meta{
+      display:flex;
+      justify-content:space-between;
+      gap:16px;
+      flex-wrap:wrap;
+      margin-bottom:18px;
+      font-size:13px;
+      color:var(--muted);
+    }
+    .meta .block{min-width: 260px}
+    .meta .block div{margin:2px 0}
+
+    .subject{
+      margin:18px 0 14px;
+      padding:12px 14px;
+      border:1px solid var(--border);
+      border-left:4px solid var(--govuk-blue);
+      background:#fbfcff;
+      font-weight:820;
+      color:var(--ink);
+    }
+
+    h2{
+      font-size:13.5px;
+      margin:18px 0 8px;
+      color:var(--govuk-black);
+      letter-spacing:.2px;
+      text-transform:uppercase;
+    }
+    p{margin:10px 0}
+    ul{margin:8px 0 10px 18px}
+    li{margin:6px 0}
+
+    .callout{
+      margin:16px 0;
+      padding:14px 14px;
+      border:1px solid var(--border);
+      border-left:4px solid var(--govuk-yellow);
+      background:#fffdf5;
+      color:var(--ink);
+    }
+
+    .kpi-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px 16px;
+      margin:10px 0 6px;
+      padding:12px 14px;
+      border:1px solid var(--border);
+      background:#fcfdff;
+    }
+    .kpi-grid div{
+      font-size:13px;
+      color:var(--muted);
+    }
+    .kpi-grid strong{
+      color:var(--ink);
+      font-weight:820;
+    }
+
+    .signature{
+      margin-top:26px;
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:20px;
+      flex-wrap:wrap;
+    }
+    .sigline{
+      margin-top:8px;
+      border-top:1px solid var(--border);
+      padding-top:10px;
+      min-width: 360px;
+    }
+    .signature-img{
+      display:block;
+      max-width:220px;
+      height:auto;
+      margin:4px 0 6px;
+    }
+    .signame{font-weight:860}
+    .sigtitle{color:var(--muted); font-size:13px; margin-top:2px}
+
+    .footer{
+      padding:14px 40px 22px;
+      border-top:1px solid var(--border);
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:12px;
+    }
+    .disclaimer{max-width: 650px}
+
+    /* A4 print setup */
+    @page{
+      size: A4;
+      margin: 15mm;
+    }
+    @media print{
+      body{
+        background:#fff !important;
+        padding:0 !important;
+        margin:0 !important;
+      }
+      .page{
+        box-shadow:none !important;
+        border:0 !important;
+        width:auto !important;
+        max-width:none !important;
+      }
+      *{
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      header, footer, .signature, .callout{
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+      .signature-img{
+        filter: contrast(1.1);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page" role="document" aria-label="Letter">
+    <header class="masthead">
+      <div class="brand">
+        <img
+          src="assets/govuk-logo.png"
+          alt="GOV.UK"
+          class="govuk-logo"
+        />
+        <div class="org">
+          <div class="name">Office for Health Improvement and Disparities</div>
+          <div class="dept">Population Health Analytics Team</div>
+        </div>
+      </div>
+
+      <div class="contact">
+        <div><strong>Department of Health and Social Care</strong></div>
+        <div>London, United Kingdom</div>
+        <div>population.health.analytics@ohid.uk</div>
+        <div>+44 (0)20 0000 0000</div>
+      </div>
+    </header>
+
+    <main class="body">
+      <div class="meta">
+        <div class="block">
+          <div><strong>To:</strong> Analyst Placement Cohort</div>
+          <div><strong>From:</strong> Population Health Analytics Team</div>
+          <div><strong>Reference:</strong> OHID-PHA-REG-2001-2024</div>
+        </div>
+        <div class="block" style="text-align:right">
+          <div><strong>Date:</strong> <span id="date"></span></div>
+          <div><strong>Project type:</strong> Dashboard and technical note</div>
+          <div><strong>Data period:</strong> 2001 to 2024</div>
+        </div>
+      </div>
+
+      <div class="subject">
+        Subject: Regional Health Inequalities Dashboard for England, 2001 to 2024
+      </div>
+
+      <p>
+        The Office for Health Improvement and Disparities is commissioning an internal analytics dashboard to support
+        timely, evidence-based decisions across population health programmes. We need a clear view of regional patterns
+        and how outcomes vary by population group.
+      </p>
+
+      <h2>context and objective</h2>
+      <p>
+        Our decision makers need a single, reliable tool that summarises health outcomes by region and highlights where
+        inequalities are widening. The dashboard must support exploration by socioeconomic status, gender, religion,
+        ethnic group, deprivation, and free school meals status where available or appropriate.
+      </p>
+
+      <div class="callout">
+        <strong>Analytical standard:</strong> This tool is designed for decision support. You should describe associations and
+        patterns. Avoid causal claims unless the data and design explicitly justify them. Document assumptions and known
+        limitations clearly.
+      </div>
+
+      <h2>data available</h2>
+      <p>Indicators include, but are not limited to:</p>
+      <ul>
+        <li>16 to 17 year olds not in education, employment or training</li>
+        <li>Children under 16 in low income families</li>
+        <li>Life expectancy</li>
+        <li>Infant mortality</li>
+        <li>Obesity prevalence in adults, Year 6 children, and Reception-age children</li>
+        <li>Percentage of 5 year olds with visually obvious dental decay</li>
+        <li>Self-reported wellbeing</li>
+        <li>Smoking prevalence in adults</li>
+        <li>Suicide rate</li>
+        <li>Under 75 mortality from cardiovascular disease</li>
+        <li>Under 75 mortality from cancer</li>
+      </ul>
+
+      <h2>core analytical questions</h2>
+      <ul>
+        <li>How does life expectancy vary by region, and are there clusters that persist over time?</li>
+        <li>Do childhood indicators align with adult outcomes within the same regions?</li>
+        <li>Does early-life disadvantage align with later health outcomes when stratified by deprivation and socioeconomic status?</li>
+        <li>Which modifiable behaviours show the strongest alignment with premature mortality on a regional basis?</li>
+        <li>Is smoking prevalence more closely aligned with cardiovascular mortality or cancer mortality?</li>
+        <li>Do obesity indicators align with cardiovascular mortality, and does this differ by region or deprivation?</li>
+      </ul>
+
+      <h2>dashboard requirements</h2>
+      <p>Your dashboard should include:</p>
+      <ul>
+        <li><strong>Regional overview:</strong> Life expectancy by region with clear comparisons and time filtering.</li>
+        <li><strong>Childhood foundations:</strong> Views linking low income families, dental decay, and childhood obesity to later outcomes.</li>
+        <li><strong>Modifiable risk factors:</strong> Smoking and adult obesity with direct comparison to under 75 mortality.</li>
+        <li><strong>Equity lens:</strong> Filters for deprivation and key demographic tags, with clear handling of missingness.</li>
+        <li><strong>Outliers and exceptions:</strong> Regions that perform better or worse than expected should be highlighted.</li>
+      </ul>
+
+      <div class="kpi-grid" aria-label="Suggested headline metrics">
+        <div><strong>Suggested KPI:</strong> Life expectancy gap between top and bottom regions</div>
+        <div><strong>Suggested KPI:</strong> Under 75 cardiovascular mortality spread by region</div>
+        <div><strong>Suggested KPI:</strong> Smoking prevalence spread by region and deprivation</div>
+        <div><strong>Suggested KPI:</strong> Childhood obesity prevalence by region and deprivation</div>
+      </div>
+
+      <h2>expected deliverables</h2>
+      <ul>
+        <li><strong>Interactive dashboard</strong> suitable for non-technical stakeholders, with sensible defaults and clear labels.</li>
+        <li><strong>Technical note (1 to 2 pages)</strong> covering data sources, transformations, definitions, and limitations.</li>
+        <li><strong>Summary slide or memo</strong> listing the 3 to 5 most important findings and recommended areas for deeper review.</li>
+      </ul>
+
+      <h2>success criteria</h2>
+      <p>
+        Success will be judged on clarity, interpretability, reproducibility, and the quality of analytical judgement.
+        The best submissions will communicate what the data suggests, what it does not suggest, and what decision makers
+        should do next to validate or act.
+      </p>
+
+      <div class="signature">
+        <div>
+          <p style="margin:0 0 6px 0;">Yours faithfully,</p>
+          <div class="sigline">
+            <img
+              src="assets/signature.png"
+              alt="Signature"
+              class="signature-img"
+            />
+            <div class="signame">Population Health Analytics Team</div>
+            <div class="sigtitle">Office for Health Improvement and Disparities, Department of Health and Social Care</div>
+          </div>
+        </div>
+
+        <div style="text-align:right; color:var(--muted); font-size:12.5px; max-width: 340px;">
+          <div><strong>Attachment:</strong> Data dictionary and indicator definitions</div>
+          <div><strong>Handling:</strong> Internal training simulation</div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="disclaimer">
+        <strong>Teaching Simulation Notice:</strong> This document is a fictional project brief created for educational purposes.
+        It is not an official communication from OHID, DHSC, or GOV.UK.
+      </div>
+      <div>© <span id="year"></span> EL</div>
+    </footer>
+  </div>
+
+  <script>
+    const now = new Date();
+    const fmt = new Intl.DateTimeFormat("en-GB", { day: "2-digit", month: "long", year: "numeric" });
+    document.getElementById("date").textContent = fmt.format(now);
+    document.getElementById("year").textContent = now.getFullYear();
+  </script>
+</body>
+</html>
