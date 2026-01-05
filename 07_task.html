@@ -1,1 +1,305 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Leicester City - Recruitment Analytics Brief (Fictional)</title>
+  <style>
+    :root{
+      --lc-blue:#003090;
+      --lc-gold:#FDB913;
+      --ink:#0b1020;
+      --muted:#5b647a;
+      --paper:#ffffff;
+      --border:#e6e9f2;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background:#f4f6fb;
+      color:var(--ink);
+      font: 15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      padding:24px;
+    }
+    .page{
+      max-width: 900px;
+      margin:0 auto;
+      background:var(--paper);
+      border:1px solid var(--border);
+      box-shadow: 0 10px 30px rgba(10,20,60,.08);
+    }
+    .letterhead{
+      padding:28px 40px 18px;
+      border-bottom: 4px solid var(--lc-gold);
+      position:relative;
+    }
+    .band{
+      position:absolute; left:0; top:0; right:0; height:10px;
+      background:var(--lc-blue);
+    }
+    .head-row{
+      display:flex; gap:18px; align-items:center; justify-content:space-between;
+      margin-top:10px;
+    }
+    .brand{
+      display:flex; gap:14px; align-items:center;
+      min-width: 320px;
+    }
+    .crest{
+      width:56px; height:56px; border-radius:14px;
+      border:2px solid rgba(0,48,144,.18);
+      display:grid; place-items:center;
+      background: linear-gradient(135deg, rgba(0,48,144,.08), rgba(253,185,19,.10));
+      color:var(--lc-blue);
+      font-weight:800;
+      letter-spacing:.5px;
+    }
+    .club{
+      line-height:1.15;
+    }
+    .club .name{
+      font-size:18px;
+      font-weight:800;
+      color:var(--lc-blue);
+      letter-spacing:.2px;
+    }
+    .club .dept{
+      font-size:13px;
+      color:var(--muted);
+      margin-top:3px;
+    }
+    .contact{
+      text-align:right;
+      font-size:12.5px;
+      color:var(--muted);
+    }
+    .contact strong{color:var(--ink); font-weight:700}
+    .body{
+      padding:34px 40px 26px;
+    }
+    .meta{
+      display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap;
+      margin-bottom:18px;
+      font-size:13px;
+      color:var(--muted);
+    }
+    .meta .block{
+      min-width: 240px;
+    }
+    .meta .block div{margin:2px 0}
+    .subject{
+      margin:18px 0 14px;
+      padding:12px 14px;
+      border:1px solid var(--border);
+      border-left:4px solid var(--lc-blue);
+      background: #fbfcff;
+      font-weight:750;
+      color:var(--ink);
+    }
+    h2{
+      font-size:14px;
+      margin:18px 0 8px;
+      color:var(--lc-blue);
+      letter-spacing:.2px;
+      text-transform:uppercase;
+    }
+    p{margin:10px 0}
+    ul{margin:8px 0 10px 18px}
+    li{margin:6px 0}
+    .callout{
+      margin:16px 0;
+      padding:14px 14px;
+      border:1px solid var(--border);
+      border-left:4px solid var(--lc-gold);
+      background: #fffdf7;
+      color:var(--ink);
+    }
+    .signature{
+      margin-top:26px;
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:20px;
+      flex-wrap:wrap;
+    }
+    .sigline{
+      margin-top:8px;
+      border-top:1px solid var(--border);
+      padding-top:10px;
+      min-width: 320px;
+    }
+    .signame{font-weight:800}
+    .sigtitle{color:var(--muted); font-size:13px; margin-top:2px}
+    .footer{
+      padding:14px 40px 22px;
+      border-top:1px solid var(--border);
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:12px;
+    }
+    .disclaimer{
+      max-width: 620px;
+    }
+    /* Print-friendly */
+    @media print{
+      body{background:#fff; padding:0}
+      .page{border:0; box-shadow:none}
+      .footer{page-break-inside:avoid}
+    }
+  </style>
+</head>
 
+<body>
+  <div class="page" role="document" aria-label="Letter">
+    <header class="letterhead">
+      <div class="band" aria-hidden="true"></div>
+      <div class="head-row">
+        <div class="brand">
+        <img 
+          src="assets/lcfc-logo.png"
+          alt="Leicester City Football Club crest"
+          class="crest"
+        />
+          <div class="club">
+            <div class="name">Leicester City Football Club</div>
+            <div class="dept">Recruitment &amp; Performance Analytics</div>
+          </div>
+        </div>
+
+        <div class="contact">
+          <div><strong>King Power Stadium</strong></div>
+          <div>Filbert Way, Leicester, LE2 7FL</div>
+          <div>recruitment.analytics@lcfc.example</div>
+          <div>+44 (0)116 000 0000</div>
+        </div>
+      </div>
+    </header>
+
+    <main class="body">
+      <div class="meta">
+        <div class="block">
+          <div><strong>To:</strong> Incoming Analyst Placement Cohort</div>
+          <div><strong>From:</strong> Recruitment &amp; Performance Analytics</div>
+          <div><strong>Reference:</strong> LCFC-RPA-24/25-01</div>
+        </div>
+        <div class="block" style="text-align:right">
+          <div><strong>Date:</strong> <span id="date"></span></div>
+          <div><strong>Season:</strong> 2024/25</div>
+          <div><strong>Delivery:</strong> Dashboard + Technical Note</div>
+        </div>
+      </div>
+
+      <div class="subject">
+        Subject: Recruitment Decision-Support Dashboard - Premier League Survival &amp; Resale Value
+      </div>
+
+      <p>
+        Thank you for joining our Recruitment &amp; Performance Analytics team.
+        As you’ll know, Leicester City has experienced the highest highs - including our
+        historic Premier League title in 2015/16 - but we also understand how quickly the margins can shift in this league.
+      </p>
+
+      <p>
+        As a newly promoted side for the 2024/25 season, our immediate objective is clear: <strong>retain Premier League status</strong>.
+        At the same time, our recruitment strategy must protect the club financially by prioritising players who can
+        <strong>hold or increase their value</strong> over the next 1–3 seasons.
+      </p>
+
+      <h2>your role</h2>
+      <p>
+        You will operate as a <strong>Junior Recruitment Analyst</strong>. Your task is to build a dashboard that supports
+        non-technical decision makers (Sporting Director, Recruitment Lead, Head Coach) with evidence-based shortlisting.
+      </p>
+
+      <h2>data available</h2>
+      <ul>
+        <li>Historical player performance and match data (appearances, minutes, goals/assists where available)</li>
+        <li>Player career histories (league/club/season context)</li>
+        <li>Market valuations over time (to approximate market perception)</li>
+      </ul>
+
+      <div class="callout">
+        <strong>Important:</strong> You may engineer derived metrics (e.g., per-90 rates, consistency measures),
+        and you may normalise performance across leagues/competitions <em>if you document your assumptions clearly</em>.
+        This tool is decision support - avoid claiming causality or certainty.
+      </div>
+
+      <h2>core objectives</h2>
+      <p>Your dashboard must help answer:</p>
+      <ul>
+        <li><strong>Value-for-money:</strong> Which players appear undervalued relative to on-pitch contribution?</li>
+        <li><strong>Context awareness:</strong> Which players still rate highly after adjusting for league strength / role / minutes?</li>
+        <li><strong>Immediate impact:</strong> Who is most likely to improve our 2024/25 performance under realistic minutes?</li>
+        <li><strong>Resale value:</strong> Which targets combine contribution now with a favourable age/value trajectory?</li>
+        <li><strong>Risk:</strong> Which options look volatile (performance or value) and should be treated cautiously?</li>
+      </ul>
+
+      <h2>constraints</h2>
+      <ul>
+        <li>Limited budget relative to established Premier League clubs</li>
+        <li>We need to strengthen in all areas of the pitch; with priority to a goal-scoring striker, 
+          a midfield anchor and a central defender. As well as other options which may prove worthy signings across the pitch.</li>
+        <li>We need a blend of <strong>short-term stabilisers</strong> and <strong>assets that retain value</strong></li>
+        <li>Comparability across leagues is essential; assumptions must be transparent</li>
+        <li>Outputs must be interpretable for non-technical stakeholders</li>
+      </ul>
+
+      <h2>expected deliverables</h2>
+      <ul>
+        <li>
+          <strong>Interactive dashboard</strong> that supports filtering by position, age band, league, season, and valuation range;
+          and surfaces candidate shortlists with rationale.
+        </li>
+        <li>
+          <strong>Technical note (1–2 pages)</strong> describing data sources, transformations, normalisation choices,
+          limitations, and how the dashboard should be used responsibly.
+        </li>
+        <li>
+          <strong>Optional (stretch):</strong> 5–10 player shortlist split into:
+          <em>“survival-ready signings”</em> vs <em>“survival + resale assets”</em>.
+        </li>
+      </ul>
+
+      <h2>success criteria</h2>
+      <p>
+        We are not looking for the most complex model. We care about:
+        <strong>clear reasoning</strong>, <strong>sensible metric design</strong>, <strong>transparent assumptions</strong>,
+        and a dashboard that helps us make better decisions under pressure.
+      </p>
+
+      <div class="signature">
+        <div>
+          <p style="margin:0 0 6px 0;">Yours sincerely,</p>
+          <div class="sigline">
+            <div class="signame">Recruitment &amp; Performance Analytics</div>
+            <div class="sigtitle">Leicester City Football Club</div>
+          </div>
+        </div>
+        <div style="text-align:right; color:var(--muted); font-size:12.5px; max-width: 320px;">
+          <div><strong>Attachment:</strong> Data Dictionary &amp; Dashboard Requirements</div>
+          <div><strong>Confidentiality:</strong> Internal use (training simulation)</div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="disclaimer">
+        <strong>Teaching Simulation Notice:</strong> This document is a fictional project brief created for educational purposes
+        and is not an official communication from Leicester City Football Club.
+      </div>
+      <div>© <span id="year"></span> Training Materials</div>
+    </footer>
+  </div>
+
+  <script>
+    // Auto-fill date + year
+    const now = new Date();
+    const fmt = new Intl.DateTimeFormat("en-GB", { day: "2-digit", month: "long", year: "numeric" });
+    document.getElementById("date").textContent = fmt.format(now);
+    document.getElementById("year").textContent = now.getFullYear();
+  </script>
+</body>
+</html>
