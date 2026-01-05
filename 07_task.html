@@ -155,6 +155,43 @@
       .page{border:0; box-shadow:none}
       .footer{page-break-inside:avoid}
     }
+
+    @page{
+  size: A4;
+  margin: 15mm;
+}
+
+@media print{
+  body{
+    background:#fff !important;
+    padding:0 !important;
+    margin:0 !important;
+  }
+
+  .page{
+    max-width: none !important;
+    width: auto !important;
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+
+  /* Keep colours as close as possible */
+  *{
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Avoid awkward splits */
+  header, footer, .signature, .callout{
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Remove any purely screen-only styling */
+  .band{
+    height: 8px;
+  }
+}
   </style>
 </head>
 
