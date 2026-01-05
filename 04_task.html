@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MHCLG Project Brief: Housing Affordability and Short Term Lets Dashboard</title>
+
+  <style>
+    :root{
+      --gov-black:#0b0c0c;
+      --gov-blue:#1d70b8;
+      --gov-yellow:#ffdd00;
+      --ink:#0b1020;
+      --muted:#505a5f;
+      --paper:#ffffff;
+      --border:#e6e9f2;
+      --bg:#f4f6fb;
+    }
+
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--ink);
+      font:15px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      padding:24px;
+    }
+
+    .page{
+      width:210mm;
+      max-width:100%;
+      margin:0 auto;
+      background:var(--paper);
+      border:1px solid var(--border);
+      box-shadow:0 10px 30px rgba(10,20,60,.08);
+    }
+
+    .masthead{
+      background:var(--gov-black);
+      color:#fff;
+      padding:16px 40px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      flex-wrap:wrap;
+      border-bottom:4px solid var(--gov-yellow);
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:360px;
+    }
+
+    .brand img{
+      height:32px;
+      width:auto;
+      display:block;
+    }
+
+    .org{
+      line-height:1.2;
+    }
+
+    .org .name{
+      font-size:15px;
+      font-weight:780;
+      color:#fff;
+    }
+
+    .org .dept{
+      font-size:12.5px;
+      color:rgba(255,255,255,.82);
+      margin-top:2px;
+    }
+
+    .contact{
+      text-align:right;
+      font-size:12.5px;
+      color:rgba(255,255,255,.82);
+    }
+
+    .contact strong{
+      color:#fff;
+      font-weight:820;
+    }
+
+    main{
+      padding:32px 40px 26px;
+      overflow-wrap:anywhere;
+    }
+
+    .meta{
+      display:flex;
+      justify-content:space-between;
+      gap:16px;
+      flex-wrap:wrap;
+      margin-bottom:18px;
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    .meta .block{min-width:260px}
+    .meta .block div{margin:2px 0}
+
+    .subject{
+      margin:18px 0 14px;
+      padding:12px 14px;
+      border:1px solid var(--border);
+      border-left:4px solid var(--gov-blue);
+      background:#fbfcff;
+      font-weight:820;
+      color:var(--ink);
+    }
+
+    h2{
+      font-size:13.5px;
+      margin:18px 0 8px;
+      color:var(--gov-black);
+      letter-spacing:.2px;
+      text-transform:uppercase;
+    }
+
+    p{margin:10px 0}
+    ul{margin:8px 0 10px 18px}
+    li{margin:6px 0}
+
+    .callout{
+      margin:16px 0;
+      padding:14px 14px;
+      border:1px solid var(--border);
+      border-left:4px solid var(--gov-yellow);
+      background:#fffdf5;
+      color:var(--ink);
+    }
+
+    .kpi-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px 16px;
+      margin:10px 0 6px;
+      padding:12px 14px;
+      border:1px solid var(--border);
+      background:#fcfdff;
+    }
+
+    .kpi-grid div{
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    .kpi-grid strong{
+      color:var(--ink);
+      font-weight:820;
+    }
+
+    .signature{
+      margin-top:26px;
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:20px;
+      flex-wrap:wrap;
+    }
+
+    .sigline{
+      margin-top:8px;
+      border-top:1px solid var(--border);
+      padding-top:10px;
+      min-width:360px;
+    }
+
+    .signature-img{
+      display:block;
+      max-width:100px;
+      height:auto;
+      margin:4px 0 6px;
+    }
+
+    .signame{font-weight:860}
+    .sigtitle{color:var(--muted); font-size:13px; margin-top:2px}
+
+    footer{
+      padding:14px 40px 22px;
+      border-top:1px solid var(--border);
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:12px;
+    }
+
+    .disclaimer{max-width:680px}
+
+    @page{
+      size:A4;
+      margin:15mm;
+    }
+
+    @media print{
+      body{
+        background:#fff !important;
+        padding:0 !important;
+        margin:0 !important;
+      }
+      .page{
+        box-shadow:none !important;
+        border:0 !important;
+        width:auto !important;
+        max-width:none !important;
+      }
+      *{
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      header, footer, .signature, .callout{
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+      .signature-img{
+        filter: contrast(1.1);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page" role="document" aria-label="Letter">
+    <header class="masthead">
+      <div class="brand">
+        <img
+          src="assets/govuk-logo2.png"
+          alt="GOV.UK"
+        />
+        <div class="org">
+          <div class="name">Department for Levelling Up, Housing and Communities</div>
+          <div class="dept">Housing Analysis and Local Policy Support</div>
+        </div>
+      </div>
+
+      <div class="contact">
+        <div><strong>2 Marsham Street</strong></div>
+        <div>London, SW1P 4DF</div>
+        <div>housing.analytics@dluhc.uk</div>
+        <div>+44 (0)20 0000 0000</div>
+      </div>
+    </header>
+
+    <main>
+      <div class="meta">
+        <div class="block">
+          <div><strong>To:</strong> Analyst Placement Cohort</div>
+          <div><strong>From:</strong> Housing Analysis and Local Policy Support</div>
+          <div><strong>Reference:</strong> DLUHC-HOUSING-PPD-1995-2025</div>
+        </div>
+        <div class="block" style="text-align:right">
+          <div><strong>Date:</strong> <span id="date"></span></div>
+          <div><strong>Project type:</strong> Dashboard and technical note</div>
+          <div><strong>Data period:</strong> 1995 to 2025</div>
+        </div>
+      </div>
+
+      <div class="subject">
+        Subject: Housing Affordability and Short Term Lets Dashboard, 1995 to 2025
+      </div>
+
+      <p>
+        The Department for Levelling Up, Housing and Communities is commissioning an internal analytics dashboard to
+        support evidence based understanding of housing affordability trends and the potential relationship with short
+        term lets in selected UK cities.
+      </p>
+
+      <p>
+        Decision makers need a tool that combines residential transaction data with household income context, and can be
+        extended using short term let listing data to highlight potential pressures on housing availability. The output
+        should help users explore differences across regions and within major cities.
+      </p>
+
+      <div class="callout">
+        <strong>Analytical standard:</strong> This tool is designed for decision support. You should describe associations and
+        patterns, and you should avoid causal claims. Clearly document how you combine datasets, how you define regional
+        coverage, and how you handle missingness, boundary changes, and differences in granularity.
+      </div>
+
+      <h2>data available</h2>
+      <ul>
+        <li>GOV.UK Price Paid Data including sale price, date, property type, and postcode or locality from 1995 to 2025</li>
+        <li>Household income data suitable for constructing price to income ratios at an appropriate geographic level</li>
+        <li>Short term let listing data for selected cities, using Inside Airbnb data extracts</li>
+        <li>Listing attributes including location, nightly price, room type, availability, and host listing counts</li>
+      </ul>
+
+      <h2>project objectives</h2>
+      <ul>
+        <li>Describe long run housing price trajectories by region and property type</li>
+        <li>Quantify affordability using price to income ratios and highlight geographic disparities</li>
+        <li>Explore whether short term let prevalence aligns with high prices or affordability stress in selected cities</li>
+        <li>Support users with clear filtering and a city focused deep dive view where data coverage allows</li>
+      </ul>
+
+      <h2>dashboard modules and questions</h2>
+
+      <h2>module 1: housing price trajectories</h2>
+      <ul>
+        <li><strong>Views:</strong> Time series of prices by region, focus cities where short term let data exists, breakdown by property type</li>
+        <li><strong>Questions:</strong> Which regions have the fastest long term growth? Are there periods of sharp change such as 2008 or 2020? Are certain property types driving growth disproportionately?</li>
+      </ul>
+
+      <h2>module 2: can people afford to live here</h2>
+      <ul>
+        <li><strong>Views:</strong> Median price vs median income, price to income ratio by region, ranked affordability stress view</li>
+        <li><strong>Questions:</strong> Where has affordability deteriorated most? Is the north south divide narrowing or growing? Are increases in income keeping up with house prices anywhere?</li>
+      </ul>
+
+      <h2>module 3: housing prices vs short term let prevalence</h2>
+      <ul>
+        <li><strong>Views:</strong> Median prices vs short term lets per housing stock, London borough view where available</li>
+        <li><strong>Questions:</strong> Are high price areas also short term let hotspots? Are there exceptions where prices are high but listings are low? Is short term let prevalence higher in already unaffordable markets?</li>
+      </ul>
+
+      <div class="kpi-grid" aria-label="Suggested headline metrics">
+        <div><strong>Suggested KPI:</strong> Price growth since 1995 by region and property type</div>
+        <div><strong>Suggested KPI:</strong> Price to income ratio by region and change over time</div>
+        <div><strong>Suggested KPI:</strong> Short term lets per 1,000 homes in selected cities</div>
+        <div><strong>Suggested KPI:</strong> Share of entire home listings and high availability listings</div>
+      </div>
+
+      <h2>expected deliverables</h2>
+      <ul>
+        <li><strong>Interactive dashboard</strong> suitable for non-technical stakeholders, with clear defaults and plain language labels</li>
+        <li><strong>Technical note (1 to 2 pages)</strong> covering data sources, joins, definitions, and limitations</li>
+        <li><strong>Brief findings summary</strong> with 3 to 5 key patterns and suggested follow up analysis</li>
+      </ul>
+
+      <h2>success criteria</h2>
+      <p>
+        Success will be judged on clarity, interpretability, reproducibility, and analytical judgement. The best
+        submissions will communicate what the data suggests, what it does not suggest, and how decision makers could use
+        the dashboard responsibly when considering housing pressures and local context.
+      </p>
+
+      <div class="signature">
+        <div>
+          <p style="margin:0 0 6px 0;">Yours faithfully,</p>
+          <div class="sigline">
+            <img
+              src="assets/signature.png"
+              alt="Signature"
+              class="signature-img"
+            />
+            <div class="signame">Housing Analysis and Local Policy Support</div>
+            <div class="sigtitle">Department for Levelling Up, Housing and Communities</div>
+          </div>
+        </div>
+
+        <div style="text-align:right; color:var(--muted); font-size:12.5px; max-width: 360px;">
+          <div><strong>Attachment:</strong> Data dictionary, geographic lookup notes, and KPI definitions</div>
+          <div><strong>Handling:</strong> Internal training</div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <div class="disclaimer">
+        <strong>Teaching Simulation Notice:</strong> This document is a fictional project brief created for educational purposes.
+        It is not an official communication from GOV.UK or the Department for Levelling Up, Housing and Communities.
+      </div>
+      <div>© <span id="year"></span> EL</div>
+    </footer>
+  </div>
+
+  <script>
+    const now = new Date();
+    const fmt = new Intl.DateTimeFormat("en-GB", { day: "2-digit", month: "long", year: "numeric" });
+    document.getElementById("date").textContent = fmt.format(now);
+    document.getElementById("year").textContent = now.getFullYear();
+  </script>
+</body>
+</html>
