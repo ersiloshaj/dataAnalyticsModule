@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Course Materials</title>
+  <style>
+    body{
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      margin:40px;
+      line-height:1.5;
+    }
+    h1{
+      font-size:24px;
+      margin-bottom:16px;
+    }
+    ul{
+      list-style:none;
+      padding:0;
+      margin:0 0 24px 0;
+    }
+    li{
+      margin:10px 0;
+    }
+    a{
+      text-decoration:none;
+      color:#1d70b8;
+      font-weight:600;
+    }
+    a:hover{
+      text-decoration:underline;
+    }
+
+    /* Password section for Jewel */
+    #password-section {
+      margin-top: 10px;
+      display: none;
+    }
+
+    #password-box {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      background-color: #f9f9f9;
+      transition: background-color 0.2s ease, border-color 0.2s ease;
+    }
+
+    #password-input {
+      padding: 5px 8px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      outline: none;
+      font-family: inherit;
+    }
+
+    #password-input:focus {
+      border-color: #1d70b8;
+    }
+
+    #password-submit {
+      padding: 6px 10px;
+      border-radius: 4px;
+      border: none;
+      background-color: #1d70b8;
+      color: white;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    #password-submit:hover {
+      background-color: #15548a;
+    }
+
+    /* Error / shake state */
+    #password-box.error {
+      background-color: #fee2e2;  /* light red */
+      border-color: #ef4444;      /* red border */
+      animation: shake 0.3s ease;
+    }
+
+    @keyframes shake {
+      0%   { transform: translateX(0); }
+      20%  { transform: translateX(-5px); }
+      40%  { transform: translateX(5px); }
+      60%  { transform: translateX(-4px); }
+      80%  { transform: translateX(4px); }
+      100% { transform: translateX(0); }
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Course Materials</h1>
+
+  <ul>
+    <li><a href="monday.html">Monday</a></li>
+    <li><a href="tuesday.html">Tuesday</a></li>
+  </ul>
+
+  <h1>Page with Potential Project Briefs/Ideas:</h1>
+  <ul>
+    <li><a href="briefs.html">Project Briefs</a></li>
+  </ul>
+
+  <h1>Client "Emails" to Kickstart Projects:</h1>
+  <ul>
+    <li><a href="01_task.html">01: Office for Health Improvement and Disparities</a></li>
+    <li><a href="04_task.html">04: Housing</a></li>
+    <li><a href="06_task.html">06: ASDA Letter of Engagement</a></li>
+    <li><a href="07_task.html">07: Leicester City Letter of Engagement</a></li>
+  </ul>
+
+  <h1>Concerns:</h1>
+  <ul>
+    <li><a href="concerns.html">Concerns</a></li>
+  </ul>
+
+  <h1>Web Test for Jewel</h1>
+  <ul>
+    <li>
+      <!-- Click to reveal password box -->
+      <a href="#" onclick="showPasswordBox(); return false;">Jewel</a>
+    </li>
+  </ul>
+
+  <!-- Hidden password entry UI -->
+  <div id="password-section">
+    <form id="password-form">
+      <div id="password-box">
+        <input
+          type="password"
+          id="password-input"
+          placeholder="Enter password"
+          autocomplete="off"
+        />
+        <button type="submit" id="password-submit">Enter</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    // Password to access Jewel.html
+    const CORRECT_PASSWORD = "monkeymonkey";
+
+    const passwordSection = document.getElementById("password-section");
+    const passwordBox     = document.getElementById("password-box");
+    const passwordInput   = document.getElementById("password-input");
+    const passwordForm    = document.getElementById("password-form");
+
+    function showPasswordBox() {
+      passwordSection.style.display = "block";
+      passwordInput.focus();
+    }
+
+    passwordForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const value = passwordInput.value;
+
+      if (value === CORRECT_PASSWORD) {
+        // Correct: go to the protected page
+        window.location.href = "Jewel.html";
+      } else {
+        // Incorrect: trigger shake + red effect
+        passwordBox.classList.remove("error");   // reset if already there
+        void passwordBox.offsetWidth;            // force reflow so animation restarts
+        passwordBox.classList.add("error");
+
+        // Clear and refocus after a short delay
+        setTimeout(function () {
+          passwordInput.value = "";
+          passwordInput.focus();
+          passwordBox.classList.remove("error");
+        }, 350); // slightly longer than the animation duration
+      }
+    });
+  </script>
+</body>
+</html>
