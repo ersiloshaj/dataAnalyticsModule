@@ -47,8 +47,31 @@
     <li><a href="07_task.html">07: Leicester City Letter of Engagement</a></li>
     <h1>Concerns:</h1>
     <li><a href="concerns.html">Concerns</a></li>
-    <h1>Web Test for Jewel</h1>
-    <li><a href="Jewel.html">Jewel</a></li>
+<h1>Web Test for Jewel</h1>
+
+<ul>
+  <li><a href="#" onclick="checkPassword(); return false;">Jewel</a></li>
+</ul>
+
+<script>
+  // Change this to whatever you want
+  const CORRECT_PASSWORD = "monkeymonkey";
+
+  function checkPassword() {
+    const input = prompt("Please enter the password to continue (no peeking at the source code):");
+
+    if (input === null) {
+      // User pressed Cancel
+      return;
+    }
+
+    if (input === CORRECT_PASSWORD) {
+      window.location.href = "Jewel.html"; // allow progression
+    } else {
+      alert("Incorrect password.");
+    }
+  }
+</script>
   </ul>
 </body>
 </html>
