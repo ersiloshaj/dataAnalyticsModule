@@ -255,8 +255,10 @@ usage_joined <- usage %>%
   </script>
 </body>
 
-  <--- incidents <- read_csv("data_clean/incident_log_clean.csv", show_col_types = FALSE) %>%
+  <!---
+  incidents <- read_csv("data_clean/incident_log_clean.csv", show_col_types = FALSE) %>%
   mutate(timestamp = as.POSIXct(timestamp, tz = "UTC"),
-         month = floor_date(as.Date(timestamp), unit = "month")) --->
+         month = floor_date(as.Date(timestamp), unit = "month"))
+  --->
   
 </html>
