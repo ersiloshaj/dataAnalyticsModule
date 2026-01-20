@@ -224,10 +224,6 @@ usage <- read_csv("data_clean/transport_usage_clean.csv", show_col_types = FALSE
 
 routes <- read_csv("data_clean/route_metadata_clean.csv", show_col_types = FALSE)
 
-incidents <- read_csv("data_clean/incident_log_clean.csv", show_col_types = FALSE) %>%
-  mutate(timestamp = as.POSIXct(timestamp, tz = "UTC"),
-         month = floor_date(as.Date(timestamp), unit = "month"))
-
 # Optional join example
 usage_joined <- usage %>%
   left_join(routes, by = "route_id")</code></pre>
@@ -258,4 +254,9 @@ usage_joined <- usage %>%
     }
   </script>
 </body>
+
+  <--- incidents <- read_csv("data_clean/incident_log_clean.csv", show_col_types = FALSE) %>%
+  mutate(timestamp = as.POSIXct(timestamp, tz = "UTC"),
+         month = floor_date(as.Date(timestamp), unit = "month")) --->
+  
 </html>
