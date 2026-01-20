@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mini Project Intro: Using R to create plots to assess methods of transport in different UK cities</title>
+  <style>
+    :root { --bg:#0b0f14; --card:#111826; --text:#e7eef7; --muted:#a9b6c5; --accent:#7dd3fc; --border:#223044; --good:#86efac; --warn:#fbbf24; }
+    body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background:var(--bg); color:var(--text); line-height:1.55; }
+    .wrap { max-width: 1020px; margin: 0 auto; padding: 28px 18px 70px; }
+    h1 { font-size: 30px; margin: 0 0 6px; }
+    h2 { font-size: 18px; margin: 0 0 8px; }
+    h3 { font-size: 15px; margin: 0 0 6px; color: var(--text); }
+    p { margin: 10px 0; color: var(--muted); }
+    .badge { display:inline-block; font-size: 12px; padding: 3px 8px; border-radius: 999px; background: rgba(125,211,252,0.12); color: var(--accent); border: 1px solid rgba(125,211,252,0.22); }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 16px; margin: 14px 0; }
+    .grid { display:grid; grid-template-columns: 1fr; gap: 14px; }
+    @media (min-width: 940px){ .grid { grid-template-columns: 1fr 1fr; } }
+    ul, ol { margin: 8px 0 0 18px; color: var(--muted); }
+    li { margin: 6px 0; }
+    code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; }
+    pre { margin: 10px 0 0; padding: 14px; border-radius: 12px; background: #0a1220; border: 1px solid #1c2a40; overflow:auto; }
+    .callout { border-left: 4px solid rgba(125,211,252,0.7); padding-left: 12px; margin: 10px 0; color: var(--muted); }
+    .pillrow { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+    .pill { font-size: 12px; padding: 4px 8px; border-radius: 999px; border: 1px solid var(--border); color: var(--muted); background: rgba(255,255,255,0.03); }
+    .kpi { display:grid; grid-template-columns: 1fr; gap:10px; margin-top:10px; }
+    @media (min-width: 940px){ .kpi { grid-template-columns: 1fr 1fr 1fr; } }
+    .kpi .box { border: 1px solid var(--border); border-radius: 12px; padding: 12px; background: rgba(255,255,255,0.02); }
+    .kpi .label { font-size: 12px; color: var(--muted); }
+    .kpi .value { font-size: 18px; font-weight: 750; margin-top:4px; }
+    .solnHead { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+    .btn {
+      cursor:pointer; user-select:none;
+      background: rgba(125,211,252,0.12);
+      border: 1px solid rgba(125,211,252,0.28);
+      color: var(--accent);
+      padding: 6px 10px;
+      border-radius: 10px;
+      display:inline-flex; align-items:center; gap:8px;
+      font-weight: 650;
+    }
+    .btn:focus { outline: 2px solid rgba(125,211,252,0.45); outline-offset: 2px; }
+    .blurred pre { filter: blur(7px); transition: filter 180ms ease; }
+    .revealed pre { filter: none; }
+    .note { margin-top: 10px; font-size: 13px; color: var(--muted); }
+    .icon { width: 18px; height: 18px; display:inline-block; }
+    .good { color: var(--good); font-weight: 700; }
+    .warn { color: var(--warn); font-weight: 700; }
+    a { color: var(--accent); text-decoration: none; }
+    .mini { font-size: 13px; color: var(--muted); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <span class="badge">Week 1 to 1.5 mini project</span>
+    <h1>Urban Mobility: Data and Tasks</h1>
+    <p>
+      You have been given three clean datasets from a city transport team. Your job is to explore the data and
+      produce a small set of clear, dashboard-ready plots. You are not trying to build a full dashboard yet.
+      You are building the core visuals that a dashboard would use in a static format. We will worry about making things live and integrating into R-Shiny over the coming days/weeks.
+    </p>
+
+    <div class="card">
+      <h2>The scenario:</h2>
+      <p>
+        A city council wants to understand how transport usage changes over time, how reliable each mode is,
+        and how rider behaviour relates to pricing. They also want to connect service usage to incident logs.
+      </p>
+      <div class="callout">
+        Your priority is clarity. Every plot should answer a specific question, and you should be able to explain
+        what decision the plot could support.
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <h2>Files you will use</h2>
+        <ul>
+          <li><code>data_clean/transport_usage_clean.csv</code> (monthly usage metrics)</li>
+          <li><code>data_clean/route_metadata_clean.csv</code> (route details that can be joined)</li>
+          <li><code>data_clean/incident_log_clean.csv</code> (incident logs with timestamps and severity)</li>
+        </ul>
+
+        <h3 style="margin-top:14px;">Suggested packages</h3>
+        <div class="pillrow">
+          <span class="pill">tidyverse</span>
+          <span class="pill">lubridate</span>
+          <span class="pill">scales</span>
+          <span class="pill">forcats</span>
+        </div>
+
+        <pre><code>library(tidyverse)
+library(lubridate)
+library(scales)</code></pre>
+      </div>
+
+      <div class="card">
+        <h2>What you should produce</h2>
+        <p class="mini">You will create these five plots over the course of the next few days:</p>
+        <ol>
+          <li>Ridership over time by mode, faceted by city</li>
+          <li>Box plot of average delay by transport mode</li>
+          <li>Total riders by city bar chart</li>
+          <li>Share of total ridership by mode pie chart</li>
+          <li>Ticket price vs daily riders with trend line by mode scatter plot</li>
+        </ol>
+        <div class="callout">
+          If you finish early: WE WILL COME UP WITH STRETCH TASKS.
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Data dictionary</h2>
+
+      <h3>transport_usage_clean.csv</h3>
+      <ul>
+        <li><code>date</code>: first day of the month for that row</li>
+        <li><code>year</code>, <code>month</code>: time helpers</li>
+        <li><code>city</code>: city name</li>
+        <li><code>route_id</code>: unique route identifier</li>
+        <li><code>transport_mode</code>: Bus, Underground, Tram, Rail, BikeShare</li>
+        <li><code>avg_daily_riders</code>: average riders per day for that route-month</li>
+        <li><code>total_monthly_riders</code>: total riders for that route-month</li>
+        <li><code>avg_ticket_price</code>: average ticket price in pounds (£)</li>
+        <li><code>service_frequency_per_hour</code>: average services per hour</li>
+        <li><code>avg_delay_minutes</code>: average additional minutes due to service reliability issues</li>
+        <li><code>capacity_utilisation</code>: utilisation ratio - likely redundant for the tasks I'm setting so will remove.</li>
+      </ul>
+
+      <h3 style="margin-top:14px;">route_metadata_clean.csv</h3>
+      <ul>
+        <li><code>route_id</code>: join key back to usage and incidents</li>
+        <li><code>zone_type</code>: Central, Suburban, Outer</li>
+        <li><code>route_length_km</code>: route length</li>
+        <li><code>urban_density_index</code>: 0 to 100 style index for density</li>
+        <li>redundant file for the most part, adds too much unnecessary complexity at this stage</li>
+      </ul>
+
+      <h3 style="margin-top:14px;">incident_log_clean.csv</h3>
+      <ul>
+        <li><code>incident_id</code>: unique incident identifier</li>
+        <li><code>timestamp</code>: time the incident occurred</li>
+        <li><code>city</code>, <code>route_id</code>, <code>transport_mode</code></li>
+        <li><code>incident_type</code>: category of disruption</li>
+        <li><code>severity_label</code> and <code>severity_score</code>: severity of incident</li>
+        <li><code>duration_minutes</code>: how long it lasted</li>
+        <li><code>est_riders_affected</code>: rough impact estimate</li>
+        <li><code>resolved</code>: whether it is marked resolved</li>
+      </ul>
+
+      <div class="callout">
+        Note on BikeShare delay: for BikeShare, delay represents friction such as finding a bike, finding an empty dock, or unlocking issues.
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>How to think like an analyst</h2>
+      <div class="kpi">
+        <div class="box">
+          <div class="label">Step 1</div>
+          <div class="value">Inspect</div>
+          <div class="mini">What columns exist, what do they mean, and what are the units?</div>
+        </div>
+        <div class="box">
+          <div class="label">Step 2</div>
+          <div class="value">Summarise</div>
+          <div class="mini">Group and summarise so the plot answers the question.</div>
+        </div>
+        <div class="box">
+          <div class="label">Step 3</div>
+          <div class="value">Communicate</div>
+          <div class="mini">Make sure titles and labels make the message obvious</div>
+        </div>
+      </div>
+
+      <div class="callout">
+        Do your plots tell a clear story? Do they offer insights to someone who might be viewing them?
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <h2>Task checklist</h2>
+        <ul>
+          <li><span class="good">Clear question</span>: What is your plot answering?</li>
+          <li><span class="good">Right aggregation</span>: Are you plotting route-level or city-level totals?</li>
+          <li><span class="good">Readable design</span>: Labels, legends, and titles help a non-expert. This might only be transport data but this becomes more important as your projects expand.</li>
+          <li><span class="warn">Avoid clutter</span>: too many lines or categories can muddy the waters and make your message less clear.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>Deliverables</h2>
+        <ul>
+          <li>Five plots created with ggplot2</li>
+          <li>A short sentence under each plot explaining the main takeaways</li>
+          <li>Clearly commented code that runs from top to bottom without manual fixes</li>
+        </ul>
+        <div class="callout">
+          In industry, reproducibility is part of quality. Your future self should be able to rerun your work.
+        </div>
+      </div>
+    </div>
+
+    <div class="card blurred" id="starter">
+      <div class="solnHead">
+        <h2 style="margin:0;">Starter code</h2>
+        <button class="btn" type="button" onclick="toggleSolution('starter')">
+          <svg class="icon" viewBox="0 0 24 24" fill="none">
+            <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z" stroke="currentColor" stroke-width="2"/>
+            <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" stroke="currentColor" stroke-width="2"/>
+          </svg>
+          Reveal
+        </button>
+      </div>
+
+      <pre><code>library(tidyverse)
+library(lubridate)
+library(scales)
+
+usage <- read_csv("data_clean/transport_usage_clean.csv", show_col_types = FALSE) %>%
+  mutate(date = as.Date(date))
+
+routes <- read_csv("data_clean/route_metadata_clean.csv", show_col_types = FALSE)
+
+incidents <- read_csv("data_clean/incident_log_clean.csv", show_col_types = FALSE) %>%
+  mutate(timestamp = as.POSIXct(timestamp, tz = "UTC"),
+         month = floor_date(as.Date(timestamp), unit = "month"))
+
+# Optional join example
+usage_joined <- usage %>%
+  left_join(routes, by = "route_id")</code></pre>
+
+      <div class="note">
+        Use this as a starting point in each plot lesson file. Please try to keep your code tidy and readable as it will make troubleshooting much easier.
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>What to do next</h2>
+      <ol>
+        <li>Open the first plot lesson: ridership over time.</li>
+        <li>Follow the steps, try it yourself, then reveal the solution if needed.</li>
+        <li>Repeat for the remaining plots.</li>
+        <li>Write one takeaway sentence per plot.</li>
+      </ol>
+    </div>
+  </div>
+
+  <script>
+    function toggleSolution(id){
+      const el = document.getElementById(id);
+      const btn = el.querySelector("button");
+      const revealed = el.classList.toggle("revealed");
+      el.classList.toggle("blurred", !revealed);
+      btn.lastChild.textContent = revealed ? " Hide" : " Reveal";
+    }
+  </script>
+</body>
+</html>
