@@ -1,3 +1,5 @@
+<!---
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,6 +45,8 @@
   </style>
 </head>
 <body>
+
+--->
 
 <h1>Applied Coding for Data Analytics & Dashboard Development</h1>
 
