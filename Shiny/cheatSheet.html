@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>One page Shiny References</title>
+  <style>
+    :root{
+      --bg:#0b1020;
+      --panel:#121a33;
+      --panel2:#0f1630;
+      --text:#e8ecff;
+      --muted:#b9c2ff;
+      --accent:#7aa2ff;
+      --good:#7dffb2;
+      --warn:#ffd37a;
+      --bad:#ff7a7a;
+      --border:rgba(255,255,255,0.12);
+      --code:#0a0f1f;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+    }
+    body{
+      margin:0;
+      font-family:var(--sans);
+      background: radial-gradient(1200px 700px at 20% 0%, rgba(122,162,255,0.18), transparent 60%),
+                  radial-gradient(800px 600px at 80% 10%, rgba(125,255,178,0.10), transparent 55%),
+                  var(--bg);
+      color:var(--text);
+      line-height:1.55;
+    }
+    header{
+      padding:34px 18px 14px;
+      max-width:1100px;
+      margin:0 auto;
+    }
+    h1{
+      margin:0 0 8px;
+      font-size: clamp(24px, 3vw, 36px);
+      letter-spacing:0.2px;
+    }
+    .subtitle{
+      color:var(--muted);
+      max-width: 90ch;
+      font-size: 15px;
+    }
+    .wrap{
+      max-width:1100px;
+      margin:0 auto;
+      padding:0 18px 60px;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:14px;
+    }
+    @media(min-width: 980px){
+      .grid{
+        grid-template-columns: 320px 1fr;
+        gap:18px;
+      }
+      .sticky{
+        position:sticky;
+        top:16px;
+        align-self:start;
+      }
+    }
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+      border:1px solid var(--border);
+      border-radius:16px;
+      padding:16px;
+      box-shadow: 0 12px 35px rgba(0,0,0,0.35);
+    }
+    .toc a{
+      display:block;
+      color:var(--muted);
+      text-decoration:none;
+      padding:7px 8px;
+      border-radius:10px;
+      border:1px solid transparent;
+      margin:2px 0;
+      font-size: 14px;
+    }
+    .toc a:hover{
+      color:var(--text);
+      border-color: rgba(122,162,255,0.35);
+      background: rgba(122,162,255,0.08);
+    }
+    .tag{
+      display:inline-block;
+      font-size:12px;
+      padding:3px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,0.15);
+      color:var(--muted);
+      background: rgba(255,255,255,0.03);
+      margin-right:6px;
+      margin-bottom:6px;
+    }
+    h2{
+      margin: 0 0 10px;
+      font-size: 22px;
+    }
+    h3{
+      margin: 16px 0 8px;
+      font-size: 18px;
+    }
+    h4{
+      margin: 14px 0 6px;
+      font-size: 15px;
+      color: var(--text);
+    }
+    p{ margin: 10px 0; }
+    ul{ margin: 8px 0 12px 22px; }
+    li{ margin: 6px 0; }
+    .hr{
+      height:1px;
+      background: rgba(255,255,255,0.10);
+      margin: 18px 0;
+    }
+    .callout{
+      border-left: 4px solid var(--accent);
+      padding: 10px 12px;
+      background: rgba(122,162,255,0.08);
+      border-radius: 12px;
+      margin: 12px 0;
+    }
+    .callout.good{ border-left-color: var(--good); background: rgba(125,255,178,0.07); }
+    .callout.warn{ border-left-color: var(--warn); background: rgba(255,211,122,0.07); }
+    .callout.bad{ border-left-color: var(--bad); background: rgba(255,122,122,0.07); }
+
+    .code{
+      background: var(--code);
+      border:1px solid rgba(255,255,255,0.10);
+      border-radius: 14px;
+      padding: 12px;
+      overflow:auto;
+      font-family: var(--mono);
+      font-size: 12.75px;
+      line-height: 1.45;
+      margin: 10px 0 14px;
+      white-space: pre;
+    }
+    .mini{
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .pill{
+      display:inline-block;
+      font-size:12px;
+      padding:2px 8px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.03);
+      color: var(--muted);
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+    .two-col{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:12px;
+    }
+    @media(min-width: 900px){
+      .two-col{
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    .foot{
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 18px;
+    }
+    code{
+      font-family: var(--mono);
+      font-size: 0.95em;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.10);
+      padding: 0 6px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>One Page Shiny References</h1>
+    <div class="subtitle">
+      A detailed quick reference for the Shiny functions used in Week 2. You might find it helpful to glance at this page as needed.
+    </div>
+  </header>
+
+  <div class="wrap">
+    <div class="grid">
+      <aside class="card sticky toc">
+        <div style="margin-bottom:10px;">
+          <span class="tag">Classic Shiny</span>
+          <span class="tag">Reactive filtering</span>
+          <span class="tag">Downloads</span>
+        </div>
+        <a href="#skeleton">App structure</a>
+        <a href="#layout">Layout building blocks</a>
+        <a href="#inputs">Input functions</a>
+        <a href="#outputs">Output functions</a>
+        <a href="#reactivity">Reactivity tools</a>
+        <a href="#update">Updating inputs</a>
+        <a href="#plots">Plotting</a>
+        <a href="#tables">Tables</a>
+        <a href="#downloads">Downloads</a>
+        <a href="#errors">Validation and friendly errors</a>
+        <a href="#perf">Performance habits</a>
+        <a href="#polish">Polishing</a>
+        <a href="#beyond">Extra ideas</a>
+      </aside>
+
+      <main class="card">
+        <section id="skeleton">
+          <h2>App structure</h2>
+          <p>
+            A Shiny app is typically built from two parts:
+            <b>UI</b> (what the user sees) and <b>server</b> (the R backend logic).
+            In Week 2, you keep both in one file called <b>app.R</b>.
+          </p>
+
+          <div class="code">library(shiny)
+
+ui <- fluidPage(
+  titlePanel("My App"),
+  mainPanel(
+    plotOutput("p1")
+  )
+)
+
+server <- function(input, output, session) {
+  output$p1 <- renderPlot({
+    hist(rnorm(100))
+  })
+}
+
+shinyApp(ui, server)</div>
+
+          <ul>
+            <li><b>ui</b> holds layout, input controls, and placeholders for outputs.</li>
+            <li><b>server</b> computes outputs and reacts to input changes.</li>
+            <li><code>shinyApp(ui, server)</code> calls both parts together and runs the app.</li>
+          </ul>
+
+          <div class="callout good">
+            <b>Useful habit:</b><br/>
+            Build your app in stages. At each stage, you should be able to run it and see something working.
+          </div>
+        </section>
+
+        <div class="hr"></div>
+
+        <section id="layout">
+          <h2>Layout building blocks</h2>
+
+          <h3><code>fluidPage()</code> <span class="pill">top-level container</span></h3>
+          <p>
+            A responsive page layout. It scales to different screen sizes.
+            Most Week 2 apps use <code>fluidPage()</code> as the outer wrapper.
+          </p>
+
+          <h3><code>titlePanel()</code> <span class="pill">page heading</span></h3>
+          <p>
+            Adds a simple title at the top. Good for quick prototypes.
+            For more control, you can use <code>h1()</code>, <code>h2()</code>, etc. as in HTML.
+          </p>
+
+          <h3><code>sidebarLayout()</code>, <code>sidebarPanel()</code>, <code>mainPanel()</code></h3>
+          <p>
+            A common “dashboard-style” layout: controls on the left, results on the right.
+          </p>
+          <div class="code">ui <- fluidPage(
+  titlePanel("Transport Dashboard"),
+  sidebarLayout(
+    sidebarPanel(
+      selectInput("city", "City", choices = c("London","Manchester")),
+      dateRangeInput("dates", "Date range")
+    ),
+    mainPanel(
+      plotOutput("p_riders"),
+      tableOutput("summary_tbl")
+    )
+  )
+)</div>
+
+          <h3><code>tabsetPanel()</code>, <code>tabPanel()</code> <span class="pill">organise outputs</span></h3>
+          <p>
+            Use tabs when you have multiple plots/tables and want to reduce scrolling.
+          </p>
+          <div class="code">mainPanel(
+  tabsetPanel(
+    tabPanel("Ridership", plotOutput("p_riders")),
+    tabPanel("Price vs Demand", plotOutput("p_price")),
+    tabPanel("Summary", tableOutput("summary_tbl"))
+  )
+)</div>
+
+          <h3><code>fluidRow()</code>, <code>column()</code> <span class="pill">grid layout</span></h3>
+          <p>
+            Arrange elements in rows and columns. Useful for KPI displays.
+          </p>
+          <div class="code">fluidRow(
+  column(4, strong("Total riders:"), textOutput("kpi_total")),
+  column(4, strong("Mean delay:"),  textOutput("kpi_delay")),
+  column(4, strong("Mean price:"),  textOutput("kpi_price"))
+)</div>
+          <p class="mini">
+            Columns use a 12-unit grid. Three equal columns each use 4.
+          </p>
+        </section>
+
+        <div class="hr"></div>
+
+        <section id="inputs">
+          <h2>Input functions</h2>
+          <p>
+            Inputs create controls that the user can interact with.
+            In server code, you read the current value using <code>input$ID</code>.
+          </p>
+
+          <div class="two-col">
+            <div>
+              <h3><code>selectInput()</code> <span class="pill">choose from a list</span></h3>
+              <p>
+                A dropdown selector. Good for city and mode filters.
+              </p>
+              <div class="code">selectInput(
+  inputId = "city",
+  label   = "City",
+  choices = c("London", "Manchester"),
+  selected = "London",
+  multiple = TRUE
+)</div>
+              <ul>
+                <li><b>When to use:</b> limited set of choices, like city names.</li>
+                <li><b>multiple = TRUE:</b> allows selecting more than one.</li>
+                <li><b>Reading value:</b> <code>input$city</code> (or as a vector if multiple choices allowed).</li>
+              </ul>
+            </div>
+
+            <div>
+              <h3><code>checkboxInput()</code> <span class="pill">simple toggle</span></h3>
+              <p>
+                A single on/off switch. In Week 2, it controls “raw points vs smooth”.
+              </p>
+              <div class="code">checkboxInput(
+  inputId = "smooth",
+  label   = "Show smooth curve",
+  value   = FALSE
+)</div>
+              <ul>
+                <li><b>When to use:</b> binary options.</li>
+                <li><b>Reading value:</b> <code>isTRUE(input$smooth)</code>.</li>
+              </ul>
+            </div>
+          </div>
+
+          <h3><code>dateRangeInput()</code> <span class="pill">filter by dates</span></h3>
+          <p>
+            Select a start date and end date. In server code, <code>input$dates</code> returns a vector of length 2.
+          </p>
+          <div class="code">dateRangeInput(
+  inputId = "dates",
+  label   = "Date range",
+  start   = as.Date("2025-01-01"),
+  end     = as.Date("2025-03-31")
+)</div>
+          <ul>
+            <li><b>When to use:</b> time series dashboards, seasonal comparisons, trend exploration.</li>
+            <li><b>Reading value:</b> <code>input$dates[1]</code> is start, <code>input$dates[2]</code> is end.</li>
+            <li><b>Common mistake:</b> your data date column is a character. Convert it to Date first.</li>
+          </ul>
+
+          <div class="callout warn">
+            <b>Input IDs must be unique.</b><br/>
+            If you use <code>selectInput("city", ...)</code>, then the server must read <code>input$city</code>.
+          </div>
+        </section>
+
+        <div class="hr"></div>
+
+        <section id="outputs">
+          <h2>Output functions</h2>
+          <p>
+            Outputs come in pairs:
+            a UI placeholder (like <code>plotOutput("p1")</code>)
+            and a server renderer (like <code>output$p1 <- renderPlot({ ... })</code>).
+          </p>
+
+          <h3><code>plotOutput()</code> + <code>renderPlot()</code></h3>
+          <p>
+            Used for ggplot2 charts. Put <code>plotOutput()</code> in the UI and <code>renderPlot()</code> in the server.
+          </p>
+          <div class="code"># UI
+plotOutput("p_riders")
+
+# Server
+output$p_riders <- renderPlot({
+  ggplot(df, aes(date, daily_riders)) + geom_line()
+})</div>
+          <ul>
+            <li><b>When to use:</b> any visual output where ggplot is sufficient.</li>
+            <li><b>Tip:</b> keep heavy data work in a reactive, not inside the plotting code.</li>
+          </ul>
+
+          <h3><code>tableOutput()</code> + <code>renderTable()</code></h3>
+          <p>
+            Good for small summary tables. It's simple and dependency-free.
+          </p>
+          <div class="code"># UI
+tableOutput("summary_tbl")
+
+# Server
+output$summary_tbl <- renderTable({
+  summary_df
+})</div>
+          <ul>
+            <li><b>When to use:</b> a small number of rows, simple summaries.</li>
+            <li><b>When not to:</b> large tables that should be searchable or paginated.</li>
+          </ul>
+
+          <h3><code>textOutput()</code> + <code>renderText()</code></h3>
+          <p>
+            Useful for KPI values, status messages, and short computed text.
+          </p>
+          <div class="code"># UI
+textOutput("kpi_total")
+
+# Server
+output$kpi_total <- renderText({
+  format(sum(df$daily_riders), big.mark = ",")
+})</div>
+
+          <h3><code>uiOutput()</code> + <code>renderUI()</code> <span class="pill">dynamic UI</span></h3>
+          <p>
+            Use when you want the UI itself to change based on input or data.
+            Example: show a warning message if filters return zero rows, or create UI elements on the fly.
+          </p>
+          <div class="code"># UI
+uiOutput("filter_warning")
+
+# Server
+output$filter_warning <- renderUI({
+  if(nrow(filtered_data()) == 0){
+    div(style="color:#ffd37a;", "No rows match your filters.")
+  } else {
+    NULL
+  }
+})</div>
+        </section>
+
+        <div class="hr"></div>
+
+        <section id="reactivity">
+          <h2>Reactivity tools</h2>
+
+          <h3><code>reactive()</code> <span class="pill">reactive value producer</span></h3>
+          <p>
+            A <code>reactive()</code> expression behaves like a function.
+            It recalculates when something it uses changes, typically an input.
+            You call it with parentheses: <code>filtered_data()</code>.
+          </p>
+          <div class="code">filtered_data <- reactive({
+  req(input$city, input$mode, input$dates)
+
+  df %>%
+    filter(city %in% input$city) %>%
+    filter(mode %in% input$mode) %>%
+    filter(date >= input$dates[1], date <= input$dates[2])
+})</div>
+          <ul>
+            <li><b>When to use:</b> whenever multiple outputs need the same filtered dataset.</li>
+            <li><b>Why it matters:</b> it keeps plots, tables, KPIs consistent.</li>
+            <li><b>Common mistake:</b> forgetting to call it as <code>filtered_data()</code>.</li>
+          </ul>
+
+          <h3><code>req()</code> <span class="pill">guard against missing inputs</span></h3>
+          <p>
+            Prevents code from running until certain inputs exist.
+            This avoids startup errors and makes apps more stable.
+          </p>
+          <div class="code">filtered_data <- reactive({
+  req(input$city)
+  req(input$dates)
+  ...
+})</div>
+
+          <h3><code>isTRUE()</code> <span class="pill">safe TRUE check</span></h3>
+          <p>
+            Inputs can sometimes be <code>NULL</code> briefly. <code>isTRUE()</code> avoids ambiguous or early truth checks.
+          </p>
+          <div class="code">if (isTRUE(input$smooth)) {
+  p <- p + geom_smooth(se = FALSE)
+}</div>
+
+          <div class="callout warn">
+            <b>Golden rule for Week 2:</b><br/>
+            One reactive filtered dataset. Everything else uses it.
+          </div>
+        </section>
+
+        <div class="hr"></div>
+
+        <section id="update">
+          <h2>Updating inputs from data</h2>
+          <p>
+            Often you want input choices to come directly from the dataset.
+            The pattern is:
+            load data, then call an update function once the data exists.
+          </p>
+
+          <h3><code>observe()</code> <span class="pill">run code reactively</span></h3>
+          <p>
+            Runs whenever reactive dependencies inside it change.
+            In Week 2, it is a simple way to update select input choices after loading data.
+          </p>
+
+          <h3><code>updateSelectInput()</code> and <code>updateDateRangeInput()</code></h3>
+          <div class="code">observe({
+  updateSelectInput(session, "city",
+    choices  = sort(unique(df$city)),
+    selected = unique(df$city)[1]
+  )
+
+  updateSelectInput(session, "mode",
+    choices  = sort(unique(df$mode)),
+    selected = unique(df$mode)[1]
+  )
+
+  updateDateRangeInput(session, "dates",
+    start = min(df$date, na.rm = TRUE),
+    end   = max(df$date, na.rm = TRUE)
+  )
+})</div>
+
+          <ul>
+            <li><b>When to use:</b> when choices depend on the data, or when you want sensible defaults.</li>
+            <li><b>Benefit:</b> your app automatically adapts to a new dataset with different cities/modes.</li>
+          </ul>
+        </section>
+
+        <div class="hr"></div>
+
+        <section id="plots">
+          <h2>Plotting</h2>
+
+          <h3>Ridership over time</h3>
+          <p>
+            This plot is a natural Shiny learning target because it responds well to city, mode, and date filtering.
+            It also introduces conditional faceting.
+          </p>
+          <div class="code">output$p_riders <- renderPlot({
+  fd <- filtered_data()
+
+  p <- ggplot(fd, aes(x = date, y = daily_riders, color = mode)) +
+    geom_line() +
+    labs(x = "Date", y = "Daily riders")
+
+  if (length(input$city) > 1) {
+    p <- p + facet_wrap(~ city, scales = "free_y")
+  }
+
+  p
+})</div>
+
+          <h3>Ticket price vs daily riders with a toggle</h3>
+          <p>
+            This is a good example of UI controlling plot geometry.
+          </p>
+          <div class="code">output$p_price <- renderPlot({
+  fd <- filtered_data()
+
+  p <- ggplot(fd, aes(x = ticket_price, y = daily_riders)) +
+    geom_point(alpha = 0.6) +
+    labs(x = "Ticket price", y = "Daily riders")
+
+  if (isTRUE(input$smooth)) {
+    p <- p + geom_smooth(se = FALSE)
+  }
+
+  p
+})</div>
+
+          <div class="callout good">
+            <b>When to use conditional logic in plots:</b><br/>
+            When the same plot should behave differently for different filter states, like faceting only when multiple cities are selected.
+          </div>
+        </section>
+
+        <div class="hr"></div>
+
+        <section id="tables">
+          <h2>Tables</h2>
+
+          <h3>Summary table (grouped metrics)</h3>
+          <p>
+            Summary tables make dashboards feel useful. They translate visuals into concrete numbers.
+            This logic groups by stakeholder relevant categories (city and mode).
+          </p>
+          <div class="code">output$summary_tbl <- renderTable({
+  fd <- filtered_data()
+
+  fd %>%
+    group_by(city, mode) %>%
+    summarise(
+      total_riders      = sum(daily_riders, na.rm = TRUE),
+      mean_delay_mins   = mean(avg_delay_mins, na.rm = TRUE),
+      mean_ticket_price = mean(ticket_price, na.rm = TRUE),
+      .groups = "drop"
+    ) %>%
+    arrange(desc(total_riders))
+})</div>
+
+          <h3>KPI values</h3>
+          <p>
+            KPIs are single numbers that update with filters.
+          </p>
+          <div class="code">output$kpi_total <- renderText({
+  fd <- filtered_data()
+  format(sum(fd$daily_riders, na.rm = TRUE), big.mark = ",")
+})
+
+output$kpi_delay <- renderText({
+  fd <- filtered_data()
+  round(mean(fd$avg_delay_mins, na.rm = TRUE), 2)
+})
+
+output$kpi_price <- renderText({
+  fd <- filtered_data()
+  round(mean(fd$ticket_price, na.rm = TRUE), 2)
+})</div>
+
+          <div class="callout warn">
+            <b>Common mistake:</b><br/>
+            Calculating KPIs from the unfiltered dataset. Always use <code>filtered_data()</code> so KPIs match the plots.
+          </div>
+        </section>
+
+        <div class="hr"></div>
+
+        <section id="downloads">
+          <h2>Downloads</h2>
+          <p>
+            Downloads make your app feel like a real deliverable.
+            Stakeholders often want the filtered data or a chart they can paste into a report.
+          </p>
+
+          <h3><code>downloadButton()</code> + <code>downloadHandler()</code></h3>
+          <p>
+            Put the button in the UI. Define the file name and content in the server.
+          </p>
+
+          <h4>Download filtered CSV</h4>
+          <div class="code"># UI
+downloadButton("download_csv", "Download filtered CSV")
+
+# Server
+output$download_csv <- downloadHandler(
+  filename = function() {
+    paste0("filtered_transport_", Sys.Date(), ".csv")
+  },
+  content = function(file) {
+    write.csv(filtered_data(), file, row.names = FALSE)
+  }
+)</div>
+
+          <h4>Download a plot (PNG)</h4>
+          <div class="code"># UI
+downloadButton("download_plot", "Download riders plot (PNG)")
+
+# Server
+output$download_plot <- downloadHandler(
+  filename = function() {
+    paste0("ridership_plot_", Sys.Date(), ".png")
+  },
+  content = function(file) {
+    png(file, width = 1200, height = 700)
+    fd <- filtered_data()
+
+    p <- ggplot(fd, aes(x = date, y = daily_riders, color = mode)) +
+      geom_line() +
+      labs(x = "Date", y = "Daily riders")
+
+    if (length(input$city) > 1) {
+      p <- p + facet_wrap(~ city, scales = "free_y")
+    }
+
+    print(p)
+    dev.off()
+  }
+)</div>
+
+          <div class="callout good">
+            <b>When to include downloads:</b><br/>
+            When your user might need to do something outside the app, like reporting, emailing results, or doing additional analysis.
+          </div>
+        </section>
+
+        <div class="hr"></div>
+
+        <section id="errors">
+          <h2>Validation and friendly errors</h2>
+          <p>
+            It is not unusual for a beginner to overlook error handling and create apps which crash when filters produce zero rows.
+            By keeping this in mind, we can build an app which helps the user recover instead of failing and causing them to reboot.
+          </p>
+
+          <h3><code>validate()</code> + <code>need()</code> <span class="pill">stop output with a message</span></h3>
+          <p>
+            If the condition fails, the output area shows a friendly message instead of error text.
+          </p>
+          <div class="code">output$p_riders <- renderPlot({
+  fd <- filtered_data()
+
+  validate(
+    need(nrow(fd) > 0, "No data matches your filters. Try expanding the date range or selecting more modes.")
+  )
+
+  ggplot(fd, aes(date, daily_riders, color = mode)) + geom_line()
+})</div>
+
+          <h3>Handling missing columns</h3>
+          <p>
+            If your dataset column names differ, change them once near the top of your code.
+            Avoid changing names in multiple places as it can make things tricky to follow through, stay consistent!
+          </p>
+
+        <div class="hr"></div>
+
+        <section id="perf">
+          <h2>Performance habits</h2>
+          <ul>
+            <li><b>Filter once, reuse everywhere:</b> one <code>filtered_data()</code> drives all outputs.</li>
+            <li><b>Keep expensive summaries together:</b> if a summary is used by table and KPIs, compute it once in a reactive.</li>
+            <li><b>Avoid re-reading data repeatedly:</b> read your CSV once per app run, not inside every plot.</li>
+            <li><b>Be careful with huge datasets:</b> for very large data you may need sampling, aggregation, or caching.</li>
+          </ul>
+
+          <div class="callout good">
+            <b>Simple upgrades:</b><br/>
+            Make <code>summary_data <- reactive({ ... })</code>, then use <code>summary_data()</code> for both the table and KPI values.
+          </div>
+        </section>
+
+        <div class="hr"></div>
+
+        <section id="polish">
+          <h2>Polishing</h2>
+
+          <h3><code>bslib</code> <span class="pill">recommended theming</span></h3>
+          <p>
+            <b>bslib</b> themes Bootstrap based Shiny apps. It is a clean way to improve styling without changing your server logic.
+          </p>
+          <div class="code">install.packages("bslib")
+library(bslib)
+
+ui <- fluidPage(
+  theme = bs_theme(bootswatch = "flatly"),
+  ...
+)</div>
+          <ul>
+            <li><b>When to use:</b> when the app works and you want it to look more professional.</li>
+            <li><b>Strength:</b> flexible and consistent.</li>
+            <li><b>Strength:</b> multiple themes exist, have a look online and play around to find one that suits you.</li>
+          </ul>
+
+          <h3><code>shinydashboard</code> <span class="pill">dashboard layout</span></h3>
+          <p>
+            Adds a classic admin dashboard look: sidebar, header, boxed content.
+            Useful when your app becomes larger and could benefit from multiple, clearly defined sections.
+          </p>
+          <p class="mini">Yours apps will likely not benefit from this yet, but keep it in mind for later.</p>
+
+          <h3><code>shinythemes</code> <span class="pill">quick theme presets</span></h3>
+          <p>
+            A fast way to apply a theme. Less flexible than bslib, but simple to try.
+          </p>
+        </section>
+
+        <div class="hr"></div>
+
+        <section id="beyond">
+          <h2>Extra Ideas</h2>
+          <p>
+            You won't necessarily need these right now, but knowing the names helps you search and learn faster later.
+          </p>
+          <ul>
+            <li><b><code>observeEvent()</code></b>: run code when a specific input changes, often a button click.</li>
+            <li><b><code>reactiveValues()</code></b>: store state that can change over time (like a “selected row” memory).</li>
+            <li><b>Modules</b>: reusable UI + server chunks, helpful for large apps.</li>
+            <li><b>Deployment</b>: publish to shinyapps.io or host on a Shiny Server. Good for hosting your app online to be accessed by others. Be mindful that free accounts only have limited runtime limits.</li>
+            <li><b>Interactivity</b>: packages like plotly can make charts interactive (hover, zoom).</li>
+          </ul>
+
+          <div class="foot">
+            EL 2026
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+</body>
+</html>
