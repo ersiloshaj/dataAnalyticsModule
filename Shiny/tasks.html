@@ -169,20 +169,51 @@
   </style>
 </head>
 
-  <style>
+<style>
+  .pw-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+  }
+
+  .pw-box {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 260px;
+    text-align: center;
+  }
+
+  .pw-box input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 10px;
+    font-size: 16px;
+  }
+
+  .pw-box button {
+    margin-top: 12px;
+    width: 100%;
+  }
+
   .shake {
-    animation: shake 0.4s;
+    animation: shake 0.35s;
     border: 2px solid red;
   }
 
   @keyframes shake {
     0%   { transform: translateX(0); }
-    25%  { transform: translateX(-5px); }
-    50%  { transform: translateX(5px); }
-    75%  { transform: translateX(-5px); }
+    25%  { transform: translateX(-6px); }
+    50%  { transform: translateX(6px); }
+    75%  { transform: translateX(-6px); }
     100% { transform: translateX(0); }
   }
 </style>
+
   
 <body>
   <header>
@@ -576,6 +607,46 @@ ui <- fluidPage(
     </div>
   </div>
 
+
+<script>
+  function unlockSolution(id){
+    const wrap = document.querySelector('[data-solution="' + id + '"]');
+    if(!wrap) return;
+
+    // build modal
+    const overlay = document.createElement("div");
+    overlay.className = "pw-overlay";
+
+    overlay.innerHTML = `
+      <div class="pw-box">
+        <strong>Enter password</strong>
+        <input type="password" id="pw-input" />
+        <button onclick="submitPassword()">Unlock</button>
+      </div>
+    `;
+
+    document.body.appendChild(overlay);
+
+    const input = overlay.querySelector("#pw-input");
+    input.focus();
+
+    window.submitPassword = function(){
+      if(input.value === "000"){
+        wrap.classList.remove("locked");
+        overlay.remove();
+      } else {
+        input.classList.add("shake");
+        input.value = "";
+
+        setTimeout(() => {
+          input.classList.remove("shake");
+        }, 350);
+      }
+    };
+  }
+</script>
+
+   <!---   
 <script>
   function unlockSolution(id){
     const wrap = document.querySelector('[data-solution="' + id + '"]');
@@ -597,7 +668,7 @@ ui <- fluidPage(
     }
   }
 </script>
-
+--->
 <!---
   <script>
     function unlockSolution(id){
