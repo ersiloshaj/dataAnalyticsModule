@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Project Map</title>
+
+  <style>
+    :root {
+      --bg: #0f172a;
+      --panel: #111827;
+      --card: #1f2933;
+      --accent: #38bdf8;
+      --muted: #94a3b8;
+      --active: #22c55e;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      background: radial-gradient(circle at top, #020617, var(--bg));
+      color: #e5e7eb;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .flowchart {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      max-width: 900px;
+      width: 100%;
+      padding: 40px;
+    }
+
+    .node {
+      background: linear-gradient(180deg, #1f2937, var(--card));
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s;
+      position: relative;
+    }
+
+    .node:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+      border-color: var(--accent);
+    }
+
+    .node.active {
+      border-color: var(--active);
+      box-shadow: 0 0 0 2px rgba(34,197,94,0.3);
+    }
+
+    .node h3 {
+      margin: 0 0 8px;
+      font-size: 1.1rem;
+    }
+
+    .node p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Arrows */
+    .arrow {
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(to right, transparent, var(--muted));
+      top: 50%;
+      right: -40px;
+    }
+
+    .arrow::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      top: -4px;
+      border-left: 8px solid var(--muted);
+      border-top: 5px solid transparent;
+      border-bottom: 5px solid transparent;
+    }
+
+    /* Center column arrows */
+    .down {
+      width: 2px;
+      height: 40px;
+      background: linear-gradient(to bottom, transparent, var(--muted));
+      left: 50%;
+      top: 100%;
+      transform: translateX(-50%);
+    }
+
+    .down::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: -4px;
+      border-top: 8px solid var(--muted);
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="flowchart">
+
+    <a href="intro.html" class="node" data-path="intro">
+      <h3>Start Here</h3>
+      <p>Orientation & data overview</p>
+      <div class="arrow"></div>
+    </a>
+
+    <a href="analysis.html" class="node" data-path="analysis">
+      <h3>Exploratory Analysis</h3>
+      <p>Cleaning, plots, questions</p>
+      <div class="arrow"></div>
+    </a>
+
+    <a href="dashboard.html" class="node" data-path="dashboard">
+      <h3>Dashboard Build</h3>
+      <p>Interactive exploration</p>
+    </a>
+
+    <a href="extensions.html" class="node" data-path="extensions">
+      <h3>Extensions</h3>
+      <p>Push further ideas</p>
+      <div class="down"></div>
+    </a>
+
+    <a href="report.html" class="node" data-path="report">
+      <h3>Technical Report</h3>
+      <p>Explain & justify decisions</p>
+    </a>
+
+    <a href="demo.html" class="node" data-path="demo">
+      <h3>Final Demo</h3>
+      <p>Present your work</p>
+    </a>
+
+  </div>
+
+  <script>
+    const nodes = document.querySelectorAll(".node");
+
+    // Restore last selected path
+    const savedPath = localStorage.getItem("currentPath");
+    if (savedPath) {
+      const activeNode = document.querySelector(`[data-path="${savedPath}"]`);
+      if (activeNode) activeNode.classList.add("active");
+    }
+
+    nodes.forEach(node => {
+      node.addEventListener("click", () => {
+        nodes.forEach(n => n.classList.remove("active"));
+        node.classList.add("active");
+        localStorage.setItem("currentPath", node.dataset.path);
+      });
+    });
+  </script>
+
+</body>
+</html>
