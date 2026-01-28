@@ -573,6 +573,8 @@ ui <- fluidPage(
         wrap.classList.remove("locked");
       } else {
         alert("Incorrect password.");
+        const pw = prompt("Enter password to reveal solution:");
+        if(pw === null) return;
       }
     }
   </script>
