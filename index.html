@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Project Map</title>
 
   <style>
@@ -12,11 +13,10 @@
       --accent: #38bdf8;
       --muted: #94a3b8;
       --active: #22c55e;
+      --dim: rgba(148, 163, 184, 0.25);
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -31,13 +31,65 @@
 
     .flowchart {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 40px;
-      max-width: 900px;
+      max-width: 980px;
       width: 100%;
       padding: 40px;
     }
 
+    /* SECTION TITLES */
+    .section-title {
+      grid-column: 1 / -1;
+      text-align: center;
+      margin: 10px 0 -10px;
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      position: relative;
+
+      /* subtle animation */
+      opacity: 0;
+      transform: translateY(6px);
+      animation: titleIn 500ms ease forwards;
+      animation-delay: var(--delay, 0ms);
+    }
+
+    .section-title::before,
+    .section-title::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 30%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--muted), transparent);
+      opacity: 0.65;
+    }
+
+    .section-title::before { left: 0; }
+    .section-title::after { right: 0; }
+
+    /* emphasized current section */
+    .section-title.current {
+      color: #dbeafe;
+      text-shadow: 0 0 18px rgba(56, 189, 248, 0.18);
+    }
+
+    .section-title.current::before,
+    .section-title.current::after {
+      background: linear-gradient(to right, transparent, var(--accent), transparent);
+      opacity: 0.9;
+    }
+
+    @keyframes titleIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* NODES */
     .node {
       background: linear-gradient(180deg, #1f2937, var(--card));
       border-radius: 12px;
@@ -45,8 +97,9 @@
       text-align: center;
       cursor: pointer;
       border: 2px solid transparent;
-      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s, opacity 0.2s ease, filter 0.2s ease;
       position: relative;
+      user-select: none;
     }
 
     .node:hover {
@@ -58,6 +111,7 @@
     .node.active {
       border-color: var(--active);
       box-shadow: 0 0 0 2px rgba(34,197,94,0.3);
+      filter: saturate(1.05);
     }
 
     .node h3 {
@@ -76,81 +130,73 @@
       color: inherit;
     }
 
-    /* Arrows */
-    .arrow {
-      position: absolute;
-      width: 100%;
-      height: 2px;
-      background: linear-gradient(to right, transparent, var(--muted));
-      top: 50%;
-      right: -40px;
+    /* De-emphasise nodes outside the current section */
+    .flowchart.has-current .node.dimmed {
+      opacity: 0.55;
+      filter: grayscale(0.15);
+      border-color: transparent;
+      box-shadow: none;
     }
 
-    .arrow::after {
-      content: "";
-      position: absolute;
-      right: 0;
-      top: -4px;
-      border-left: 8px solid var(--muted);
-      border-top: 5px solid transparent;
-      border-bottom: 5px solid transparent;
+    .flowchart.has-current .node.dimmed:hover {
+      opacity: 0.8;
+      filter: none;
     }
 
-    /* Center column arrows */
-    .down {
-      width: 2px;
-      height: 40px;
-      background: linear-gradient(to bottom, transparent, var(--muted));
-      left: 50%;
-      top: 100%;
-      transform: translateX(-50%);
-    }
+    /* Small screens: stack nicely */
+    @media (max-width: 860px) {
+      .flowchart {
+        grid-template-columns: 1fr;
+        gap: 18px;
+        padding: 24px;
+      }
 
-    .down::after {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      left: -4px;
-      border-top: 8px solid var(--muted);
-      border-left: 5px solid transparent;
-      border-right: 5px solid transparent;
+      .section-title::before,
+      .section-title::after {
+        width: 22%;
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <div class="flowchart">
+  <div class="flowchart" id="flowchart">
 
-    <a href="intro.html" class="node" data-path="intro">
+    <div class="section-title" data-section-title="getting-started" style="--delay: 0ms;">
+      Getting Started
+    </div>
+
+    <a href="intro.html" class="node" data-path="intro" data-section="getting-started">
       <h3>Start Here</h3>
       <p>Orientation & data overview</p>
-      <div class="arrow"></div>
     </a>
 
-    <a href="analysis.html" class="node" data-path="analysis">
+    <a href="analysis.html" class="node" data-path="analysis" data-section="getting-started">
       <h3>Exploratory Analysis</h3>
       <p>Cleaning, plots, questions</p>
-      <div class="arrow"></div>
     </a>
 
-    <a href="dashboard.html" class="node" data-path="dashboard">
+    <a href="dashboard.html" class="node" data-path="dashboard" data-section="getting-started">
       <h3>Dashboard Build</h3>
       <p>Interactive exploration</p>
     </a>
 
-    <a href="extensions.html" class="node" data-path="extensions">
+    <div class="section-title" data-section-title="build-and-finish" style="--delay: 120ms;">
+      Build & Finish
+    </div>
+
+    <a href="extensions.html" class="node" data-path="extensions" data-section="build-and-finish">
       <h3>Extensions</h3>
       <p>Push further ideas</p>
-      <div class="down"></div>
     </a>
 
-    <a href="report.html" class="node" data-path="report">
+    <a href="report.html" class="node" data-path="report" data-section="build-and-finish">
       <h3>Technical Report</h3>
       <p>Explain & justify decisions</p>
     </a>
 
-    <a href="demo.html" class="node" data-path="demo">
+    <a href="demo.html" class="node" data-path="demo" data-section="build-and-finish">
       <h3>Final Demo</h3>
       <p>Present your work</p>
     </a>
@@ -158,21 +204,83 @@
   </div>
 
   <script>
-    const nodes = document.querySelectorAll(".node");
+    const flow = document.getElementById("flowchart");
+    const nodes = Array.from(document.querySelectorAll(".node"));
+    const sectionTitles = Array.from(document.querySelectorAll(".section-title"));
 
-    // Restore last selected path
-    const savedPath = localStorage.getItem("currentPath");
-    if (savedPath) {
-      const activeNode = document.querySelector(`[data-path="${savedPath}"]`);
-      if (activeNode) activeNode.classList.add("active");
+    function clearActive() {
+      nodes.forEach(n => n.classList.remove("active"));
+      nodes.forEach(n => n.classList.remove("dimmed"));
+      sectionTitles.forEach(t => t.classList.remove("current"));
+      flow.classList.remove("has-current");
     }
 
+    function applyCurrentSection(sectionKey) {
+      // Highlight section title
+      sectionTitles.forEach(t => {
+        const key = t.getAttribute("data-section-title");
+        t.classList.toggle("current", key === sectionKey);
+      });
+
+      // Dim nodes outside current section
+      nodes.forEach(n => {
+        const sec = n.getAttribute("data-section");
+        n.classList.toggle("dimmed", sec !== sectionKey);
+      });
+
+      flow.classList.add("has-current");
+    }
+
+    // Restore previous selection
+    const savedPath = localStorage.getItem("currentPath");
+    if (savedPath) {
+      const activeNode = document.querySelector(`.node[data-path="${savedPath}"]`);
+      if (activeNode) {
+        activeNode.classList.add("active");
+        applyCurrentSection(activeNode.getAttribute("data-section"));
+      }
+    }
+
+    // Click behaviour: set active node + emphasise section + persist
     nodes.forEach(node => {
       node.addEventListener("click", () => {
         nodes.forEach(n => n.classList.remove("active"));
         node.classList.add("active");
         localStorage.setItem("currentPath", node.dataset.path);
+
+        const sectionKey = node.getAttribute("data-section");
+        applyCurrentSection(sectionKey);
       });
+
+      // Hover polish: gently emphasise the hovered node's section title
+      node.addEventListener("mouseenter", () => {
+        const sectionKey = node.getAttribute("data-section");
+        sectionTitles.forEach(t => {
+          const key = t.getAttribute("data-section-title");
+          if (key === sectionKey) t.classList.add("current");
+        });
+      });
+
+      node.addEventListener("mouseleave", () => {
+        // On leave, restore the true current selection (if any)
+        const current = document.querySelector(".node.active");
+        sectionTitles.forEach(t => t.classList.remove("current"));
+        if (current) {
+          applyCurrentSection(current.getAttribute("data-section"));
+        } else {
+          // no selection yet: remove hover emphasis
+          flow.classList.remove("has-current");
+          nodes.forEach(n => n.classList.remove("dimmed"));
+        }
+      });
+    });
+
+    // Optional: press Escape to clear selection (nice for demos)
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        localStorage.removeItem("currentPath");
+        clearActive();
+      }
     });
   </script>
 
