@@ -561,6 +561,29 @@ ui <- fluidPage(
     </div>
   </div>
 
+
+<script>
+  function unlockSolution(id){
+    const wrap = document.querySelector('[data-solution="' + id + '"]');
+    if(!wrap) return;
+
+    let unlocked = false;
+
+    while(!unlocked){
+      const pw = prompt("Enter password to reveal solution:");
+      if(pw === null) return; // user pressed Cancel
+
+      if(pw === "000"){
+        wrap.classList.remove("locked");
+        unlocked = true;
+      } else {
+        alert("Incorrect password. Try again.");
+      }
+    }
+  }
+</script>
+
+<!---   
   <script>
     function unlockSolution(id){
       const wrap = document.querySelector('[data-solution="' + id + '"]');
@@ -578,7 +601,7 @@ while(wrap.classList.remove="locked"){
       }
     }
   </script>
-
+--->
 
 </body>
 </html>
