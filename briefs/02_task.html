@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>FDA CDER Offer Letter: FAERS Pharmacovigilance Dashboard</title>
+
+  <style>
+    :root{
+       [oai_citation:4‡04_task.html](sediment://file_00000000993872069f30dba965734462)     --fda-navy:#0b1f3a;
+      --fda-sky:#eaf3ff;
+      --ink:#0b1020;
+      --muted:#4b5563;
+      --paper:#ffffff;
+      --border:#e6e9f2;
+      --bg:#f4f6fb;
+      --accent:#2b8cc4;
+      --warn:#b58800;
+    }
+
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--ink);
+      font:15px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      padding:24px;
+    }
+
+    .page{
+      width:210mm;
+      max-width:100%;
+      margin:0 auto;
+      background:var(--paper);
+      border:1px solid var(--border);
+      box-shadow:0 10px 30px rgba(10,20,60,.08);
+    }
+
+    .masthead{
+      background:linear-gradient(0deg, var(--fda-navy), var(--fda-blue));
+      color:#fff;
+      padding:16px 40px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      flex-wrap:wrap;
+      border-bottom:4px solid var(--accent);
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:360px;
+    }
+
+    .brand img{
+      height:34px;
+      width:auto;
+      display:block;
+      filter: drop-shadow(0 2px 6px rgba(0,0,0,.18));
+    }
+
+    .org{
+      line-height:1.2;
+    }
+
+    .org .name{
+      font-size:15px;
+      font-weight:820;
+      color:#fff;
+      letter-spacing:.2px;
+    }
+
+    .org .dept{
+      font-size:12.5px;
+      color:rgba(255,255,255,.86);
+      margin-top:2px;
+    }
+
+    .contact{
+      text-align:right;
+      font-size:12.5px;
+      color:rgba(255,255,255,.86);
+    }
+
+    .contact strong{
+      color:#fff;
+      font-weight:850;
+    }
+
+    main{
+      padding:32px 40px 26px;
+      overflow-wrap:anywhere;
+    }
+
+    .meta{
+      display:flex;
+      justify-content:space-between;
+      gap:16px;
+      flex-wrap:wrap;
+      margin-bottom:18px;
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    .meta .block{min-width:260px}
+    .meta .block div{margin:2px 0}
+
+    .subject{
+      margin:18px 0 14px;
+      padding:12px 14px;
+      border:1px solid var(--border);
+      border-left:4px solid var(--fda-blue);
+      background:var(--fda-sky);
+      font-weight:860;
+      color:var(--ink);
+    }
+
+    h2{
+      font-size:13.5px;
+      margin:18px 0 8px;
+      color:var(--fda-navy);
+      letter-spacing:.2px;
+      text-transform:uppercase;
+    }
+
+    p{margin:10px 0}
+    ul{margin:8px 0 10px 18px}
+    li{margin:6px 0}
+
+    .callout{
+      margin:16px 0;
+      padding:14px 14px;
+      border:1px solid var(--border);
+      border-left:4px solid var(--warn);
+      background:#fffdf2;
+      color:var(--ink);
+    }
+
+    .kpi-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px 16px;
+      margin:10px 0 6px;
+      padding:12px 14px;
+      border:1px solid var(--border);
+      background:#fcfdff;
+    }
+
+    .kpi-grid div{
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    .kpi-grid strong{
+      color:var(--ink);
+      font-weight:860;
+    }
+
+    .signature{
+      margin-top:26px;
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:20px;
+      flex-wrap:wrap;
+    }
+
+    .sigline{
+      margin-top:8px;
+      border-top:1px solid var(--border);
+      padding-top:10px;
+      min-width:360px;
+    }
+
+    .signature-img{
+      display:block;
+      max-width:110px;
+      height:auto;
+      margin:4px 0 6px;
+    }
+
+    .signame{font-weight:880}
+    .sigtitle{color:var(--muted); font-size:13px; margin-top:2px}
+
+    footer{
+      padding:14px 40px 22px;
+      border-top:1px solid var(--border);
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:12px;
+    }
+
+    .disclaimer{max-width:720px}
+
+    .pill{
+      display:inline-block;
+      font-size:12px;
+      padding:2px 9px;
+      border-radius:999px;
+      border:1px solid rgba(0,94,162,0.25);
+      background: rgba(0,94,162,0.06);
+      color: var(--fda-blue);
+      margin-right:6px;
+      margin-bottom:6px;
+      font-weight:650;
+    }
+
+    @page{
+      size:A4;
+      margin:15mm;
+    }
+
+    @media print{
+      body{
+        background:#fff !important;
+        padding:0 !important;
+        margin:0 !important;
+      }
+      .page{
+        box-shadow:none !important;
+        border:0 !important;
+        width:auto !important;
+        max-width:none !important;
+      }
+      *{
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      header, footer, .signature, .callout{
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page" role="document" aria-label="Letter">
+    <header class="masthead">
+      <div class="brand">
+        <img src="assets/fda-logo.png" alt="U.S. Food and Drug Administration (FDA)" />
+        <div class="org">
+          <div class="name">U.S. Food and Drug Administration</div>
+          <div class="dept">Center for Drug Evaluation and Research (CDER), Office of Surveillance and Epidemiology</div>
+        </div>
+      </div>
+
+      <div class="contact">
+        <div><strong>10903 New Hampshire Avenue</strong></div>
+        <div>Silver Spring, MD 20993</div>
+        <div>drug.safety.analytics@fda.gov</div>
+        <div>+1 (301) 000 0000</div>
+      </div>
+    </header>
+
+    <main>
+      <div class="meta">
+        <div class="block">
+          <div><strong>To:</strong> Analyst Placement Cohort</div>
+          <div><strong>From:</strong> Pharmacovigilance Analytics Unit</div>
+          <div><strong>Reference:</strong> CDER-OSE-FAERS-SURV-2026</div>
+        </div>
+        <div class="block" style="text-align:right">
+          <div><strong>Date:</strong> <span id="date"></span></div>
+          <div><strong>Engagement:</strong> Safety monitoring dashboard + technical note</div>
+          <div><strong>Data source:</strong> FAERS (public extracts)</div>
+        </div>
+      </div>
+
+      <div class="subject">
+        Subject: Offer of Engagement, FAERS Adverse Drug Reaction Surveillance Dashboard
+      </div>
+
+      <p>
+        The Center for Drug Evaluation and Research (CDER) is commissioning an internal training deliverable to support
+        the interpretation of post marketing adverse event reports. Your team will build a decision support dashboard
+        that enables non technical reviewers to explore reporting patterns and potential safety signals in a structured way.
+      </p>
+
+      <p>
+        This engagement uses public extracts of the FDA Adverse Event Reporting System (FAERS). These reports are submitted by
+        healthcare professionals, consumers, and manufacturers. They are valuable for signal detection, but they do not confirm
+        that a drug caused an event. Your work must communicate that distinction clearly.
+      </p>
+
+      <div class="callout">
+        <strong>Analytical standard:</strong>
+        This tool is designed for surveillance and triage. You should describe patterns, associations, and reporting changes.
+        You must avoid causal claims. You must document how you define cohorts, how you handle missingness, and how you treat
+        multi drug reports. If you introduce any scoring or flagging, it must be described as a simple prioritisation aid.
+      </div>
+
+      <h2>data provided</h2>
+      <p>
+        You will be provided with a curated extract derived from public FAERS releases, structured to be analysis ready for this project.
+        The underlying source material is based on the FAERS Quarterly Data Extract.
+      </p>
+
+      <div>
+        <span class="pill">FAERS quarterly extract</span>
+        <span class="pill">Adverse reactions</span>
+        <span class="pill">Drug roles</span>
+        <span class="pill">Outcomes</span>
+        <span class="pill">Demographics</span>
+      </div>
+
+      <p><strong>What one row represents:</strong> one adverse event report, linked to one or more suspect drugs and one or more reported reactions.</p>
+
+      <h2>project objectives</h2>
+      <ul>
+        <li>Enable reviewers to explore reporting frequency over time for selected medicines</li>
+        <li>Summarise the adverse reaction profile for each selected medicine in a consistent way</li>
+        <li>Provide demographic and outcome context to support responsible interpretation</li>
+        <li>Support comparison across multiple drugs, including within the same therapeutic area</li>
+        <li>Produce a brief technical note that explains limitations and appropriate interpretation</li>
+      </ul>
+
+      <h2>required dashboard modules</h2>
+
+      <h2>module 1: reporting volume and trends</h2>
+      <ul>
+        <li><strong>Views:</strong> time series of report counts, month or quarter aggregation, optional rolling average</li>
+        <li><strong>Questions:</strong> Are there spikes or sustained increases? Do patterns differ between drugs? Are trends stable across time windows?</li>
+      </ul>
+
+      <h2>module 2: reaction profile</h2>
+      <ul>
+        <li><strong>Views:</strong> top reported reactions for selected drug(s), reaction category grouping if available, comparison mode</li>
+        <li><strong>Questions:</strong> Which reactions dominate reporting? Are reaction profiles similar across drugs? Are rare but serious reactions present?</li>
+      </ul>
+
+      <h2>module 3: seriousness and outcomes</h2>
+      <ul>
+        <li><strong>Views:</strong> outcome distribution (hospitalisation, death, life threatening, disability), seriousness split by time or subgroup</li>
+        <li><strong>Questions:</strong> Does the mix of outcomes change over time? Are severe outcomes concentrated in specific subgroups?</li>
+      </ul>
+
+      <h2>module 4: population context</h2>
+      <ul>
+        <li><strong>Views:</strong> age band and sex distributions, optional filters for reporter type and country if available</li>
+        <li><strong>Questions:</strong> Are reports concentrated in older populations? Are patterns consistent across sexes? Are there data gaps that affect interpretation?</li>
+      </ul>
+
+      <div class="kpi-grid" aria-label="Suggested headline metrics">
+        <div><strong>Suggested KPI:</strong> Total reports for selected drug(s) in chosen period</div>
+        <div><strong>Suggested KPI:</strong> Proportion of reports flagged as serious</div>
+        <div><strong>Suggested KPI:</strong> Most common reaction term or category</div>
+        <div><strong>Suggested KPI:</strong> Change in reporting rate vs prior period</div>
+      </div>
+
+      <h2>implementation requirements</h2>
+      <ul>
+        <li>Include filters for drug selection and time range at minimum</li>
+        <li>All outputs must use one consistently filtered dataset to avoid mismatched numbers</li>
+        <li>Provide at least three charts and one summary table</li>
+        <li>Use plain language labels suitable for non technical reviewers</li>
+        <li>Include a visible disclaimer panel about interpretation and non causality</li>
+      </ul>
+
+      <h2>stretch goals</h2>
+      <ul>
+        <li>Add comparison between two drugs or a drug class view</li>
+        <li>Add a download button for filtered data and a download button for a key figure</li>
+      </ul>
+
+      <h2>deliverables</h2>
+      <ul>
+        <li><strong>Interactive dashboard:</strong> Shiny app suitable for a stakeholder walk through</li>
+        <li><strong>Technical note:</strong> one to two pages describing data provenance, cleaning assumptions, limitations, and interpretation guidance</li>
+      </ul>
+
+      <div class="signature">
+        <div class="sigline">
+          <div class="sigtitle">Lead, Pharmacovigilance Analytics Unit, CDER OSE</div>
+          <img class="signature-img" src="assets/signature.png" alt="Signature" />
+          <div style="font-size:12.5px;color:var(--muted);margin-top:6px;">
+            For questions about scope and deliverables, contact: drug.safety.analytics@fda.gov
+          </div>
+        </div>
+
+        <div style="min-width:240px; text-align:right; color:var(--muted); font-size:12.5px;">
+          <div><strong>Requested start:</strong> Immediate</div>
+          <div><strong>Requested duration:</strong> Final project period</div>
+          <div><strong>Output format:</strong> Dashboard + technical note</div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <div>
+        CDER OSE | Pharmacovigilance Analytics
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    (function(){
+      const el = document.getElementById("date");
+      if(!el) return;
+      const d = new Date();
+      const opts = { year: "numeric", month: "long", day: "numeric" };
+      el.textContent = d.toLocaleDateString(undefined, opts);
+    })();
+  </script>
+</body>
+</html>
