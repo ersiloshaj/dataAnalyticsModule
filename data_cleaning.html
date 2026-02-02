@@ -176,14 +176,13 @@
     a{ color: var(--accent); text-decoration: none; }
 
 
-      .download-row{
-    display:flex;
-    gap:14px;
-    justify-content:center;
-    align-items:stretch;
-    flex-wrap:wrap;
-    margin-top: 14px;
-  }
+    .download-row{
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      align-items: stretch;
+      margin-top: 16px;
+    }
 
   .dl-box{
     width: min(320px, 100%);
