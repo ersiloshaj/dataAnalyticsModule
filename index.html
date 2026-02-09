@@ -8,30 +8,26 @@
   <style>
     :root{
       --bg:#0b1020;
-      --panel:#121a33;
-      --panel2:#0f1630;
       --text:#e8ecff;
       --muted:#b9c2ff;
       --border:rgba(255,255,255,0.12);
       --shadow: 0 18px 45px rgba(0,0,0,0.35);
       --ring: 0 0 0 3px rgba(122,162,255,0.35);
 
-      --done1:#ffe07a;
-      --done2:#ffb800;
-
-      --next1:#a9b9ff;
-      --next2:#6f8dff;
+      --coin1:#ffe07a;
+      --coin2:#ffb800;
 
       --locked1:#cfd3df;
       --locked2:#9aa3b8;
 
       --accent:#7aa2ff;
-      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
       --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     }
 
     *{ box-sizing:border-box; }
     html,body{ height:100%; }
+
     body{
       margin:0;
       font-family: var(--sans);
@@ -52,24 +48,18 @@
       justify-content:space-between;
       gap:14px;
       flex-wrap:wrap;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
     h1{ margin:0; font-size: clamp(22px, 2.6vw, 34px); line-height:1.15; }
     .subtitle{ margin-top:6px; color: var(--muted); font-size: 14px; max-width: 75ch; }
 
     .topbar{
-      display:flex; gap:10px; align-items:center; flex-wrap:wrap; justify-content:flex-end;
+      display:flex;
+      gap:10px;
+      align-items:center;
+      flex-wrap:wrap;
+      justify-content:flex-end;
     }
-    .pill{
-      display:inline-flex; align-items:center; gap:8px;
-      padding:8px 10px; border-radius:999px;
-      border:1px solid var(--border);
-      background: rgba(255,255,255,0.04);
-      color: var(--muted);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.22);
-      user-select:none; font-size: 13px; white-space:nowrap;
-    }
-    .pill strong{ color: var(--text); font-weight: 820; }
 
     .btn{
       cursor:pointer;
@@ -132,31 +122,6 @@
     }
     .input input::placeholder{ color: rgba(185,194,255,0.55); }
 
-    .chips{ display:flex; gap:8px; flex-wrap:wrap; }
-    .chip{
-      cursor:pointer; user-select:none;
-      font-size: 12.5px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.14);
-      background: rgba(255,255,255,0.03);
-      color: var(--muted);
-      transition: background .12s ease, border-color .12s ease, transform .12s ease, color .12s ease;
-      white-space:nowrap;
-    }
-    .chip:hover{
-      background: rgba(122,162,255,0.10);
-      border-color: rgba(122,162,255,0.28);
-      transform: translateY(-1px);
-      color: var(--text);
-    }
-    .chip.active{
-      background: rgba(255,184,0,0.12);
-      border-color: rgba(255,184,0,0.38);
-      color: var(--text);
-      font-weight: 760;
-    }
-
     /* Sections */
     .section{
       margin-top: 14px;
@@ -176,15 +141,27 @@
       flex-wrap:wrap;
     }
     .sectionHead h2{ margin:0; font-size: 14.5px; letter-spacing:.2px; }
-    .sectionHead .meta{ color: var(--muted); font-size: 12.5px; }
 
-    /* Roadmap list */
+    .lockTag{
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.25);
+      background: rgba(255,211,122,0.08);
+      color: #ffd37a;
+      user-select:none;
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+    }
+
+    /* Road list */
     .road{
       position: relative;
       padding: 14px;
     }
 
-    /* Vertical path line behind icons */
+    /* Vertical dotted path line behind icons */
     .road::before{
       content:"";
       position:absolute;
@@ -224,26 +201,19 @@
       position: relative;
       z-index: 1;
       transition: transform .12s ease;
+      color: rgba(70,40,0,0.95);
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.25), transparent 55%),
+                  linear-gradient(180deg, var(--coin1), var(--coin2));
     }
+
     .row:hover .node{ transform: translateY(-1px); }
 
     .node svg{ width: 26px; height: 26px; }
 
-    .node[data-status="done"]{
-      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.25), transparent 55%),
-                  linear-gradient(180deg, var(--done1), var(--done2));
-      color: rgba(70,40,0,0.95);
-    }
-    .node[data-status="next"]{
-      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.22), transparent 55%),
-                  linear-gradient(180deg, var(--next1), var(--next2));
-      color: rgba(0,10,40,0.95);
-    }
-    .node[data-status="locked"]{
+    .node.locked{
+      color: rgba(20,24,38,0.95);
       background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.18), transparent 55%),
                   linear-gradient(180deg, var(--locked1), var(--locked2));
-      color: rgba(20,24,38,0.95);
-      opacity: 0.9;
     }
 
     .content{
@@ -269,9 +239,7 @@
     }
     .content:focus{ outline:none; box-shadow: 0 14px 40px rgba(0,0,0,0.22), var(--ring); }
 
-    .left{
-      min-width:0;
-    }
+    .left{ min-width:0; }
     .title{
       margin:0;
       font-weight: 860;
@@ -285,22 +253,7 @@
       overflow:hidden;
       text-overflow:ellipsis;
       white-space:nowrap;
-      max-width: 75ch;
-    }
-
-    .badges{
-      margin-top: 8px;
-      display:flex;
-      gap: 8px;
-      flex-wrap:wrap;
-    }
-    .badge{
-      font-size: 11.5px;
-      padding: 3px 8px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.14);
-      background: rgba(255,255,255,0.03);
-      color: var(--muted);
+      max-width: 80ch;
     }
 
     .right{
@@ -312,21 +265,20 @@
       font-size: 12.5px;
       white-space:nowrap;
     }
-    .right .miniDot{
-      width: 9px; height: 9px; border-radius: 999px;
-      background: rgba(255,255,255,0.22);
-      border: 1px solid rgba(255,255,255,0.14);
-    }
-    .content[data-status="done"] .miniDot{ background: rgba(255,184,0,0.95); border-color: rgba(255,184,0,0.35); }
-    .content[data-status="next"] .miniDot{ background: rgba(122,162,255,0.95); border-color: rgba(122,162,255,0.35); }
-    .content[data-status="locked"] .miniDot{ background: rgba(154,163,184,0.85); border-color: rgba(154,163,184,0.35); }
 
-    .content[data-status="locked"]{
-      cursor:not-allowed;
-      opacity: 0.72;
+    .chev{
+      width: 18px;
+      height: 18px;
+      opacity: 0.9;
     }
-    .content[data-status="locked"]:hover{
-      transform:none;
+
+    /* Disabled when section locked */
+    .content.disabled{
+      cursor: not-allowed;
+      opacity: 0.68;
+    }
+    .content.disabled:hover{
+      transform: none;
       border-color: rgba(255,255,255,0.12);
       background: rgba(15,22,48,0.55);
     }
@@ -341,6 +293,12 @@
       flex-wrap:wrap;
     }
     .mono{ font-family: var(--mono); }
+
+    /* Small screens: keep it comfy */
+    @media (max-width: 460px){
+      .road::before{ left: 30px; }
+      .node{ width: 54px; height: 54px; }
+    }
   </style>
 </head>
 
@@ -350,15 +308,14 @@
       <div>
         <h1>Roadmap</h1>
         <div class="subtitle">
-          Icons on the left, titles on the right. Edit the <span class="mono">ROADMAP</span> array to fill in lessons.
+          Duolingo-style path with titles on the right. Only whole sections can be password locked.
         </div>
       </div>
 
       <div class="topbar">
-        <div class="pill"><strong id="kpiDone">0</strong> done</div>
-        <div class="pill"><strong id="kpiNext">0</strong> next</div>
-        <div class="pill"><strong id="kpiLocked">0</strong> locked</div>
-        <button class="btn" id="btnReset" type="button">Reset progress</button>
+        <button class="btn" id="btnClearUnlocks" type="button" title="Forget unlocked sections on this device">
+          Clear unlocks
+        </button>
       </div>
     </header>
 
@@ -370,47 +327,60 @@
         </svg>
         <input id="q" type="search" placeholder="Search lessons, projects, keywords…" autocomplete="off" />
       </div>
-
-      <div class="chips" aria-label="Filters">
-        <div class="chip active" data-filter="all">All</div>
-        <div class="chip" data-filter="next">Next</div>
-        <div class="chip" data-filter="done">Done</div>
-        <div class="chip" data-filter="locked">Locked</div>
+      <div style="color:var(--muted); font-size:12.5px;">
+        Tip: lock entire weeks with passwords.
       </div>
     </div>
 
     <div id="mount"></div>
 
     <footer>
-      <div>Progress saved in <span class="mono">localStorage</span>.</div>
-      <div>Tip: duplicate items in <span class="mono">ROADMAP</span> to fill quickly.</div>
+      <div>Unlocked sections are remembered in <span class="mono">localStorage</span> for this browser.</div>
+      <div>Fill content by editing <span class="mono">ROADMAP</span>.</div>
     </footer>
   </div>
 
   <script>
     /*****************************************************************
      * EDIT ME: Course structure
+     *
+     * - locked: true/false
+     * - password: only required if locked: true
      *****************************************************************/
     const ROADMAP = [
       {
         section: "Week 1: Foundations",
+        locked: false,
         items: [
-          { id:"w1-setup", title:"Orientation + project setup", desc:"Folder structure, scripts, reading CSVs", href:"monday.html", status:"done", tags:["setup","csv"] },
-          { id:"w1-clean", title:"Data wrangling & cleaning", desc:"Missing data, types, joins", href:"tuesday.html", status:"next", tags:["dplyr","cleaning"] },
-          { id:"w1-line",  title:"Line graphs", desc:"Ridership over time", href:"linegraphs.html", status:"locked", lockReason:"Finish Data wrangling & cleaning first.", tags:["ggplot","time"] },
-          { id:"w1-box",   title:"Box plots", desc:"Compare delays by mode", href:"boxplots.html", status:"locked", lockReason:"Finish Data wrangling & cleaning first.", tags:["ggplot","distribution"] },
+          { title:"Orientation + project setup", desc:"Folder structure, scripts, reading CSVs", href:"monday.html" },
+          { title:"Data wrangling & cleaning", desc:"Missing data, types, joins", href:"tuesday.html" },
+          { title:"Line graphs", desc:"Ridership over time", href:"linegraphs.html" },
+          { title:"Box plots", desc:"Compare delays by mode", href:"boxplots.html" }
         ]
       },
       {
         section: "Week 2: Dashboard Build",
+        locked: true,
+        password: "week2",
         items: [
-          { id:"w2-shiny", title:"Intro to Shiny", desc:"UI vs server, reactivity", href:"notes.html", status:"locked", lockReason:"Finish Week 1 plots first.", tags:["shiny"] },
-          { id:"w2-tasks", title:"Shiny build tasks", desc:"Inputs, filtered data, downloads", href:"tasks.html", status:"locked", lockReason:"Finish Intro to Shiny first.", tags:["shiny","tasks"] }
+          { title:"Intro to Shiny", desc:"UI vs server, reactivity", href:"notes.html" },
+          { title:"Shiny build tasks", desc:"Inputs, filtered data, downloads", href:"tasks.html" },
+          { title:"Cheat sheet", desc:"One-page reference while building", href:"cheatSheet.html" }
+        ]
+      },
+      {
+        section: "Project briefs",
+        locked: true,
+        password: "briefs",
+        items: [
+          { title:"Choose a brief", desc:"Pick a client scenario and build a dashboard", href:"briefs.html" },
+          { title:"Public health brief", desc:"Health inequalities dashboard", href:"01_task.html" },
+          { title:"Housing brief", desc:"Affordability and short-term lets", href:"04_task.html" }
         ]
       }
     ];
 
-    const LS_KEY = "roadmapProgress.v2";
+    const UNLOCK_KEY = "unlockedSections.v1";
 
     function esc(s){
       return String(s ?? "").replace(/[&<>"']/g, m => ({
@@ -418,110 +388,86 @@
       })[m]);
     }
 
-    function loadProgress(){
+    function loadUnlocked(){
       try{
-        const raw = localStorage.getItem(LS_KEY);
-        return raw ? JSON.parse(raw) : {};
-      }catch{ return {}; }
-    }
-    function saveProgress(p){ localStorage.setItem(LS_KEY, JSON.stringify(p)); }
-
-    function flatten(sections){
-      const out = [];
-      for(const sec of sections){
-        for(const it of sec.items) out.push({ ...it, section: sec.section });
+        return JSON.parse(localStorage.getItem(UNLOCK_KEY)) || {};
+      }catch{
+        return {};
       }
-      return out;
     }
 
-    function iconSVG(status){
-      if(status === "done"){
-        return `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    function saveUnlocked(obj){
+      localStorage.setItem(UNLOCK_KEY, JSON.stringify(obj));
+    }
+
+    function iconCheck(){
+      return `
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
           <path d="M6 12.5l4 4L18.5 8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>`;
-      }
-      if(status === "next"){
-        return `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M12 2l1.6 6.2L20 10l-6.4 1.8L12 18l-1.6-6.2L4 10l6.4-1.8L12 2Z" stroke="currentColor" stroke-width="2"/>
-        </svg>`;
-      }
-      return `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <path d="M7 11V8a5 5 0 0 1 10 0v3" stroke="currentColor" stroke-width="2"/>
-        <path d="M6 11h12v10H6V11Z" stroke="currentColor" stroke-width="2"/>
-      </svg>`;
+        </svg>
+      `;
+    }
+
+    function iconLock(){
+      return `
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M7 11V8a5 5 0 0 1 10 0v3" stroke="currentColor" stroke-width="2"/>
+          <path d="M6 11h12v10H6V11Z" stroke="currentColor" stroke-width="2"/>
+        </svg>
+      `;
+    }
+
+    function iconChevron(){
+      return `
+        <svg class="chev" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      `;
     }
 
     function matchesQuery(item, q){
       if(!q) return true;
-      const hay = [item.title, item.desc, item.section, ...(item.tags||[])].join(" ").toLowerCase();
+      const hay = [item.title, item.desc].join(" ").toLowerCase();
       return hay.includes(q.toLowerCase());
     }
-    function matchesFilter(item, f){
-      if(f === "all") return true;
-      return item.status === f;
-    }
 
-    function kpis(items){
-      const done = items.filter(x => x.status === "done").length;
-      const next = items.filter(x => x.status === "next").length;
-      const locked = items.filter(x => x.status === "locked").length;
-      return { done, next, locked };
-    }
-
-    function mount(){
-      const progress = loadProgress();
-
-      // Apply saved overrides
-      const sections = ROADMAP.map(sec => ({
-        section: sec.section,
-        items: sec.items.map(it => ({
-          ...it,
-          status: progress[it.id]?.status || it.status
-        }))
-      }));
-
-      const all = flatten(sections);
-      const k = kpis(all);
-      document.getElementById("kpiDone").textContent = k.done;
-      document.getElementById("kpiNext").textContent = k.next;
-      document.getElementById("kpiLocked").textContent = k.locked;
-
+    function render(){
+      const unlocked = loadUnlocked();
       const q = document.getElementById("q").value.trim();
-      const filter = document.querySelector(".chip.active")?.dataset.filter || "all";
+      const mount = document.getElementById("mount");
 
-      const html = sections.map(sec => {
-        const items = sec.items.filter(it => matchesQuery(it, q)).filter(it => matchesFilter(it, filter));
+      mount.innerHTML = ROADMAP.map(sec => {
+        const isLocked = !!sec.locked && !unlocked[sec.section];
+
+        const items = (sec.items || []).filter(it => matchesQuery(it, q));
+
         return `
           <div class="section">
             <div class="sectionHead">
               <h2>${esc(sec.section)}</h2>
-              <div class="meta">${items.length} shown</div>
+              ${isLocked ? `<span class="lockTag">🔒 Section locked</span>` : ``}
             </div>
+
             <div class="road">
               ${items.length ? items.map(it => {
-                const locked = it.status === "locked";
-                const hint = locked ? (it.lockReason || "Locked.") : (it.desc || "");
-                const tags = (it.tags||[]).slice(0,3).map(t => `<span class="badge">${esc(t)}</span>`).join("");
-
+                const href = isLocked ? "#" : (it.href || "#");
+                const hint = isLocked ? "This section is locked. Click to enter password." : (it.desc || "");
                 return `
                   <div class="row">
-                    <div class="node" data-status="${esc(it.status)}" title="${esc(it.status)}">
-                      ${iconSVG(it.status)}
+                    <div class="node ${isLocked ? "locked" : ""}" title="${isLocked ? "Locked" : "Unlocked"}">
+                      ${isLocked ? iconLock() : iconCheck()}
                     </div>
 
-                    <a class="content"
-                       href="${locked ? "#" : esc(it.href || "#")}"
-                       data-status="${esc(it.status)}"
-                       data-id="${esc(it.id)}"
-                       ${locked ? 'aria-disabled="true"' : ''}>
+                    <a class="content ${isLocked ? "disabled" : ""}"
+                       href="${esc(href)}"
+                       data-section="${esc(sec.section)}"
+                       ${isLocked ? 'aria-disabled="true"' : ''}>
                       <div class="left">
                         <div class="title">${esc(it.title)}</div>
-                        <div class="desc" title="${esc(hint)}">${esc(hint)}</div>
-                        <div class="badges">${tags}</div>
+                        <div class="desc" title="${esc(hint)}">${esc(it.desc || "")}</div>
                       </div>
                       <div class="right">
-                        <span class="miniDot" aria-hidden="true"></span>
-                        <span>${esc(it.status)}</span>
+                        ${iconChevron()}
                       </div>
                     </a>
                   </div>
@@ -532,48 +478,42 @@
         `;
       }).join("");
 
-      document.getElementById("mount").innerHTML = html;
+      wireSectionLocks();
+    }
 
-      // Intercept locked clicks
-      document.querySelectorAll('.content[data-status="locked"]').forEach(a => {
-        a.addEventListener("click", (e) => {
-          e.preventDefault();
-          const id = a.dataset.id;
-          const item = flatten(sections).find(x => x.id === id);
-          alert(item?.lockReason || "This item is locked.");
-        });
-      });
+    function wireSectionLocks(){
+      const unlocked = loadUnlocked();
 
-      // Optional: mark as done with Alt+Click
-      document.querySelectorAll('.content:not([data-status="locked"])').forEach(a => {
-        a.addEventListener("click", (e) => {
-          if(!e.altKey) return; // normal click opens link
+      document.querySelectorAll(".content.disabled").forEach(link => {
+        link.addEventListener("click", (e) => {
           e.preventDefault();
-          const id = a.dataset.id;
-          progress[id] = { status: "done" };
-          saveProgress(progress);
-          mount();
+
+          const sectionName = link.dataset.section;
+          const sec = ROADMAP.find(s => s.section === sectionName);
+          if(!sec || !sec.locked) return;
+
+          const pw = prompt(`Enter password to unlock "${sectionName}"`);
+          if(pw === null) return;
+
+          if(pw === sec.password){
+            unlocked[sectionName] = true;
+            saveUnlocked(unlocked);
+            render();
+          } else {
+            alert("Incorrect password.");
+          }
         });
       });
     }
 
-    // Filters
-    document.querySelectorAll(".chip").forEach(chip => {
-      chip.addEventListener("click", () => {
-        document.querySelectorAll(".chip").forEach(c => c.classList.remove("active"));
-        chip.classList.add("active");
-        mount();
-      });
+    document.getElementById("q").addEventListener("input", render);
+
+    document.getElementById("btnClearUnlocks").addEventListener("click", () => {
+      localStorage.removeItem(UNLOCK_KEY);
+      render();
     });
 
-    document.getElementById("q").addEventListener("input", mount);
-
-    document.getElementById("btnReset").addEventListener("click", () => {
-      localStorage.removeItem(LS_KEY);
-      mount();
-    });
-
-    mount();
+    render();
   </script>
 </body>
 </html>
