@@ -413,10 +413,10 @@
         locked: false,
         password: "briefs",
         items: [
-          { title:"Office for Health Improvement and Disparities", desc:"", href:"briefs/01_task.html" },
-          { title:"U.S. Food & Drug Administration", desc:"", href:"briefs/02_task.html" },
+          { title:"Office for Health Improvement and Disparities", desc:"", href:"briefs/01_task.html", icon:"GOVuk"},
+          { title:"U.S. Food & Drug Administration", desc:"", href:"briefs/02_task.html", icon:"FDA"},
           { title:"", desc:"", href:"briefs/03_task.html" },
-          { title:"Department for Levelling Up, Housing & Communities", desc:"", href:"briefs/04_task.html" },
+          { title:"Department for Levelling Up, Housing & Communities", desc:"", href:"briefs/04_task.html", icon:"GOVuk"},
           { title:"", desc:"", href:"briefs/05_task.html" },
           { title:"ASDA: Retail Operations and Commercial Analysis", desc:"", href:"briefs/06_task.html", icon:"ASDA"},
           { title:"Leicester City Football Club", desc:"", href:"briefs/07_task.html", icon:"lcfc"},
@@ -444,6 +444,16 @@
       <img 
         src="assets/asda-logo.png"
         alt="ASDA logo"
+        class="crest"
+      />
+    `;
+  }
+
+  if(kind === "GOVuk") {
+    return `
+      <img 
+        src="assets/govuk-logo2.png"
+        alt="GOV.UK logo"
         class="crest"
       />
     `;
