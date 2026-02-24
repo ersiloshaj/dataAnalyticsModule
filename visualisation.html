@@ -1,0 +1,877 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Visual Hierarchy & Dashboard Design</title>
+  <style>
+    :root{
+      --bg:#ffffff;
+      --panel:#f6f6f6;
+      --panel2:#fbfbfb;
+      --text:#111;
+      --muted:#555;
+      --muted2:#6b6b6b;
+      --border:#d9d9d9;
+      --accent:#1f4ed8;
+      --good:#0f8a3c;
+      --warn:#b77800;
+      --bad:#b42318;
+      --codebg:#f2f2f2;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
+      --sans: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      --shadow: 0 12px 30px rgba(0,0,0,0.08);
+      --ring: 0 0 0 3px rgba(31,78,216,0.12);
+      --radius: 12px;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+
+    body{
+      margin:0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      line-height: 1.6;
+    }
+
+    /* Page header */
+    header{
+      max-width:1100px;
+      margin:0 auto;
+      padding: 40px 18px 10px;
+    }
+    h1{
+      margin:0 0 10px;
+      font-size: clamp(26px, 3vw, 40px);
+      line-height:1.15;
+      letter-spacing:.2px;
+    }
+    .subtitle{
+      color: var(--muted);
+      font-size: 16px;
+      max-width: 85ch;
+    }
+
+    /* Layout */
+    .wrap{
+      max-width:1100px;
+      margin:0 auto;
+      padding: 0 18px 70px;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+    @media(min-width: 980px){
+    .grid{ grid-template-columns: 1fr; }
+    }
+
+    /* Card */
+    .card{
+      background: var(--panel2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: var(--shadow);
+    }
+
+    /* TOC */
+    .tocTop{
+      margin-bottom: 10px;
+    }
+    .tag{
+      display:inline-block;
+      font-size: 12px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--panel);
+      color: var(--muted);
+      margin: 0 6px 6px 0;
+    }
+    .toc a{
+      display:block;
+      color: var(--muted);
+      text-decoration:none;
+      padding: 8px 10px;
+      border-radius: 10px;
+      border: 1px solid transparent;
+      margin: 2px 0;
+      font-size: 14px;
+    }
+    .toc a:hover{
+      color: var(--text);
+      border-color: rgba(31,78,216,0.25);
+      background: rgba(31,78,216,0.06);
+    }
+    .toc a.active{
+      color: var(--text);
+      border-color: rgba(31,78,216,0.35);
+      background: rgba(31,78,216,0.08);
+      box-shadow: var(--ring);
+    }
+
+    /* Typography */
+    h2{
+      margin: 0 0 10px;
+      font-size: 22px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 6px;
+    }
+    h3{
+      margin: 18px 0 8px;
+      font-size: 18px;
+    }
+    h4{
+      margin: 14px 0 6px;
+      font-size: 15px;
+    }
+    p{ margin: 10px 0; color: var(--muted); }
+    ul{ margin: 8px 0 12px 22px; color: var(--muted); }
+    li{ margin: 6px 0; }
+
+    .hr{
+      height:1px;
+      background: var(--border);
+      margin: 18px 0;
+    }
+
+    /* Callouts */
+    .callout{
+      border-left: 4px solid var(--accent);
+      padding: 10px 12px;
+      background: var(--panel);
+      border-radius: 10px;
+      margin: 12px 0;
+      color: var(--muted);
+    }
+    .callout.good{ border-left-color: var(--good); }
+    .callout.warn{ border-left-color: var(--warn); }
+    .callout.bad{ border-left-color: var(--bad); }
+
+    /* Code */
+    code{
+      font-family: var(--mono);
+      font-size: 0.95em;
+      background: var(--codebg);
+      border: 1px solid var(--border);
+      padding: 0 6px;
+      border-radius: 8px;
+      color: var(--text);
+    }
+    .code{
+      background: var(--codebg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px;
+      overflow:auto;
+      font-family: var(--mono);
+      font-size: 13px;
+      line-height: 1.5;
+      margin: 10px 0 14px;
+      white-space: pre;
+      color: #111;
+    }
+
+    /* Columns */
+    .two-col{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    @media(min-width: 900px){
+      .two-col{ grid-template-columns: 1fr 1fr; }
+    }
+
+    .mini{
+      font-size: 13px;
+      color: var(--muted2);
+    }
+
+    /* Demo dashboard mock */
+    .dashShell{
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow:hidden;
+      background: #fff;
+    }
+    .dashTop{
+      display:flex;
+      gap: 10px;
+      align-items:center;
+      justify-content:space-between;
+      padding: 12px 12px;
+      border-bottom: 1px solid var(--border);
+      background: var(--panel2);
+      flex-wrap:wrap;
+    }
+    .dashTitle{
+      margin:0;
+      font-size: 14.5px;
+      font-weight: 750;
+      color: var(--text);
+      letter-spacing:.2px;
+    }
+    .btnRow{ display:flex; gap:10px; flex-wrap:wrap; }
+    .btn{
+      cursor:pointer;
+      user-select:none;
+      border: 1px solid rgba(31,78,216,0.35);
+      background: rgba(31,78,216,0.08);
+      color: var(--text);
+      padding: 8px 10px;
+      border-radius: 10px;
+      font-weight: 650;
+      font-size: 13px;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      background: rgba(31,78,216,0.11);
+      border-color: rgba(31,78,216,0.5);
+    }
+    .btn:focus{ outline:none; box-shadow: var(--ring); }
+
+    .dashGrid{
+      padding: 12px;
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    @media(min-width: 900px){
+      .dashGrid{
+        grid-template-columns: 0.95fr 2.05fr;
+        align-items:start;
+      }
+    }
+
+    .filters{
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px;
+      background: var(--panel2);
+    }
+    .filters .lab{
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 10px;
+      margin-bottom: 6px;
+    }
+    .fakeInput{
+      height: 36px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: #fff;
+    }
+
+    .mainArea{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .kpis{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    @media(min-width: 760px){
+      .kpis{ grid-template-columns: repeat(3, 1fr); }
+    }
+
+    .kpi{
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px;
+      background: var(--panel2);
+    }
+    .kpi .label{ color: var(--muted); font-size: 12px; }
+    .kpi .value{ font-size: 20px; margin-top: 4px; font-weight: 780; color: var(--text); }
+    .kpi .delta{ margin-top: 6px; font-size: 12px; color: var(--muted); }
+
+    .chart{
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px;
+      background: var(--panel2);
+    }
+    .chartHead{
+      display:flex;
+      justify-content:space-between;
+      gap: 10px;
+      align-items:flex-start;
+      flex-wrap:wrap;
+      margin-bottom: 10px;
+    }
+    .chartHead .t{
+      font-weight: 750;
+      font-size: 13.5px;
+      color: var(--text);
+      margin:0;
+    }
+    .chartHead .s{
+      font-size: 12px;
+      color: var(--muted);
+      margin: 2px 0 0;
+    }
+
+    .spark{
+      height: 150px;
+      border-radius: 10px;
+      border: 1px dashed #cfcfcf;
+      background:
+        linear-gradient(0deg, rgba(31,78,216,0.05), rgba(31,78,216,0.05)),
+        #fff;
+      position:relative;
+      overflow:hidden;
+    }
+    .spark::after{
+      content:"";
+      position:absolute;
+      inset: -40% -30%;
+      background: radial-gradient(circle at 30% 30%, rgba(15,138,60,0.07), transparent 60%);
+      transform: rotate(8deg);
+      pointer-events:none;
+    }
+
+    /* Bad mode adjustments */
+    .badMode .kpis{ grid-template-columns: repeat(2, 1fr); }
+    .badMode .filters{ order: 2; }
+    .badMode .mainArea{ order: 1; }
+    .badMode .kpi .value{ font-size: 15px; font-weight: 650; }
+    .badMode .spark{ height: 110px; }
+    .badMode .chartHead .t{ font-size: 12px; font-weight: 650; }
+    .badMode .dashTitle{ opacity: 0.85; }
+
+    /* Checklist */
+    .checklist{
+      margin: 8px 0 0;
+      padding-left: 0;
+      list-style:none;
+    }
+    .checklist li{
+      margin: 10px 0;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: #fff;
+      color: var(--muted);
+      display:flex;
+      gap: 10px;
+      align-items:flex-start;
+    }
+    .checklist .tick{
+      flex: 0 0 auto;
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(15,138,60,0.35);
+      background: rgba(15,138,60,0.08);
+      margin-top: 2px;
+    }
+    .checklist b{ color: var(--text); }
+
+    a{ color: var(--accent); text-decoration:none; }
+    a:hover{ text-decoration:underline; }
+
+    .foot{
+      color: var(--muted2);
+      font-size: 13px;
+      margin-top: 20px;
+    }
+
+    /* Print */
+    @media print{
+      .sticky{ position: static !important; }
+      .card{ box-shadow:none; }
+      .btn{ display:none; }
+      body{ background:#fff; }
+    }
+
+    .positive {
+    color: #0f8a3c;  /* green */
+    font-weight: 600;
+    }
+
+    .negative {
+    color: #b42318;  /* red */
+    font-weight: 600;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Visual Hierarchy &amp; Dashboard Design</h1>
+    <div class="subtitle">
+      A dashboard is a decision-support tool. This page explains how to guide attention, reduce confusion,
+      and design screens that tell a clear story — before you write a single line of code.
+    </div>
+  </header>
+
+  <div class="wrap">
+    <div class="grid">
+
+      <main class="card">
+        <section id="why">
+          <h2>What “good” looks like</h2>
+          <p>
+            A stakeholder opens your dashboard and, within <b>5 seconds</b>, they should know:
+            (1) what they’re looking at, (2) what question it answers, and (3) what to click next.
+          </p>
+
+          <div class="callout good">
+            <b>Goal:</b> make the correct interpretation the easiest interpretation.
+            The design should “pull” the eye through the page in the right order.
+          </div>
+
+          <div class="two-col">
+            <div class="callout">
+              <b>Dashboards are not reports.</b><br/>
+              Reports are linear (page 1 → page 2). Dashboards are exploratory:
+              users jump around, filter, compare, and revisit.
+            </div>
+            <div class="callout warn">
+              <b>Design rule:</b><br/>
+              If everything is visually loud, nothing is important.
+              Your job is to control emphasis.
+            </div>
+          </div>
+        </section>
+
+        <div class="hr"></div>
+
+        <section id="hierarchy">
+          <h2>Visual hierarchy toolkit</h2>
+          <p>
+            Hierarchy is how you control what gets noticed first, second, and third.
+            You do it with a small set of levers:
+          </p>
+
+          <h3>1) Size</h3>
+          <ul>
+            <li><b>Bigger = more important.</b> KPI numbers are usually largest.</li>
+            <li>Chart titles are bigger than axis labels. Filters are smaller than results.</li>
+          </ul>
+
+          <h3>2) Contrast</h3>
+          <ul>
+            <li><b>High contrast draws attention.</b> Use it sparingly.</li>
+            <li>Mute “supporting” elements: gridlines, secondary labels, helper text.</li>
+          </ul>
+
+          <h3>3) Position</h3>
+          <ul>
+            <li>Top-left gets attention first (for left-to-right readers).</li>
+            <li>Put your primary story near the top, and details below.</li>
+          </ul>
+
+          <h3>4) Grouping</h3>
+          <ul>
+            <li>Things close together are perceived as related.</li>
+            <li>Use whitespace to separate sections; don’t rely on heavy borders everywhere.</li>
+          </ul>
+
+          <h3>5) Repetition</h3>
+          <ul>
+            <li>Repeat styles: same KPI cards, same chart header layout, same spacing rhythm.</li>
+            <li>Consistency reduces cognitive load.</li>
+          </ul>
+
+          <div class="callout">
+            <b>Practical tip:</b> design in “levels”.
+            Level 1 = page title + headline KPI.
+            Level 2 = 2–4 supporting visuals.
+            Level 3 = details, notes, small tables.
+          </div>
+        </section>
+
+        <div class="hr"></div>
+
+        <section id="layout">
+          <h2>Dashboard layout patterns</h2>
+          <p>Most dashboards can be built using one of these simple patterns:</p>
+
+          <h3>Pattern A: Filters left, results right</h3>
+          <ul>
+            <li>Great for teaching and first dashboards.</li>
+            <li>Works well for Shiny: <code>sidebarPanel()</code> + <code>mainPanel()</code>.</li>
+          </ul>
+
+          <h3>Pattern B: Filters top, results below</h3>
+          <ul>
+            <li>Better on mobile and smaller screens.</li>
+            <li>Keeps horizontal space for charts.</li>
+          </ul>
+
+          <h3>Pattern C: Overview → Details</h3>
+          <ul>
+            <li>Top: one “anchor” chart showing the big picture.</li>
+            <li>Bottom: 2–3 supporting charts that explain drivers or breakdowns.</li>
+          </ul>
+
+          <div class="callout warn">
+            <b>Avoid “everything everywhere” layouts.</b><br/>
+            If users must scroll endlessly, they lose context and stop comparing properly.
+          </div>
+        </section>
+
+        <div class="hr"></div>
+
+        <section id="charts">
+          <h2>Choosing &amp; shaping charts</h2>
+          <p>
+            Chart choice is part of hierarchy. Pick a chart that matches the question,
+            then remove anything that doesn’t help answer it.
+          </p>
+
+          <div class="two-col">
+            <div>
+              <h3>Match chart to question</h3>
+              <ul>
+                <li><b>Trend over time:</b> line chart</li>
+                <li><b>Compare categories:</b> bar chart (often sorted)</li>
+                <li><b>Distribution / variability:</b> box plot</li>
+                <li><b>Relationship:</b> scatter plot + trend</li>
+                <li><b>Part-to-whole:</b> pie only when few categories (often better as bars)</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Reduce chart noise</h3>
+              <ul>
+                <li>Use clear titles: what is plotted and what filters apply.</li>
+                <li>Lighten gridlines; avoid thick borders.</li>
+                <li>Label units (minutes, £, riders) and use sensible scales.</li>
+                <li>Prefer direct labels where possible (but don’t clutter).</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="callout good">
+            <b>Design habit:</b> If a stakeholder screenshots one chart, does the image still make sense?
+            Add enough context in the title/subtitle to stand alone.
+          </div>
+        </section>
+
+        <div class="hr"></div>
+
+        <section id="filters">
+          <h2>Filters &amp; interaction rules</h2>
+          <p>
+            Filters control “what universe the dashboard is talking about”.
+            They should be obvious, predictable, and never feel like they break the page.
+          </p>
+
+          <h3>Rules of thumb</h3>
+          <ul>
+            <li><b>Put filters near the top</b> (left panel or top row).</li>
+            <li><b>Default to sensible starting values</b> (e.g., all cities, last 12 months).</li>
+            <li><b>Use one filtered dataset</b> that drives all outputs (consistency).</li>
+            <li><b>Show empty states politely</b> (“No rows match your filters”).</li>
+          </ul>
+
+          <div class="callout warn">
+            <b>Interaction anti-pattern:</b><br/>
+            If the user changes a filter and only one chart updates, they stop trusting the dashboard.
+          </div>
+
+          <h3>Interaction ladder</h3>
+          <ul>
+            <li><b>Level 1:</b> Filter → everything updates</li>
+            <li><b>Level 2:</b> Hover → tooltips</li>
+            <li><b>Level 3:</b> Click → highlight or drill-down</li>
+            <li><b>Level 4:</b> Brush/zoom → focus on a region</li>
+          </ul>
+
+          <div class="callout">
+            <b>Teaching tip:</b> start students at Level 1 (filters) and add Level 2 (tooltips) later.
+          </div>
+        </section>
+
+        <div class="hr"></div>
+
+        <section id="copy">
+          <h2>Titles, labels, and microcopy</h2>
+          <p>
+            Writing is part of design. A good title reduces the amount of time someone spends guessing.
+          </p>
+
+          <h3>Good titles are specific</h3>
+          <ul>
+            <li>Bad: <i>“Ridership”</i></li>
+            <li>Better: <i>“Average daily riders over time (selected cities &amp; modes)”</i></li>
+            <li>Best: <i>“Average daily riders over time — London &amp; Bus — Jan 2023 to Dec 2024”</i></li>
+          </ul>
+
+          <h3>Use subtitles for assumptions</h3>
+          <ul>
+            <li>“Monthly totals; missing months excluded”</li>
+            <li>“Prices shown in £; mean ticket price per route-month”</li>
+            <li>“Delays in minutes; negative values removed”</li>
+          </ul>
+
+          <h3>Microcopy that prevents confusion</h3>
+          <ul>
+            <li>“Select multiple cities” (so users don’t assume one-only)</li>
+            <li>“Double-click to reset zoom” (if using Plotly)</li>
+            <li>“Hover points for details” (so they discover tooltips)</li>
+          </ul>
+
+          <div class="callout">
+            <b>Rule:</b> if users keep asking the same question, answer it in the UI.
+          </div>
+        </section>
+
+        <div class="hr"></div>
+
+        <section id="mistakes">
+          <h2>Common mistakes</h2>
+
+          <div class="two-col">
+            <div class="callout bad">
+              <b>Everything is a KPI</b><br/>
+              Showing 12 big numbers makes none of them meaningful.
+              Choose 3–5 that represent the dashboard’s purpose.
+            </div>
+            <div class="callout bad">
+              <b>Too many chart types</b><br/>
+              Switching styles every panel makes comparison harder.
+              Keep repeated patterns where possible.
+            </div>
+          </div>
+
+          <div class="two-col">
+            <div class="callout warn">
+              <b>Unsorted bars</b><br/>
+              If the goal is comparison, sort the bars (or use a meaningful order).
+            </div>
+            <div class="callout warn">
+              <b>Titles that don’t describe filters</b><br/>
+              Users forget what they selected. Remind them in the subtitle.
+            </div>
+          </div>
+
+          <div class="callout warn">
+            <b>Layout trap:</b> cramming everything above the fold.
+            It’s often better to show fewer panels with stronger hierarchy than many panels with weak hierarchy.
+          </div>
+
+          <h3>Trust-breakers</h3>
+          <ul>
+            <li>Different totals across charts due to inconsistent filtering</li>
+            <li>Axes that change scale unexpectedly when filters change</li>
+            <li>Numbers without units</li>
+            <li>Charts without context (“what is this measuring?”)</li>
+          </ul>
+        </section>
+
+        <div class="hr"></div>
+
+        <section id="demo">
+          <h2>Mini wireframe (toggle)</h2>
+          <p class="mini">
+            This is a non-data mock. It shows how hierarchy changes when you choose what is “loud”.
+          </p>
+
+          <div class="dashShell" id="demoDash">
+            <div class="dashTop">
+              <div>
+                <div class="dashTitle">Transport Operations Dashboard</div>
+                <div class="mini">Scope: selected city/mode/date range</div>
+              </div>
+              <div class="btnRow">
+                <button class="btn" type="button" id="btnToggle">Toggle “Bad vs Better”</button>
+              </div>
+            </div>
+
+            <div class="dashGrid">
+              <div class="filters">
+                <div style="font-weight:750;color:var(--text);font-size:13.5px;">Filters</div>
+
+                <div class="lab">City</div>
+                <div class="fakeInput" aria-hidden="true"></div>
+
+                <div class="lab">Mode</div>
+                <div class="fakeInput" aria-hidden="true"></div>
+
+                <div class="lab">Date range</div>
+                <div class="fakeInput" aria-hidden="true"></div>
+
+                <div class="callout" style="margin-top:12px;">
+                  <b>Design intent:</b> filters are visible but not louder than results.
+                </div>
+              </div>
+
+              <div class="mainArea">
+                <div class="kpis">
+                  <div class="kpi">
+                    <div class="label">Total monthly riders</div>
+                    <div class="value">18.4M</div>
+                    <div class="delta">vs previous year:<span class="positive"> +4.1%</span></div>
+                  </div>
+                  <div class="kpi">
+                    <div class="label">Average delay</div>
+                    <div class="value">3.8 min</div>
+                    <div class="delta">vs previous year:<span class="positive"> -0.6</span></div>
+                  </div>
+                  <div class="kpi">
+                    <div class="label">Average ticket price</div>
+                    <div class="value">£2.45</div>
+                    <div class="delta">vs previous year: <span class="negative"> +£0.12</span></div>
+                  </div>
+                </div>
+
+                <div class="chart">
+                  <div class="chartHead">
+                    <div>
+                      <p class="t">Ridership over time</p>
+                      <p class="s">Line chart; highlights trend and seasonality</p>
+                    </div>
+                    <div class="mini">Hover/click (in real dashboard)</div>
+                  </div>
+                  <div class="spark" aria-hidden="true"></div>
+                </div>
+
+                <div class="two-col">
+                  <div class="chart">
+                    <div class="chartHead">
+                      <div>
+                        <p class="t">Delays by mode</p>
+                        <p class="s">Box plot; spread and outliers</p>
+                      </div>
+                    </div>
+                    <div class="spark" aria-hidden="true"></div>
+                  </div>
+                  <div class="chart">
+                    <div class="chartHead">
+                      <div>
+                        <p class="t">Price vs demand</p>
+                        <p class="s">Scatter + trend; relationship</p>
+                      </div>
+                    </div>
+                    <div class="spark" aria-hidden="true"></div>
+                  </div>
+                </div>
+
+                <div class="callout good">
+                  <b>Better hierarchy:</b> KPIs → one anchor chart → supporting charts.
+                  The user gets a story even if they only look at the top half.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <p class="mini" style="margin-top:10px;">
+            In “bad mode”, the page makes everything compete: smaller KPIs, crowded layout, weak anchor chart,
+            and the filter panel interrupts the reading flow.
+          </p>
+        </section>
+
+        <div class="hr"></div>
+
+        <section id="checklist">
+          <h2>QA checklist</h2>
+          <p class="mini">Use this when reviewing your dashboard before submitting.</p>
+
+          <ul class="checklist">
+            <li><span class="tick" aria-hidden="true"></span><span><b>Purpose:</b> can you state the decision this dashboard supports in one sentence?</span></li>
+            <li><span class="tick" aria-hidden="true"></span><span><b>Hierarchy:</b> do KPIs and the main chart get attention first?</span></li>
+            <li><span class="tick" aria-hidden="true"></span><span><b>Consistency:</b> do all charts respond to the same filters?</span></li>
+            <li><span class="tick" aria-hidden="true"></span><span><b>Clarity:</b> are titles specific and do they mention scope/filters?</span></li>
+            <li><span class="tick" aria-hidden="true"></span><span><b>Noise:</b> have you reduced gridlines, clutter, and redundant legends?</span></li>
+            <li><span class="tick" aria-hidden="true"></span><span><b>Comparison:</b> are bars sorted and units labelled?</span></li>
+            <li><span class="tick" aria-hidden="true"></span><span><b>Edge cases:</b> do empty filters show a friendly message?</span></li>
+          </ul>
+
+          <div class="callout">
+            <b>Extra credit:</b> Ask someone else to use your dashboard without instructions and watch where they get stuck.
+          </div>
+        </section>
+
+        <div class="hr"></div>
+
+        <section id="exercises">
+          <h2>Short exercises</h2>
+
+          <h3>Exercise 1: “5-second test”</h3>
+          <p>
+            Show your dashboard to a classmate for 5 seconds, then hide it.
+            Ask them: “What is this dashboard about?” and “What would you click first?”
+          </p>
+
+          <h3>Exercise 2: Reduce one chart</h3>
+          <p>
+            Pick one plot and remove three things that don’t help interpretation
+            (legend, heavy gridlines, too many categories, unclear title, etc.).
+          </p>
+
+          <h3>Exercise 3: Write better titles</h3>
+          <p>
+            Rewrite two titles so that they include:
+            <b>metric</b>, <b>population/scope</b>, and <b>time window</b>.
+          </p>
+
+          <h3>Exercise 4: Hierarchy map</h3>
+          <p>
+            On paper (or in a screenshot editor), circle the <b>first</b>, <b>second</b>, and <b>third</b>
+            things your eye sees on your dashboard. If it’s not KPI → anchor chart → supporting detail,
+            adjust size/contrast/position until it is.
+          </p>
+
+          <div class="callout">
+            <b>Stretch:</b> build a “dashboard narrative”:
+            a one-sentence headline + three bullet insights your dashboard supports.
+          </div>
+
+          <div class="foot">
+            Tip: keep this page open while building — treat it as a checklist and a style guide.
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    // Toggle demo mode
+    (function(){
+      const dash = document.getElementById("demoDash");
+      const btn = document.getElementById("btnToggle");
+      let bad = false;
+
+      btn.addEventListener("click", () => {
+        bad = !bad;
+        dash.classList.toggle("badMode", bad);
+        btn.textContent = bad ? "Switch back to “Better”" : "Toggle “Bad vs Better”";
+      });
+    })();
+
+    // Simple TOC active link based on scroll
+    (function(){
+      const links = Array.from(document.querySelectorAll(".toc a"));
+      const sections = links
+        .map(a => document.querySelector(a.getAttribute("href")))
+        .filter(Boolean);
+
+      const setActive = () => {
+        const y = window.scrollY || document.documentElement.scrollTop;
+        let best = sections[0];
+
+        for(const s of sections){
+          const top = s.getBoundingClientRect().top + y;
+          if(top <= y + 140) best = s;
+        }
+
+        links.forEach(a => a.classList.remove("active"));
+        const active = links.find(a => a.getAttribute("href") === "#" + best.id);
+        if(active) active.classList.add("active");
+      };
+
+      window.addEventListener("scroll", setActive, { passive:true });
+      setActive();
+    })();
+  </script>
+</body>
+</html>
