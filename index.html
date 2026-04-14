@@ -342,7 +342,7 @@
           <path d="M10 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16Z" stroke="currentColor" stroke-width="2"/>
           <path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2"/>
         </svg>
-        <input id="q" type="search" placeholder="Search lessons, projects, keywords…" autocomplete="off" />
+        <input id="q" type="search" placeholder="search here guys…" autocomplete="off" />
       </div>
     </div>
 
@@ -426,7 +426,10 @@
           { title:"Department for Levelling Up, Housing & Communities", desc:"", href:"briefs/04_task.html", icon:"GOVuk"},
           { title:"Graduate Outcomes", desc:"", href:"briefs/05_task.html"},
           { title:"ASDA: Retail Operations and Commercial Analysis", desc:"", href:"briefs/06_task.html", icon:"ASDA"},
-          { title:"Leicester City Football Club", desc:"", href:"briefs/07_task.html", icon:"lcfc"}
+          { title:"Leicester City Football Club", desc:"", href:"briefs/07_task.html", icon:"lcfc"},
+          { title:"Helios Energy Capital", desc:"", href:"briefs/011_task.html", icon:"helios"},
+          { title:"Orion Global Holdings", desc:"", href:"briefs/012_task.html", icon:"orion"},
+          { title:"Northcare", desc:"", href:"briefs/013_task.html", icon:"northcare"}
         ]
       },
       {
@@ -611,6 +614,36 @@
       <img 
         src="briefs/assets/contract-icon.png"
         alt="barchart"
+        class="crest"
+      />
+    `;
+  }
+
+    if(kind === "helios") {
+    return `
+      <img 
+        src="briefs/assets/helios-logo.png"
+        alt="helios logo"
+        class="crest"
+      />
+    `;
+  }
+
+      if(kind === "northcare") {
+    return `
+      <img 
+        src="briefs/assets/northcare-logo.png"
+        alt="northcare logo"
+        class="crest"
+      />
+    `;
+  }
+
+      if(kind === "orion") {
+    return `
+      <img 
+        src="briefs/assets/orion-logo.png"
+        alt="orion logo"
         class="crest"
       />
     `;

@@ -1,0 +1,252 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>NorthCare Health - Operations Analytics Brief</title>
+
+<style>
+:root{
+  --teal:#00695c;
+  --accent:#4db6ac;
+  --ink:#0b1020;
+  --muted:#5b647a;
+  --paper:#ffffff;
+  --border:#e6e9f2;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:#f4f6fb;
+  font:15px/1.5 system-ui;
+  padding:24px;
+}
+.page{
+  max-width:900px;
+  margin:auto;
+  background:var(--paper);
+  border:1px solid var(--border);
+  box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+.header{
+  padding:28px 40px 20px;
+  border-bottom:4px solid var(--accent);
+  position:relative;
+}
+.band{
+  position:absolute; top:0; left:0; right:0; height:10px;
+  background:var(--teal);
+}
+.head-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-top:10px;
+}
+.brand{
+  display:flex;
+  gap:14px;
+  align-items:center;
+}
+.logo{
+  width:55px;
+}
+.company{
+  font-weight:800;
+  color:var(--teal);
+}
+.sub{
+  font-size:13px;
+  color:var(--muted);
+}
+.contact{
+  text-align:right;
+  font-size:12px;
+  color:var(--muted);
+}
+.body{
+  padding:34px 40px;
+}
+.meta{
+  display:flex;
+  justify-content:space-between;
+  font-size:13px;
+  color:var(--muted);
+  margin-bottom:20px;
+}
+.subject{
+  border-left:4px solid var(--teal);
+  padding:12px;
+  background:#f3fffd;
+  font-weight:700;
+  margin-bottom:16px;
+}
+h2{
+  font-size:14px;
+  color:var(--teal);
+  text-transform:uppercase;
+}
+.callout{
+  border-left:4px solid var(--accent);
+  background:#ecfffb;
+  padding:12px;
+  margin:16px 0;
+}
+.signature{
+  margin-top:30px;
+}
+.footer{
+  border-top:1px solid var(--border);
+  padding:16px 40px;
+  font-size:12px;
+  color:var(--muted);
+}
+</style>
+
+</head>
+
+<body>
+<div class="page">
+
+<header class="header">
+<div class="band"></div>
+
+<div class="head-row">
+<div class="brand">
+<img src="assets/northcare-logo.png" class="logo" />
+<div>
+<div class="company">NorthCare Health Network</div>
+<div class="sub">Operations & Performance Analytics</div>
+</div>
+</div>
+
+<div class="contact">
+Manchester, United Kingdom<br>
+operations@northcare.health.uk<br>
++44 (0) 161 000 0000
+</div>
+</div>
+</header>
+
+<main class="body">
+
+<div class="meta">
+<div>
+<strong>To:</strong> Incoming Placement Data Analyst<br>
+<strong>From:</strong> Director of Operations<br>
+<strong>Reference:</strong> NCH-OPS-26-03
+</div>
+
+<div style="text-align:right">
+<strong>Date:</strong> April 2026<br>
+<strong> Delivery:</strong> RShiny Dashboard + 
+<br> Operations Report
+</div>
+</div>
+
+<div class="subject">
+Subject: Patient Flow & Capacity Dashboard - Efficiency, Cost & Quality
+</div>
+
+<p>
+Welcome to the NorthCare Health Network.
+</p>
+
+<p>
+Our hospitals are currently experiencing sustained operational pressure.
+Patient demand has increased significantly, leading to longer wait times,
+capacity constraints, and rising costs.
+</p>
+
+<p>
+You will work with hospital operations data including patient admissions, treatment pathways,
+resource utilisation, and outcomes. Such datasets are commonly used to improve efficiency and
+resource allocation across healthcare systems.
+</p>
+
+<h2>Strategic Context</h2>
+<p>
+Leadership is balancing competing priorities:
+</p>
+
+<ul>
+<li><strong>Reduce wait times</strong> and improve patient experience</li>
+<li><strong>Maintain clinical quality</strong> and avoid increased re-admissions</li>
+</ul>
+
+<p>
+Improving one metric at the expense of another is not acceptable.
+</p>
+
+<h2>Your Role</h2>
+<p>
+You will operate as a <strong>Healthcare Data Analyst</strong>.
+Your dashboard will support hospital leadership in understanding
+<strong>patient flow, capacity constraints, and operational bottlenecks</strong>.
+</p>
+
+<h2>Core Analytical Objectives</h2>
+<ul>
+<li><strong>Flow analysis:</strong> Identify bottlenecks in the patient journey</li>
+<li><strong>Capacity management:</strong> Evaluate bed utilisation and department load</li>
+<li><strong>Efficiency drivers:</strong> Understand factors affecting length of stay</li>
+<li><strong>Cost analysis:</strong> Identify high-cost patient pathways</li>
+</ul>
+
+<h2>Required KPIs</h2>
+<ul>
+<li>Average wait time</li>
+<li>Length of stay</li>
+<li>Bed occupancy rate</li>
+<li>Readmission rate</li>
+<li>Cost per patient</li>
+</ul>
+
+<div class="callout">
+<strong>Important:</strong> Length of stay is a critical operational metric.
+Reducing LOS can improve efficiency but must not compromise patient outcomes.
+</div>
+
+<h2>Constraints</h2>
+<ul>
+<li>Reducing wait time must not increase readmission rates</li>
+<li>Data may be incomplete or simulated</li>
+<li>Ethical considerations must be acknowledged</li>
+<li>Outputs must be interpretable for clinical staff</li>
+</ul>
+
+<h2>Expected Deliverables</h2>
+<ul>
+<li><strong>Interactive RShiny dashboard</strong> (time, department, patient type)</li>
+<li><strong>Operational analysis report</strong> identifying bottlenecks</li>
+<li><strong>Recommendations</strong> for improving efficiency without reducing care quality</li>
+</ul>
+
+<h2>Success Criteria</h2>
+<ul>
+<li>Clear identification of bottlenecks</li>
+<li>Balanced operational trade-offs</li>
+<li>Actionable recommendations</li>
+<li>Clarity for non-technical stakeholders</li>
+</ul>
+
+<div class="signature">
+Yours sincerely,<br><br>
+
+<img src="assets/signature.png" style="width:120px"><br>
+
+<strong>Director of Operations</strong><br>
+NorthCare Health Network
+
+</div>
+
+</main>
+
+<footer class="footer">
+<strong>Teaching Simulation Notice:</strong> This is a fictional project brief created for educational purposes.
+</footer>
+
+</div>
+</body>
+</html>

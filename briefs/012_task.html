@@ -1,0 +1,254 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Orion Global - Market Expansion Brief</title>
+
+<style>
+:root{
+  --blue:#1a237e;
+  --accent:#7986cb;
+  --ink:#0b1020;
+  --muted:#5b647a;
+  --paper:#ffffff;
+  --border:#e6e9f2;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:#f4f6fb;
+  font:15px/1.5 system-ui;
+  padding:24px;
+}
+.page{
+  max-width:900px;
+  margin:auto;
+  background:var(--paper);
+  border:1px solid var(--border);
+  box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+.header{
+  padding:28px 40px 20px;
+  border-bottom:4px solid var(--accent);
+  position:relative;
+}
+.band{
+  position:absolute; top:0; left:0; right:0; height:10px;
+  background:var(--blue);
+}
+.head-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-top:10px;
+}
+.brand{
+  display:flex;
+  gap:14px;
+  align-items:center;
+}
+.logo{
+  width:55px;
+}
+.company{
+  font-weight:800;
+  color:var(--blue);
+}
+.sub{
+  font-size:13px;
+  color:var(--muted);
+}
+.contact{
+  text-align:right;
+  font-size:12px;
+  color:var(--muted);
+}
+.body{
+  padding:34px 40px;
+}
+.meta{
+  display:flex;
+  justify-content:space-between;
+  font-size:13px;
+  color:var(--muted);
+  margin-bottom:20px;
+}
+.subject{
+  border-left:4px solid var(--blue);
+  padding:12px;
+  background:#f5f7ff;
+  font-weight:700;
+  margin-bottom:16px;
+}
+h2{
+  font-size:14px;
+  color:var(--blue);
+  text-transform:uppercase;
+}
+.callout{
+  border-left:4px solid var(--accent);
+  background:#eef2ff;
+  padding:12px;
+  margin:16px 0;
+}
+.signature{
+  margin-top:30px;
+}
+.footer{
+  border-top:1px solid var(--border);
+  padding:16px 40px;
+  font-size:12px;
+  color:var(--muted);
+}
+</style>
+
+</head>
+
+<body>
+<div class="page">
+
+<header class="header">
+<div class="band"></div>
+
+<div class="head-row">
+<div class="brand">
+<img src="assets/orion-logo.png" class="logo" style="width:60px"/>
+<div>
+<div class="company">Orion Global Holdings</div>
+<div class="sub">Corporate Strategy & Market Intelligence</div>
+</div>
+</div>
+
+<div class="contact">
+Lower Manhattan, NY, United States<br>
+strategy@orion.global<br>
++1 (212) 000 0000
+</div>
+</div>
+</header>
+
+<main class="body">
+
+<div class="meta">
+<div>
+<strong>To:</strong> Incoming Placement Data Analyst<br>
+<strong>From:</strong> Corporate Strategy Division<br>
+<strong>Reference:</strong> OGH-STRAT-26-02
+</div>
+
+<div style="text-align:right">
+<strong>Date:</strong> April 2026<br>
+<strong>Delivery:</strong> RShiny Dashboard +<br> Strategic Note
+</div>
+</div>
+
+<div class="subject">
+Subject: Market Entry Support Dashboard - Growth, Risk & Opportunity
+</div>
+
+<p>
+Welcome to Orion Global Holdings.
+</p>
+
+<p>
+Our organisation is entering a new phase of international expansion. Previous expansion cycles have delivered mixed results,
+with several markets underperforming expectations due to overestimated demand and underestimated risk.
+</p>
+
+<p>
+You will work with data from the <strong>World Bank World Development Indicators</strong>,
+which provide internationally comparable economic and demographic data across 
+over 200 countries and thousands of indicators.
+</p>
+
+<h2>Strategic Context</h2>
+<p>
+The Executive Committee must select <strong>3–5 new markets</strong> for expansion within the next 12 months.
+</p>
+
+<ul>
+<li><strong>High-growth markets</strong> offer strong upside but carry economic instability</li>
+<li><strong>Stable markets</strong> provide predictability but limited expansion potential</li>
+</ul>
+
+<p>
+Whilst there is no “correct” answer - we expect a report which gives a balaced view of the economic market with honest and validated suggestions.
+</p>
+
+<h2>Your Role</h2>
+<p>
+You will operate as a <strong>Strategy Analyst</strong>.
+Your task is to build a dashboard that allows senior leadership to evaluate markets across
+<strong>growth, affordability, and risk dimensions</strong>.
+</p>
+
+<h2>Core Analytical Objectives</h2>
+<ul>
+<li><strong>Growth potential:</strong> Identify economies with sustained GDP expansion</li>
+<li><strong>Consumer opportunity:</strong> Evaluate income levels and population growth</li>
+<li><strong>Infrastructure readiness:</strong> Assess digital and economic infrastructure</li>
+<li><strong>Macroeconomic risk:</strong> Identify instability (inflation, unemployment)</li>
+</ul>
+
+<h2>Required KPIs</h2>
+<ul>
+<li>GDP growth rate</li>
+<li>GDP per capita</li>
+<li>Population growth</li>
+<li>Internet penetration</li>
+<li>Inflation rate</li>
+<li>Unemployment rate</li>
+</ul>
+
+<div class="callout">
+<strong>Important:</strong> You must construct a <strong>Market Attractiveness Index</strong>.
+Weighting decisions must be justified and tested for sensitivity.
+</div>
+
+<h2>Constraints</h2>
+<ul>
+<li>Data availability varies significantly by country</li>
+<li>No single KPI should dominate decision-making</li>
+<li>Stakeholders require a shortlist of no more than 5 countries</li>
+<li>Outputs must be interpretable by non-technical executives</li>
+</ul>
+
+<h2>Expected Deliverables</h2>
+<ul>
+<li><strong>Interactive RShiny dashboard</strong> with global map and country comparison tools</li>
+<li><strong>Technical note</strong> explaining methodology and index construction</li>
+<li><strong>Final recommendation:</strong> ranked shortlist of expansion markets</li>
+</ul>
+
+<h2>Success Criteria</h2>
+<ul>
+<li>Clear and defensible reasoning</li>
+<li>Balanced treatment of growth vs risk</li>
+<li>Transparent methodology</li>
+<li>Decision-oriented insights (not descriptive analysis)</li>
+</ul>
+
+<h2>Data Access</h2>
+<p>Data can be accessed <a href="https://data.worldbank.org/">here</a>:</p>
+
+<div class="signature">
+Yours sincerely,<br><br>
+
+<img src="assets/signature.png" style="width:120px"><br>
+
+<strong>Head of Corporate Strategy</strong><br>
+Orion Global Holdings
+
+</div>
+
+</main>
+
+<footer class="footer">
+<strong>Teaching Simulation Notice:</strong> This is a fictional project brief created for educational purposes.
+</footer>
+
+</div>
+</body>
+</html>

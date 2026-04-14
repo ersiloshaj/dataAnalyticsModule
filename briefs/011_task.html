@@ -1,0 +1,256 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Helios Energy Capital - Investment Analytics Brief</title>
+
+<style>
+:root{
+  --green:#0b3d2e;
+  --accent:#6ee7b7;
+  --ink:#0b1020;
+  --muted:#5b647a;
+  --paper:#ffffff;
+  --border:#e6e9f2;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:#f4f6fb;
+  font:15px/1.5 system-ui;
+  padding:24px;
+}
+.page{
+  max-width:900px;
+  margin:auto;
+  background:var(--paper);
+  border:1px solid var(--border);
+  box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+.header{
+  padding:28px 40px 20px;
+  border-bottom:4px solid var(--accent);
+  position:relative;
+}
+.band{
+  position:absolute; top:0; left:0; right:0; height:10px;
+  background:var(--green);
+}
+.head-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-top:10px;
+}
+.brand{
+  display:flex;
+  gap:14px;
+  align-items:center;
+}
+.logo{
+  width:55px;
+}
+.company{
+  font-weight:800;
+  color:var(--green);
+}
+.sub{
+  font-size:13px;
+  color:var(--muted);
+}
+.contact{
+  text-align:right;
+  font-size:12px;
+  color:var(--muted);
+}
+.body{
+  padding:34px 40px;
+}
+.meta{
+  display:flex;
+  justify-content:space-between;
+  font-size:13px;
+  color:var(--muted);
+  margin-bottom:20px;
+}
+.subject{
+  border-left:4px solid var(--green);
+  padding:12px;
+  background:#f6fffa;
+  font-weight:700;
+  margin-bottom:16px;
+}
+h2{
+  font-size:14px;
+  color:var(--green);
+  text-transform:uppercase;
+}
+.callout{
+  border-left:4px solid var(--accent);
+  background:#f1fff5;
+  padding:12px;
+  margin:16px 0;
+}
+.signature{
+  margin-top:30px;
+}
+.footer{
+  border-top:1px solid var(--border);
+  padding:16px 40px;
+  font-size:12px;
+  color:var(--muted);
+}
+</style>
+
+</head>
+
+<body>
+<div class="page">
+
+<header class="header">
+<div class="band"></div>
+
+<div class="head-row">
+<div class="brand">
+<img src="assets/helios-logo.png" class="logo" />
+<div>
+<div class="company">Helios Energy Capital</div>
+<div class="sub">Portfolio Strategy & Investment Analytics</div>
+</div>
+</div>
+
+<div class="contact">
+Athens, Greece<br>
+strategy@helios.energy.gr<br>
++30 (0) 40 9180 0500
+</div>
+</div>
+</header>
+
+<main class="body">
+
+<div class="meta">
+<div>
+<strong>To:</strong> Incoming Placement Data Analyst<br>
+<strong>From:</strong> Portfolio Strategy Team<br>
+<strong>Reference:</strong> HEC-STRAT-26-01
+</div>
+
+<div style="text-align:right">
+<strong>Date:</strong> April 2026<br>
+<strong>Delivery:</strong> RShiny Dashboard + Technical Note
+</div>
+</div>
+
+<div class="subject">
+Subject: Capital Allocation Decision-Support Dashboard - Energy Transition Risk & Profitability
+</div>
+
+<p>
+Welcome to Helios Energy Capital.
+</p>
+
+<p>
+Our firm manages a diversified portfolio of energy assets across fossil fuels and renewable generation.
+Historically, fossil fuel plants have delivered stable returns. However, recent market conditions -
+including fuel price volatility, regulatory pressure, and technological improvements in renewables -
+are beginning to challenge that assumption.
+</p>
+
+<p>
+You will work with energy system data derived from sources such as the Public Utility Data Liberation (PUDL) project,
+which integrates operational, financial, and fuel-level data across the electricity system.
+</p>
+
+<h2>Strategic Context</h2>
+<p>
+Senior leadership is currently split across two competing investment philosophies:
+</p>
+
+<ul>
+<li><strong>Yield preservation:</strong> Continue investing in fossil fuel assets delivering strong short-term returns</li>
+<li><strong>Transition positioning:</strong> Reallocate capital toward renewables in anticipation of structural market change</li>
+</ul>
+
+<p>
+There is no consensus. Your analysis will directly inform this decision.
+</p>
+
+<h2>Your Role</h2>
+<p>
+You will operate as a <strong>Junior Investment Analyst</strong>.
+Your responsibility is to develop a dashboard that enables senior stakeholders to evaluate trade-offs between
+<strong>profitability, risk, and long-term viability</strong>.
+</p>
+
+<h2>Core Analytical Objectives</h2>
+<ul>
+<li><strong>Cost efficiency:</strong> Compare generation cost per MWh across fuel types</li>
+<li><strong>Operational performance:</strong> Identify underperforming plants relative to peers</li>
+<li><strong>Volatility:</strong> Assess sensitivity to fuel price fluctuations</li>
+<li><strong>Transition risk:</strong> Identify assets exposed to regulatory or structural decline</li>
+</ul>
+
+<h2>Required KPIs</h2>
+<ul>
+<li>Cost per MWh (primary metric)</li>
+<li>Capacity factor / utilisation rate</li>
+<li>Fuel cost trends</li>
+<li>Emissions intensity (proxy for regulatory exposure)</li>
+<li>Output variability</li>
+</ul>
+
+<div class="callout">
+<strong>Important:</strong> You are expected to design your own derived metrics.
+Where assumptions are made (e.g., normalisation across plants or fuel types), they must be explicitly documented.
+</div>
+
+<h2>Constraints</h2>
+<ul>
+<li>No complex black-box modelling</li>
+<li>Data completeness will vary across assets</li>
+<li>Comparability across fuel types must be handled carefully</li>
+<li>Outputs must be usable by non-technical stakeholders</li>
+</ul>
+
+<h2>Expected Deliverables</h2>
+<ul>
+<li><strong>Interactive RShiny dashboard</strong> with filtering by fuel type, region, plant, and time</li>
+<li><strong>Technical note (1–2 pages)</strong> describing data transformations and assumptions</li>
+<li><strong>Final recommendation:</strong> Maintain, rebalance, or transition portfolio</li>
+</ul>
+
+<h2>Success Criteria</h2>
+<p>
+We are not evaluating technical complexity alone.
+We are looking for:
+</p>
+
+<ul>
+<li>Clear reasoning and structured thinking</li>
+<li>Thoughtful KPI design</li>
+<li>Ability to communicate trade-offs under uncertainty</li>
+<li>A dashboard that genuinely supports decision-making</li>
+</ul>
+
+<div class="signature">
+Yours sincerely,<br><br>
+
+<img src="assets/signature.png" style="width:120px"><br>
+
+<strong>Director of Portfolio Strategy</strong><br>
+Helios Energy Capital
+
+</div>
+
+</main>
+
+<footer class="footer">
+<strong>Teaching Simulation Notice:</strong> This is a fictional project brief created for educational purposes.
+</footer>
+
+</div>
+</body>
+</html>
