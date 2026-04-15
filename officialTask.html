@@ -302,12 +302,6 @@
   </style>
 </head>
 
-<body>
-  <div class="controls">
-    <button class="primary" onclick="window.print()">Print / Save as PDF</button>
-    <button onclick="fillToday()">Set today’s date</button>
-  </div>
-
   <div class="desk">
     <div class="paper" role="document" aria-label="Final project task brief">
 
@@ -315,25 +309,27 @@
 
         <div class="letterhead">
           <div class="brandblock">
-            <!-- Replace placeholder with your logo:
-                 <div class="logo"><img src="assets/citing-logo.webp" alt="Logo"></div>
-                 or if this file sits outside /briefs, use: briefs/assets/citing-logo.webp
-            -->
-            <div class="logo placeholder"><b>[Logo]</b></div>
+              <div class="logo" aria-label="Company logo">
+                <img
+                  src="briefs/assets/citysg-logo.png"
+                  alt="City St Georges Logo"
+                  style="height:100%; width:auto; object-fit:contain;"
+                />
+              </div>
 
             <div class="org">
-              <div class="name editable" contenteditable="true">[Hypothetical Consultancy Name]</div>
-              <div class="strap editable" contenteditable="true">
-                Final Project Task Brief (Applies to all client briefs)
+              <div class="name editable" contenteditable="false">CSG Analytx</div>
+              <div class="strap editable" contenteditable="false">
+                Final Project Task Brief
               </div>
             </div>
           </div>
 
           <div class="meta">
-            <div><b>Document:</b> Final Task</div>
-            <div><b>Module:</b> <span class="editable" contenteditable="true">[Module title]</span></div>
-            <div><b>Reference:</b> <span class="editable" contenteditable="true">[FP-0001]</span></div>
-            <div><b>Date:</b> <span id="docDate" class="editable" contenteditable="true">[DD Month YYYY]</span></div>
+            <div><b>Document:</b> Final Task Description</div>
+            <div><b>Module:</b> <span class="editable" contenteditable="false">R and RShiny for Data Analytics</span></div>
+            <div><b>Group:</b> <span class="editable" contenteditable="false">Clin Pharm Y2 2026</span></div>
+            <div><b>Date:</b> <span id="docDate" class="editable" contenteditable="false">27 APR 2026</span></div>
           </div>
         </div>
 
@@ -350,7 +346,7 @@
         <div class="rule"></div>
 
         <h2>What you must submit</h2>
-        <p>Submit <b>three things</b> (unless your brief states otherwise):</p>
+        <p>Submit <b>four things</b> (unless your brief states otherwise):</p>
 
         <table class="table" aria-label="Submission components">
           <thead>
@@ -374,7 +370,7 @@
             <tr>
               <td><b>2) Short findings note</b></td>
               <td>
-                A 1–2 page summary written for non-technical readers:
+                A 1-2 page summary written for non-technical readers:
                 what you found, what it means, and what you recommend next.
               </td>
               <td>
@@ -411,7 +407,7 @@
             <li>You include at least <b>one KPI / headline metric</b> (clearly defined).</li>
             <li>You explain <b>what you can and cannot conclude</b> from the data.</li>
             <li>You document cleaning and assumptions in a way someone else can follow.</li>
-            <li>Your file structure is organised and your work can be reproduced.</li>
+            <li>Your file structure is organised and your work can be <b>reproduced</b>.</li>
           </ul>
         </div>
 
@@ -437,12 +433,12 @@
           </div>
 
           <div>
-            <h3>Findings note (1–2 pages)</h3>
+            <h3>Findings note (1-2 pages)</h3>
             <ul>
               <li><b>Context:</b> what the brief asked.</li>
               <li><b>Approach:</b> what data you used and how you analysed it.</li>
-              <li><b>Key findings:</b> 3–6 bullet points, each backed by evidence.</li>
-              <li><b>Recommendations:</b> 2–4 actions or next steps.</li>
+              <li><b>Key findings:</b> 3-6 bullet points, each backed by evidence.</li>
+              <li><b>Recommendations:</b> 2-4 actions or next steps.</li>
               <li><b>Risks/limits:</b> what might be misleading or missing.</li>
             </ul>
 
@@ -474,7 +470,7 @@
         </div>
 
         <h2>Marking criteria (high level)</h2>
-        <p>Your grade is based on both <b>technical correctness</b> and <b>client readiness</b>:</p>
+        <p>Whilst there is no formal grade for this project, your overall success is based on both <b>technical correctness</b> and <b>client readiness</b>:</p>
         <table class="table" aria-label="Marking criteria">
           <thead>
             <tr>
@@ -538,51 +534,21 @@
           </ul>
         </div>
 
-        <p style="margin-top:5mm;color:var(--muted);font-size:12px;">
-          Template fields are editable. Click any bracketed item to replace it.
-        </p>
-
       </div>
 
       <div class="footer" aria-label="Page footer">
         <div>
-          <b class="editable" contenteditable="true">[Hypothetical Consultancy Name]</b> •
-          <span class="editable" contenteditable="true">Final Project Task Brief</span><br/>
-          <span class="editable" contenteditable="true">[Module / Department]</span>
+          <b class="editable" contenteditable="false">[CSG Analytx]</b> •
+          <span class="editable" contenteditable="false">Final Project Task Brief</span><br/>
+          <span class="editable" contenteditable="false">EL 2026</span>
         </div>
         <div class="right">
-          Ref: <span class="editable" contenteditable="true">[FP-0001]</span><br/>
-          Page 1
+          Group: <span class="editable" contenteditable="false">Clin Pharm Y2 2026</span>
         </div>
       </div>
 
     </div>
   </div>
 
-  <script>
-    function formatToday(){
-      const d = new Date();
-      const day = String(d.getDate()).padStart(2, "0");
-      const month = d.toLocaleString(undefined, { month: "long" });
-      const year = d.getFullYear();
-      return `${day} ${month} ${year}`;
-    }
-    function fillToday(){
-      const today = formatToday();
-      const docDate = document.getElementById("docDate");
-      if(docDate && docDate.textContent.trim() === "[DD Month YYYY]") docDate.textContent = today;
-
-      // Replace a few common placeholders
-      const edits = document.querySelectorAll(".editable[contenteditable='true']");
-      let n = 0;
-      for(const el of edits){
-        if(n > 10) break;
-        if(el.textContent.includes("[DD Month YYYY]")){
-          el.textContent = el.textContent.replace("[DD Month YYYY]", today);
-          n++;
-        }
-      }
-    }
-  </script>
 </body>
 </html>

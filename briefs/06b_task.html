@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Retail Operations Brief: Sales, Inventory and Performance Dashboard</title>
+
+  <style>
+    :root{
+      --navy:#17324d;
+      --accent:#2b8cc4;
+      --green:#2f8f4e;
+      --bg:#f4f6fb;
+      --ink:#0b1020;
+      --muted:#5b647a;
+      --paper:#ffffff;
+      --border:#e6e9f2;
+      --soft:#f7fbff;
+    }
+
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--ink);
+      font:15px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,sans-serif;
+      padding:24px;
+    }
+
+    .page{
+      width:210mm;
+      max-width:100%;
+      margin:0 auto;
+      background:var(--paper);
+      border:1px solid var(--border);
+      box-shadow:0 10px 30px rgba(10,20,60,.08);
+    }
+
+    header{
+      padding:20px 40px 16px;
+      border-bottom:4px solid var(--green);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:20px;
+      flex-wrap:wrap;
+      position:relative;
+    }
+
+    .top-strip{
+      position:absolute;
+      left:0;
+      top:0;
+      right:0;
+      height:10px;
+      background:var(--navy);
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      min-width:360px;
+      margin-top:10px;
+    }
+
+    .brand img{
+      height:44px;
+      width:auto;
+      display:block;
+    }
+
+    .org{
+      line-height:1.2;
+    }
+
+    .org .name{
+      font-size:17px;
+      font-weight:850;
+      color:var(--navy);
+      letter-spacing:.2px;
+    }
+
+    .org .dept{
+      font-size:13px;
+      color:var(--muted);
+      margin-top:2px;
+    }
+
+    .contact{
+      text-align:right;
+      font-size:12.5px;
+      color:var(--muted);
+      margin-top:10px;
+    }
+
+    .contact strong{
+      color:var(--ink);
+      font-weight:850;
+    }
+
+    main{
+      padding:32px 40px 26px;
+      overflow-wrap:anywhere;
+    }
+
+    .meta{
+      display:flex;
+      justify-content:space-between;
+      gap:16px;
+      flex-wrap:wrap;
+      margin-bottom:18px;
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    .meta .block{min-width:260px}
+    .meta .block div{margin:2px 0}
+
+    .subject{
+      margin:18px 0 14px;
+      padding:12px 14px;
+      border:1px solid var(--border);
+      border-left:4px solid var(--green);
+      background:var(--soft);
+      font-weight:850;
+      color:var(--ink);
+    }
+
+    h2{
+      font-size:13.5px;
+      margin:18px 0 8px;
+      color:var(--navy);
+      letter-spacing:.2px;
+      text-transform:uppercase;
+    }
+
+    p{margin:10px 0}
+    ul{margin:8px 0 10px 18px}
+    li{margin:6px 0}
+
+    .callout{
+      margin:16px 0;
+      padding:14px;
+      border:1px solid var(--border);
+      border-left:4px solid var(--accent);
+      background:#f5fbff;
+    }
+
+    .kpi-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px 16px;
+      margin:10px 0 6px;
+      padding:12px 14px;
+      border:1px solid var(--border);
+      background:#fcfdff;
+    }
+
+    .kpi-grid div{
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    .kpi-grid strong{
+      color:var(--ink);
+      font-weight:850;
+    }
+
+    .signature{
+      margin-top:28px;
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-end;
+      gap:20px;
+      flex-wrap:wrap;
+    }
+
+    .sigline{
+      margin-top:8px;
+      border-top:1px solid var(--border);
+      padding-top:10px;
+      min-width:360px;
+    }
+
+    .signature-img{
+      display:block;
+      max-width:100px;
+      height:auto;
+      margin:4px 0 6px;
+    }
+
+    .signame{font-weight:880}
+    .sigtitle{color:var(--muted); font-size:13px; margin-top:2px}
+
+    footer{
+      padding:14px 40px 22px;
+      border-top:1px solid var(--border);
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:12px;
+    }
+
+    .disclaimer{max-width:680px}
+
+    @page{
+      size:A4;
+      margin:15mm;
+    }
+
+    @media print{
+      body{
+        background:#fff !important;
+        padding:0 !important;
+        margin:0 !important;
+      }
+      .page{
+        box-shadow:none !important;
+        border:0 !important;
+        width:auto !important;
+        max-width:none !important;
+      }
+      *{
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      header, footer, .signature, .callout{
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page" role="document" aria-label="Letter">
+    <header>
+      <div class="top-strip" aria-hidden="true"></div>
+
+      <div class="brand">
+        <img src="assets/asda-logo.png" alt="Retail Group" />
+        <div class="org">
+          <div class="name">ASDA</div>
+          <div class="dept">Retail Operations and Performance Analytics</div>
+        </div>
+      </div>
+
+      <div class="contact">
+        <div><strong>Head Office</strong></div>
+        <div>United Kingdom</div>
+        <div>operations.analytics@asda.co.uk</div>
+        <div>+44 (0) 20 0000 0000</div>
+      </div>
+    </header>
+
+    <main>
+      <div class="meta">
+        <div class="block">
+          <div><strong>To:</strong> Analyst Placement Cohort</div>
+          <div><strong>From:</strong> Retail Operations and Performance Analytics</div>
+          <div><strong>Reference:</strong> RGP-OPS-2026-01</div>
+        </div>
+        <div class="block" style="text-align:right">
+          <div><strong>Date:</strong> <span id="date"></span></div>
+          <div><strong>Project type:</strong> Dashboard and technical note</div>
+          <div><strong>Dataset:</strong> Retail & Supply Chain Operations Data</div>
+        </div>
+      </div>
+
+      <div class="subject">
+        Subject: Retail Operations and Performance Dashboard - Sales, Inventory and Demand
+      </div>
+
+      <p>
+        Retail Group is commissioning an internal dashboard to support store leadership, commercial teams and regional managers with fast, consistent insight into retail performance. The dashboard will be used to monitor sales, inventory health, pricing pressure and demand patterns across stores, regions and product categories.
+      </p>
+
+      <p>
+        This project uses the
+        <a href="https://www.kaggle.com/datasets/programmer3/retail-and-supply-chain-operations-data" target="_blank" rel="noopener noreferrer">
+          Retail & Supply Chain Operations Data
+        </a>
+        dataset, which includes time-stamped records for inventory levels, units sold, units ordered, demand forecasts, pricing, discounts, competitor pricing, weather, holidays and seasonality.
+      </p>
+
+      <div class="callout">
+        <strong>Analytical standard:</strong>
+        This tool is designed for decision support. You should describe patterns and plausible operational explanations, but avoid claiming causality. Document assumptions clearly, including data cleaning choices, missingness handling, and any engineered metrics.
+      </div>
+
+      <h2>data available</h2>
+      <ul>
+        <li>Store, region and product category identifiers</li>
+        <li>Time-stamped sales and inventory information</li>
+        <li>Units sold, units ordered and demand forecast</li>
+        <li>Price, discount and competitor pricing</li>
+        <li>Weather, holiday/promotion and seasonality indicators</li>
+      </ul>
+
+      <h2>primary dashboard objectives</h2>
+      <ul>
+        <li>Give leadership a clear view of sales and demand trends over time</li>
+        <li>Identify stores, regions and categories driving growth, volatility and stock risk</li>
+        <li>Support operational planning around replenishment and promotions</li>
+        <li>Explore how external factors align with changes in demand and sales</li>
+      </ul>
+
+      <h2>dashboard modules and questions</h2>
+
+      <h2>module 1: commercial overview</h2>
+      <ul>
+        <li><strong>Views:</strong> total sales trend, demand trend, rolling average, store and region comparison, holiday highlighting</li>
+        <li><strong>Questions:</strong> Are sales growing or flattening? Which stores dominate revenue? Do holiday periods create clear uplifts?</li>
+      </ul>
+
+      <h2>module 2: stock and demand management</h2>
+      <ul>
+        <li><strong>Views:</strong> inventory level, units sold, units ordered, forecast vs actual, stock risk flags</li>
+        <li><strong>Questions:</strong> Where are stockouts likely? Which stores are over-ordering? Where does forecast error appear highest?</li>
+      </ul>
+
+      <h2>module 3: pricing and promotion analysis</h2>
+      <ul>
+        <li><strong>Views:</strong> price, discount, competitor pricing, sales response by category and region</li>
+        <li><strong>Questions:</strong> Do discounts drive incremental sales? Which categories are most price-sensitive? Is pricing aligned with competition?</li>
+      </ul>
+
+      <h2>module 4: external drivers</h2>
+      <ul>
+        <li><strong>Views:</strong> weather, holiday/promotion, seasonality overlays, segmented trend analysis</li>
+        <li><strong>Questions:</strong> Which external conditions align with changes in demand? Are some categories more seasonal than others? Do weather and holiday effects differ by region?</li>
+      </ul>
+
+      <div class="kpi-grid" aria-label="Suggested headline metrics">
+        <div><strong>Suggested KPI:</strong> Total sales and sales growth vs prior period</div>
+        <div><strong>Suggested KPI:</strong> Inventory turnover and stock risk rate</div>
+        <div><strong>Suggested KPI:</strong> Forecast accuracy / error rate</div>
+        <div><strong>Suggested KPI:</strong> Discount uplift or price sensitivity measure</div>
+      </div>
+
+      <h2>expected deliverables</h2>
+      <ul>
+        <li><strong>Interactive dashboard</strong> with clear filters for store, region, category and date</li>
+        <li><strong>Technical note (1 to 2 pages)</strong> describing data sources, derived metrics and limitations</li>
+        <li><strong>Brief findings summary</strong> with 3 to 5 actionable operational insights</li>
+      </ul>
+
+      <h2>success criteria</h2>
+      <p>
+        Success will be judged on clarity, interpretability, reproducibility and practical usefulness. Strong submissions will explain what the data suggests, what it does not suggest, and how a manager could use the dashboard to prioritise action.
+      </p>
+
+      <div class="signature">
+        <div>
+          <p style="margin:0 0 6px 0;">Yours faithfully,</p>
+          <div class="sigline">
+            <img src="assets/signature.png" alt="Signature" class="signature-img" />
+            <div class="signame">Retail Operations and Performance Analytics</div>
+            <div class="sigtitle">Retail Group</div>
+          </div>
+        </div>
+
+        <div style="text-align:right; color:var(--muted); font-size:12.5px; max-width: 360px;">
+          <div><strong>Attachment:</strong> Data dictionary and KPI definitions</div>
+          <div><strong>Handling:</strong> Internal training</div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <div class="disclaimer">
+        <strong>Teaching Simulation Notice:</strong> This document is a fictional project brief created for educational purposes.
+        It is not an official communication from a real retailer.
+      </div>
+      <div>© <span id="year"></span> EL</div>
+    </footer>
+  </div>
+
+  <script>
+    const now = new Date();
+    const fmt = new Intl.DateTimeFormat("en-GB", { day: "2-digit", month: "long", year: "numeric" });
+    document.getElementById("date").textContent = fmt.format(now);
+    document.getElementById("year").textContent = now.getFullYear();
+  </script>
+</body>
+</html>
