@@ -6,8 +6,8 @@
   <title>FDA CDER Offer Letter: FAERS Pharmacovigilance Dashboard</title>
 
   <style>
-    :root{
-       [oai_citation:4‡04_task.html](sediment://file_00000000993872069f30dba965734462)     --fda-navy:#0b1f3a;
+  :root{
+      --fda-navy:#0b1f3a;
       --fda-sky:#eaf3ff;
       --ink:#0b1020;
       --muted:#4b5563;
@@ -16,6 +16,18 @@
       --bg:#f4f6fb;
       --accent:#2b8cc4;
       --warn:#b58800;
+    }
+
+    .masthead{
+      background:linear-gradient(0deg, var(--fda-navy), #12365f);
+      color:#fff;
+      padding:16px 40px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      flex-wrap:wrap;
+      border-bottom:4px solid var(--accent);
     }
 
     *{box-sizing:border-box}
@@ -37,18 +49,6 @@
       box-shadow:0 10px 30px rgba(10,20,60,.08);
     }
 
-    .masthead{
-      background:linear-gradient(0deg, var(--fda-navy), var(--fda-blue));
-      color:#fff;
-      padding:16px 40px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:16px;
-      flex-wrap:wrap;
-      border-bottom:4px solid var(--accent);
-    }
-
     .brand{
       display:flex;
       align-items:center;
@@ -68,6 +68,7 @@
     }
 
     .org .name{
+      text-align: right;
       font-size:15px;
       font-weight:820;
       color:#fff;
@@ -75,13 +76,14 @@
     }
 
     .org .dept{
+      text-align: right;
       font-size:12.5px;
       color:rgba(255,255,255,.86);
       margin-top:2px;
     }
 
     .contact{
-      text-align:right;
+      text-align: right;
       font-size:12.5px;
       color:rgba(255,255,255,.86);
     }
@@ -245,18 +247,18 @@
   <div class="page" role="document" aria-label="Letter">
     <header class="masthead">
       <div class="brand">
-        <img src="assets/fda-logo.png" alt="U.S. Food and Drug Administration (FDA)" />
+        <img src="assets/fda-logo.png" alt="U.S. Food and Drug Administration (FDA)" style="height:75px" />
         <div class="org">
           <div class="name">U.S. Food and Drug Administration</div>
           <div class="dept">Center for Drug Evaluation and Research (CDER), Office of Surveillance and Epidemiology</div>
         </div>
       </div>
-
+      <br>
       <div class="contact">
         <div><strong>10903 New Hampshire Avenue</strong></div>
         <div>Silver Spring, MD 20993</div>
         <div>drug.safety.analytics@fda.gov</div>
-        <div>+1 (301) 000 0000</div>
+        <div> +1 (301) 000 0000</div>
       </div>
     </header>
 
@@ -297,22 +299,6 @@
         multi drug reports. If you introduce any scoring or flagging, it must be described as a simple prioritisation aid.
       </div>
 
-      <h2>data provided</h2>
-      <p>
-        You will be provided with a curated extract derived from public FAERS releases, structured to be analysis ready for this project.
-        The underlying source material is based on the FAERS Quarterly Data Extract.
-      </p>
-
-      <div>
-        <span class="pill">FAERS quarterly extract</span>
-        <span class="pill">Adverse reactions</span>
-        <span class="pill">Drug roles</span>
-        <span class="pill">Outcomes</span>
-        <span class="pill">Demographics</span>
-      </div>
-
-      <p><strong>What one row represents:</strong> one adverse event report, linked to one or more suspect drugs and one or more reported reactions.</p>
-
       <h2>project objectives</h2>
       <ul>
         <li>Enable reviewers to explore reporting frequency over time for selected medicines</li>
@@ -326,13 +312,13 @@
 
       <h2>module 1: reporting volume and trends</h2>
       <ul>
-        <li><strong>Views:</strong> time series of report counts, month or quarter aggregation, optional rolling average</li>
+        <li><strong>Views:</strong> time series of report counts, month or quarter aggregation, optional rolling average.</li>
         <li><strong>Questions:</strong> Are there spikes or sustained increases? Do patterns differ between drugs? Are trends stable across time windows?</li>
       </ul>
 
       <h2>module 2: reaction profile</h2>
       <ul>
-        <li><strong>Views:</strong> top reported reactions for selected drug(s), reaction category grouping if available, comparison mode</li>
+        <li><strong>Views:</strong> top reported reactions for selected drug(s), reaction category grouping if available, comparison mode.</li>
         <li><strong>Questions:</strong> Which reactions dominate reporting? Are reaction profiles similar across drugs? Are rare but serious reactions present?</li>
       </ul>
 
@@ -376,6 +362,9 @@
         <li><strong>Technical note:</strong> one to two pages describing data provenance, cleaning assumptions, limitations, and interpretation guidance</li>
       </ul>
 
+      <h2>Data Access</h2>
+      <p>Quarterly data is available <a href="https://fis.fda.gov/extensions/FPD-QDE-FAERS/FPD-QDE-FAERS.html">here</a></p>
+
       <div class="signature">
         <div class="sigline">
           <div class="sigtitle">Lead, Pharmacovigilance Analytics Unit, CDER OSE</div>
@@ -384,18 +373,13 @@
             For questions about scope and deliverables, contact: drug.safety.analytics@fda.gov
           </div>
         </div>
-
-        <div style="min-width:240px; text-align:right; color:var(--muted); font-size:12.5px;">
-          <div><strong>Requested start:</strong> Immediate</div>
-          <div><strong>Requested duration:</strong> Final project period</div>
-          <div><strong>Output format:</strong> Dashboard + technical note</div>
-        </div>
       </div>
     </main>
 
     <footer>
       <div>
         CDER OSE | Pharmacovigilance Analytics
+        <br><br><em> This is a simulated task. It does not represent a genuine letter of engagement from the FDA or CDER and should not be interpreted as such.</em>
       </div>
     </footer>
   </div>

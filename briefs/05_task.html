@@ -1,0 +1,275 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>DfE - Graduate Outcomes Analytics Brief</title>
+
+<style>
+:root{
+  --navy:#1d3557;
+  --accent:#457b9d;
+  --ink:#0b1020;
+  --muted:#5b647a;
+  --paper:#ffffff;
+  --border:#e6e9f2;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:#f4f6fb;
+  font:15px/1.5 system-ui;
+  padding:24px;
+}
+.page{
+  max-width:900px;
+  margin:auto;
+  background:var(--paper);
+  border:1px solid var(--border);
+  box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+.header{
+  padding:28px 40px 20px;
+  border-bottom:4px solid var(--accent);
+  position:relative;
+}
+.band{
+  position:absolute; top:0; left:0; right:0; height:10px;
+  background:var(--navy);
+}
+.head-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-top:10px;
+}
+.brand{
+  display:flex;
+  gap:14px;
+  align-items:center;
+}
+.logo{
+  width:55px;
+}
+.company{
+  font-weight:800;
+  color:var(--navy);
+}
+.sub{
+  font-size:13px;
+  color:var(--muted);
+}
+.contact{
+  text-align:right;
+  font-size:12px;
+  color:var(--muted);
+}
+.body{
+  padding:34px 40px;
+}
+.meta{
+  display:flex;
+  justify-content:space-between;
+  font-size:13px;
+  color:var(--muted);
+  margin-bottom:20px;
+}
+.subject{
+  border-left:4px solid var(--navy);
+  padding:12px;
+  background:#f4f7fb;
+  font-weight:700;
+  margin-bottom:16px;
+}
+h2{
+  font-size:14px;
+  color:var(--navy);
+  text-transform:uppercase;
+}
+.callout{
+  border-left:4px solid var(--accent);
+  background:#eef6fb;
+  padding:12px;
+  margin:16px 0;
+}
+.signature{
+  margin-top:30px;
+}
+.footer{
+  border-top:1px solid var(--border);
+  padding:16px 40px;
+  font-size:12px;
+  color:var(--muted);
+}
+</style>
+
+</head>
+
+<body>
+<div class="page">
+
+<header class="header">
+<div class="band"></div>
+
+<div class="head-row">
+<div class="brand">
+<img src="assets/dfe-logo.png" class="logo" style="width:150px" />
+<div>
+    <br>
+<div class="company">Department for Education</div>
+<div class="sub">Skills & Outcomes Analysis Unit</div>
+</div>
+</div>
+
+<div class="contact">
+Sanctuary Buildings, London<br>
+skills.analysis@education.gov.uk<br>
++44 (0) 20 0000 0000
+</div>
+</div>
+</header>
+
+<main class="body">
+
+<div class="meta">
+<div>
+<strong>To:</strong> Incoming Placement Data Analyst<br>
+<strong>From:</strong> Skills & Outcomes Analysis Unit<br>
+<strong>Reference:</strong> DFE-LEO-26-05
+</div>
+
+<div style="text-align:right">
+<strong>Date:</strong> April 2026<br>
+<strong>Delivery:</strong> RShiny Dashboard + <br> Policy Brief
+</div>
+</div>
+
+<div class="subject">
+Subject: Graduate Outcomes Dashboard - Institutional Performance, Subject Value & Inequality
+</div>
+
+<p>
+Welcome to the Department for Education.
+</p>
+
+<p>
+The UK higher education system is under increasing scrutiny to demonstrate both
+<strong>economic value</strong> and <strong>fair access</strong>.
+Recent analysis using Longitudinal Education Outcomes (LEO) data shows substantial variation in graduate outcomes
+across subjects, institutions, and demographic groups.
+</p>
+
+<p>
+You will work with two complementary datasets derived from LEO:
+</p>
+<ul>
+    <li>
+        <strong>Graduate Outcomes Dataset</strong> (Subject & Demographic Level); Provides earnings and employment outcomes by subject and graduate characteristics.
+    </li>
+    <li>
+        <strong>Provider Level Dataset</strong> (Institution Level); enables comparison of outcomes across universities and subjects.
+    </li>
+</ul>
+
+<!---
+<ul>
+<li>
+<a href="https://explore-education-statistics.service.gov.uk/data-catalogue/data-set/8665d750-93c9-4d2b-a94f-c47fd2a495c7" target="_blank">
+Graduate Outcomes Dataset (subject & demographic level)
+</a> - provides earnings and employment outcomes by subject and graduate characteristics.
+</li>
+
+<li>
+<a href="https://explore-education-statistics.service.gov.uk/find-statistics/graduate-outcomes-leo-provider-level-data/2022-23" target="_blank">
+Provider-Level Dataset (institution-level outcomes)
+</a> - enables comparison of outcomes across universities and subjects.
+</li>
+</ul>
+--->
+
+<h2>Strategic Context</h2>
+<p>
+Government must balance competing priorities:
+</p>
+
+<ul>
+<li><strong>Access & participation:</strong> widening access to higher education</li>
+<li><strong>Economic value:</strong> ensuring degrees deliver strong labour market returns</li>
+</ul>
+
+<p>
+Policy decisions increasingly rely on evidence of “value for money” across institutions and subjects.
+</p>
+
+<h2>Your Role</h2>
+<p>
+You will operate as a <strong>Data Analyst</strong> within the Skills & Outcomes Unit.
+Your task is to develop a dashboard that enables policymakers to evaluate
+<strong>where value is created, where it is uneven, and where intervention may be required</strong>.
+</p>
+
+<h2>Core Analytical Objectives</h2>
+<ul>
+<li><strong>Institutional performance:</strong> Compare outcomes across universities</li>
+<li><strong>Subject value:</strong> Identify high- and low-return degree subjects</li>
+<li><strong>Outcome variation:</strong> Analyse differences within subjects across institutions</li>
+<li><strong>Equity analysis:</strong> Identify disparities across demographic groups</li>
+</ul>
+
+<h2>Required KPIs</h2>
+<ul>
+<li>Median earnings (1, 3, 5 years after graduation)</li>
+<li>Employment rate (sustained employment)</li>
+<li>Further study rate</li>
+<li>Earnings distribution (quartiles)</li>
+<li>Earnings growth over time</li>
+</ul>
+
+<div class="callout">
+<strong>Important:</strong> LEO data is observational.
+Differences in outcomes may reflect student intake, subject mix, or regional labour markets - not institutional performance alone.
+</div>
+
+<h2>Constraints</h2>
+<ul>
+<li>Data is aggregated and does not imply causality</li>
+<li>Some values may be suppressed for small groups</li>
+<li>Comparisons across providers must be interpreted carefully</li>
+<li>Outputs must be accessible to non-technical stakeholders</li>
+</ul>
+
+<h2>Expected Deliverables</h2>
+<ul>
+<li><strong>Interactive RShiny dashboard</strong> with filters for institution, subject, demographics, and time</li>
+<li><strong>Technical note</strong> explaining data transformations and limitations</li>
+<li><strong>Policy brief</strong> outlining key findings and recommendations</li>
+</ul>
+
+<h2>Success Criteria</h2>
+<ul>
+<li>Clear, structured analysis</li>
+<li>Balanced interpretation of data limitations</li>
+<li>Effective comparison across institutions and subjects</li>
+<li>Insights that support real policy decisions</li>
+</ul>
+
+<div class="signature">
+Yours sincerely,<br><br>
+
+<img src="assets/signature.png" style="width:120px"><br>
+
+<strong>Head of Skills & Outcomes Analysis</strong><br>
+Department for Education
+
+</div>
+
+</main>
+
+<footer class="footer">
+<strong>Teaching Simulation Notice:</strong> This is a fictional project brief created for educational purposes.
+</footer>
+
+</div>
+</body>
+</html>
