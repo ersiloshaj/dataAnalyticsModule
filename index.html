@@ -323,18 +323,28 @@
       .road::before{ left: 30px; }
       .node{ width: 54px; height: 54px; }
     }
+
+    a.btn {
+      text-decoration: none;
+    }
+
+    a.btn.download {
+      background: rgba(37,99,235,0.15);
+      color: var(--text);
+      border-color: rgba(37,99,235,0.3);
+    }
   </style>
 </head>
 
-<body>
-  <div class="wrap">
-    <header>
-      <div class="topbar">
-        <button class="btn" id="btnClearUnlocks" type="button" title="Forget unlocked sections on this device">
-          Clear unlocks
-        </button>
-      </div>
-    </header>
+<header>
+  <div class="topbar">
+
+    <button class="btn" id="btnClearUnlocks" type="button" title="Forget unlocked sections on this device">
+      Clear unlocks
+    </button>
+
+  </div>
+</header>
 
     <div class="card controls">
       <div class="input" role="search">
@@ -354,6 +364,7 @@
   </div>
 
   <script>
+
     /*****************************************************************
      * EDIT ME: Course structure
      *
@@ -361,14 +372,16 @@
      * - password: only required if locked: true
      *****************************************************************/
     const ROADMAP = [
-      {
-        section: "Pre-Requisites",
-        locked: false,
-        password: "000",
-        items: [
-          { title:"Installation List", desc:"Which programs do I need?", href:"installation_guide.html", icon:"information" }
-        ]
-      },
+    {
+      section: "Pre-Requisites",
+      locked: false,
+      password: "000",
+      items: [
+        { title:"Installation List", desc:"Which programs do I need?", href:"installation_guide.html", icon:"information" },
+
+        { title:"Download Students CSV", desc:"Get the dataset for this course", href:"Day1/students.csv", icon:"download" }
+      ]
+    },
     {
         section: "Setting the scene",
         locked: false,
@@ -392,12 +405,12 @@
         password: "000",
         items: [
         { title:"Data Cleaning", desc:"A series of tasks to challenge you and improve your data cleaning skills", href:"data_cleaning.html", icon:"cleaning" },
-        { title:"LOCK UNTIL APRIL 30 : Light intro to data cleaning", desc:"Help get me started with data cleainng", href:"daily/tuesday.html", icon:"cleaning" }
+        { title:"Revealed on APR 30ish : Light intro to data cleaning", desc:"Help get me started with data cleainng", href:"daily/tuesday_.html", icon:"cleaning" }
         ]
       },
       {
         section: "Walkthroughs and plotting with R",
-        locked: false,
+        locked: true,
         password: "000",
         items: [
           { title:"Intro to plotting", desc:"This module uses the cleaned data from the previous session.", href:"walkthroughs/0introtask.html", icon:"r-logo" },
@@ -410,7 +423,7 @@
       },
       {
         section: "RShiny",
-        locked: false,
+        locked: true,
         password: "000",
         items: [
           { title:"Intro to R Shiny", desc:"Let's turn our static analysis into something interactive", href:"Shiny/notes.html", icon: "shiny-logo" },
@@ -420,7 +433,7 @@
       },
       {
         section: "Briefs",
-        locked: false,
+        locked: true,
         password: "000",
         items: [
           { title:"Available Contract Offers", desc:"Pick a client scenario and build a dashboard", href:"briefs/briefs.html" }
@@ -428,7 +441,7 @@
       },
       {
         section: "Letters of Engagement",
-        locked: false,
+        locked: true,
         password: "000",
         items: [
           { title:"Office for Health Improvement and Disparities", desc:"", href:"briefs/01_task.html", icon:"GOVuk"},
@@ -444,7 +457,7 @@
       },
       {
         section: "TLDR;",
-        locked: false,
+        locked: true,
         password: "000",
         items: [
           { title:"The Task", desc:"A generic task explanation that is not project specific.", href:"officialTask.html", icon:"cleaning" }
@@ -452,7 +465,7 @@
       },
       {
         section: "F1",
-        locked: false,
+        locked: true,
         password: "000",
         items: [
           { title:"F1", desc:"F1", href:"F1.html", icon:"F1" }
@@ -460,7 +473,7 @@
       },
       {
         section: "Logic",
-        locked: false,
+        locked: true,
         password: "000",
         items: [
           { title:"Visualisation", desc:"What makes a dashboard good?", href:"visualisation0.html", icon:"eye" }
@@ -661,6 +674,17 @@
       />
     `;
   }
+
+      if(kind === "download") {
+    return `
+      <img 
+        src="briefs/assets/download-icon.png"
+        alt="download icon"
+        class="crest"
+      />
+    `;
+  }
+
 
   return iconCheck(); // fallback
 }
