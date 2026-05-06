@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>McLaren Racing - Strategy & Performance Brief</title>
+
+  <style>
+    :root{
+      --mclaren-orange:#ff8000;
+      --mclaren-blue:#00a3e0;
+      --mclaren-dark:#1b1d21;
+      --ink:#0b1020;
+      --muted:#5b647a;
+      --paper:#ffffff;
+      --border:#e6e9f2;
+    }
+
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      background:#f4f6fb;
+      color:var(--ink);
+      font:15px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      padding:24px;
+    }
+
+    .page{
+      width:210mm;
+      max-width:100%;
+      margin:0 auto;
+      background:var(--paper);
+      border:1px solid var(--border);
+      box-shadow:0 10px 30px rgba(10,20,60,.08);
+    }
+
+    header{
+      padding:20px 40px 16px;
+      border-bottom:4px solid var(--mclaren-orange);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:20px;
+      flex-wrap:wrap;
+      position:relative;
+    }
+
+    .top-strip{
+      position:absolute;
+      left:0;
+      top:0;
+      right:0;
+      height:10px;
+      background:var(--mclaren-blue);
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      min-width:360px;
+      margin-top:10px;
+    }
+
+    .brand img{
+      height:40px;
+      width:auto;
+    }
+
+    .org{
+      line-height:1.2;
+    }
+
+    .org .name{
+      font-size:17px;
+      font-weight:850;
+      color:var(--mclaren-dark);
+      letter-spacing:.2px;
+      text-transform: uppercase;
+    }
+
+    .org .dept{
+      font-size:13px;
+      color:var(--muted);
+      margin-top:2px;
+    }
+
+    .contact{
+      text-align:right;
+      font-size:12.5px;
+      color:var(--muted);
+      margin-top:10px;
+    }
+
+    .contact strong{
+      color:var(--ink);
+      font-weight:850;
+    }
+
+    main{
+      padding:32px 40px 26px;
+    }
+
+    .meta{
+      display:flex;
+      justify-content:space-between;
+      gap:16px;
+      flex-wrap:wrap;
+      margin-bottom:18px;
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    .meta .block{min-width:260px}
+
+    .subject{
+      margin:18px 0 14px;
+      padding:12px 14px;
+      border:1px solid var(--border);
+      border-left:4px solid var(--mclaren-orange);
+      background:#fffaf5;
+      font-weight:850;
+      color:var(--ink);
+    }
+
+    h2{
+      font-size:13.5px;
+      margin:18px 0 8px;
+      color:var(--mclaren-dark);
+      letter-spacing:.2px;
+      text-transform:uppercase;
+    }
+
+    .callout{
+      margin:16px 0;
+      padding:14px;
+      border:1px solid var(--border);
+      border-left:4px solid var(--mclaren-blue);
+      background:#f0f9ff;
+    }
+
+    .kpi-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px 16px;
+      margin:10px 0 6px;
+      padding:12px 14px;
+      border:1px solid var(--border);
+      background:#fafafa;
+    }
+
+    .kpi-grid div{
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    .kpi-grid strong{
+      color:var(--ink);
+      font-weight:850;
+    }
+
+    .signature{
+      margin-top:28px;
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-end;
+      gap:20px;
+      flex-wrap:wrap;
+    }
+
+    .sigline{
+      margin-top:8px;
+      border-top:1px solid var(--border);
+      padding-top:10px;
+      min-width:360px;
+    }
+
+    .signame{font-weight:880}
+    .sigtitle{color:var(--muted); font-size:13px; margin-top:2px}
+
+    footer{
+      padding:14px 40px 22px;
+      border-top:1px solid var(--border);
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:12px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page" role="document">
+    <header>
+      <div class="top-strip"></div>
+      <div class="brand">
+        <div class="org">
+          <div class="name">McLaren Racing</div>
+          <div class="dept">Mission Control & Performance Analytics</div>
+        </div>
+      </div>
+      <div class="contact">
+        <div><strong>McLaren Technology Centre</strong></div>
+        <div>Chertsey Rd, Woking, GU21 4YH</div>
+        <div>papaya.rules@mclaren.com</div>
+      </div>
+    </header>
+
+    <main>
+      <div class="meta">
+        <div class="block">
+          <div><strong>To:</strong> Performance Analyst Intern</div>
+          <div><strong>From:</strong> Head of Race Strategy</div>
+          <div><strong>Reference:</strong> NO-STRAT-2026-PAPAYA</div>
+        </div>
+        <div class="block" style="text-align:right">
+          <div><strong>Date:</strong> April 2026</div>
+          <div><strong>Project:</strong> RShiny Strategy Tool</div>
+        </div>
+      </div>
+
+      <div class="subject">
+        Subject: Critical Performance Dashboard - Race Pace, Tire Life & Strategic Delta
+      </div>
+
+      <p>
+        Team, we are in a fight for every single point this season. As we push the limits of the MCL40, we need a robust analytics tool that goes beyond simple lap timing. We need to visualise the "silent killers" of our race result: tire degradation and pit-loss efficiency.
+      </p>
+
+      <p>
+        Your mission is to build a decision-support dashboard that helps Mission Control identify exactly when our rivals are vulnerable to an undercut.
+      </p>
+
+      <div class="callout">
+        <strong>Strategic Directive:</strong> All analysis must be objective and data-driven. Please ensure the dashboard handles our team-mate comparison logic under the <strong>"Papaya Rules"</strong> directive - which, as a reminder, means race each other hard, but if you code a bug that takes both drivers out of the visualisation, Zak won't be happy.
+      </div>
+
+      <h2>Analytical Objectives</h2>
+      <ul>
+        <li><strong>Tire Degradation Curves:</strong> Model lap time "fall-off" across Soft, Medium, and Hard compounds.</li>
+        <li><strong>Rival Benchmarking:</strong> Compare our rolling average pace against Mercedes, Red Bull and Ferrari.</li>
+        <li><strong>Pit Window Analysis:</strong> Visualise the "gap to traffic" to ensure we release drivers into clean air.</li>
+        <li><strong>Outlier Handling:</strong> Automatically filter laps affected by Safety Cars or VSCs to avoid skewed averages.</li>
+      </ul>
+
+      <div class="kpi-grid">
+        <div><strong>Suggested KPI:</strong> Degradation Gradient (sec/lap)</div>
+        <div><strong>Suggested KPI:</strong> Fuel-Corrected Pace Delta</div>
+        <div><strong>Suggested KPI:</strong> Pit Lane Time Loss vs. Fresh Tire Advantage</div>
+        <div><strong>Suggested KPI:</strong> Consistency Score (Std Dev of Lap Times)</div>
+      </div>
+
+      <h2>Data Access & Infrastructure</h2>
+      <p>
+        You are expected to utilise the following raw data sources and services for this build:
+      </p>
+      <ul>
+        <li><a href="https://docs.fastf1.dev/" target="_blank"><strong>FastF1 Python Library:</strong></a> The official documentation for accessing raw telemetry, tire compounds, and micro-sector data.</li>
+        <li><a href="https://api.jolpi.ca/" target="_blank"><strong>Jolpica-F1 API:</strong></a> The community-standard, drop-in replacement for the deprecated Ergast API. Use this for historical race results, pit stop timing, and standings.</li>
+        <li><a href="https://openf1.org/" target="_blank"><strong>OpenF1:</strong></a> Open API for lap data, positions, team radio, stints, and weather.</li>
+        <li><a href="https://www.kaggle.com/datasets/rohanrao/formula-1-world-championship-1950-2020"><strong>F1 CSV Archives:</strong></a> Historical lap timing for trend analysis.</li>
+      </ul>
+
+      <h2>Expected Deliverables</h2>
+      <ul>
+        <li><strong>Interactive Dashboard:</strong> RShiny or Python Dash app with filtering for Driver, Circuit, and Year.</li>
+        <li><strong>Technical Note:</strong> Description of your normalisation logic (e.g., how you adjusted for fuel burn).</li>
+        <li><strong>Race Debrief Memo:</strong> 3 actionable insights from a historical race of your choice.</li>
+      </ul>
+
+      <div class="signature">
+        <div class="sigline">
+          <div class="signame">Director of Strategy</div>
+          <div class="sigtitle">McLaren Racing</div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <div class="disclaimer">
+        <strong>Teaching Simulation Notice:</strong> This is a fictional project brief created for educational purposes. It is not an official communication from McLaren Racing or Formula 1.
+      </div>
+      <div>© 2026 EL</div>
+    </footer>
+  </div>
+</body>
+</html>
